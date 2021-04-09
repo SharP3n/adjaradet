@@ -1,0 +1,8 @@
+<app-navbar></app-navbar>
+<div class='sportsbook'>
+    <app-matches-list
+    (bet)='betPlaced($event)'
+    ></app-matches-list>
+
+    <app-ticket [newMatch]='betDetails'></app-ticket>
+</div>

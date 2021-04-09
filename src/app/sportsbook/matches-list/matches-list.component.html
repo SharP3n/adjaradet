@@ -1,0 +1,37 @@
+<div class="list">
+    <div class="list__header">
+        <button #NBA (click)='displayMatches($event)' id='nba' class="list__header__specific NBA active"><img src="assets/icons/basketball.png" alt="basketball"> NBA<br>({{NBAMatches.length}} bets)</button>
+        <button #UFC (click)='displayMatches($event)' class="list__header__specific UFC"><img src="assets/icons/mma.png" alt="mma"> UFC<br>({{UFCMatches.length}} bets)</button>
+        <button #UEFA (click)='displayMatches($event)' class="list__header__specific UEFA"><img src="assets/icons/soccer.png" alt="soccer"> UEFA<br>({{UEFAMatches.length}} bets)</button>
+    </div>
+    
+    <div class="list__container">
+        <div *ngIf='display==="NBA"'>
+            <div class="list__container__item" *ngFor='let NBAMatch of NBAMatches; let i = index'>
+                <div class="list__container__names">{{NBAMatch.away}} - {{NBAMatch.home}}</div>
+                <div class="list__container__item__odds">
+                    <button (click)='addToBet($event)' [id]='i' [attr.data-id]='i' class="list__container__item__odds__away away btn">AWAY {{NBAMatch.awayOdd}}</button>
+                    <button (click)='addToBet($event)' [id]='i' [attr.data-id]='i' class="list__container__item__odds__home home btn">HOME {{NBAMatch.homeOdd}}</button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf='display==="UFC"'>
+            <div class="list__container__item" *ngFor='let UFCMatch of UFCMatches; let i = index'>
+                <div class="list__container__names">{{UFCMatch.away}} - {{UFCMatch.home}}</div>
+                <div class="list__container__item__odds">
+                    <button (click)='addToBet($event)' [id]='NBAMatches.length + i' [attr.data-id]='NBAMatches.length + i' class="list__container__item__odds__away away btn">AWAY {{UFCMatch.awayOdd}}</button>
+                    <button (click)='addToBet($event)' [id]='NBAMatches.length + i' [attr.data-id]='NBAMatches.length + i' class="list__container__item__odds__home home btn">HOME {{UFCMatch.homeOdd}}</button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf='display==="UEFA"'>
+            <div class="list__container__item" *ngFor='let UEFAMatch of UEFAMatches;  let i = index'>
+                <div class="list__container__names">{{UEFAMatch.away}} - {{UEFAMatch.home}}</div>
+                <div class="list__container__item__odds">
+                    <button (click)='addToBet($event)' [id]='NBAMatches.length + UFCMatches.length + i' [attr.data-id]='NBAMatches.length + UFCMatches.length + i' class="list__container__item__odds__away away btn">AWAY {{UEFAMatch.awayOdd}}</button>
+                    <button (click)='addToBet($event)' [id]='NBAMatches.length + UFCMatches.length + i' [attr.data-id]='NBAMatches.length + UFCMatches.length + i' class="list__container__item__odds__home home btn">HOME {{UEFAMatch.homeOdd}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="list">
+    <span class="list__header"><div class="list__header__text">BETS HISTORY ({{placedBets?.length}} bets)</div> </span>
+
+    <div class="list__bets" *ngFor='let bet of placedBets'>
+        <div class="list__bets__tooltip">
+            VIEW MATCHES ({{bet.matchDetails.length}})
+            <span class="list__bets__tooltip__matches-info">
+                <div class='list__bets__tooltip__matches-info__details' *ngFor='let match of bet.matchDetails'>
+                    {{match.away}} VS {{match.home}}
+                </div>    
+            </span>
+        </div>
+        <div class="list__bets__bet-info">
+            <div class="list__bets__bet-info__odd">ODD: {{bet.betDetails.odd}}</div>
+            <div class="list__bets__bet-info__bet-amount">BET: {{bet.betDetails.betAmount}}$</div>
+            <div class="list__bets__bet-info__poss-win">POSSIBLE WIN: {{bet.betDetails.possWin}}$</div>
+        </div>
+    </div>
+<div>
