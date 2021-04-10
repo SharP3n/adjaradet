@@ -12,17 +12,17 @@ export class BetDetailsService {//keep all bets!
   ] //home, away, odd, betAmount, possWin
   
   newBet: fullBet;
-  betPlaced = new EventEmitter<fullBet[]>();
+  betPlaced = new EventEmitter;
   
   createBet(matchesDetails: match[], betDetails: Bet){
     this.newBet = new fullBet(betDetails, matchesDetails)
     this.addedBets.push(this.newBet);
-    this.betPlaced.emit(this.addedBets.slice());
+    this.betPlaced.emit();
   }
 
   getData(){
     return this.addedBets;
   }
-  
+
   constructor() { }
 }

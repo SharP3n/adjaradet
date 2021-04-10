@@ -15,7 +15,7 @@ export class BetsHistoryComponent implements OnInit {
 
   ngOnInit(): void {//home, away, odd, betAmount, possWin
 
-    this.placedBets = this.betDetailsService.getData();
+    this.placedBets = this.betDetailsService.getData();//observable
     
   }
 

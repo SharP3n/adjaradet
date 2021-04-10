@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './home/navbar/navbar.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { PicturesSliderComponent } from './home/pictures-slider/pictures-slider.component';
 import { SportsPicturesComponent } from './home/sports-pictures/sports-pictures.component';
@@ -12,9 +12,10 @@ import { MatchesListComponent } from './sportsbook/matches-list/matches-list.com
 import { TicketComponent } from './sportsbook/ticket/ticket.component';
 import { MyBetsComponent } from './my-bets/my-bets.component';
 import { BetsHistoryComponent } from './my-bets/bets-history/bets-history.component';
-import { FormsModule } from '@angular/forms';
 import { BetDetailsService } from './shared/bet-details.service';
 import { CommonModule } from '@angular/common';
+import { HighlightDirective} from './navbar/highlight.directive';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { CommonModule } from '@angular/common';
     TicketComponent,
     MyBetsComponent,
     BetsHistoryComponent,
-    
+    HighlightDirective    
   ],
   imports: [
     BrowserModule,

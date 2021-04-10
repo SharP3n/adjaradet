@@ -1,5 +1,6 @@
 import { Component, EventEmitter, ElementRef, OnInit, ViewChild, Output} from '@angular/core';
 import { BetDetailsService } from 'src/app/shared/bet-details.service';
+import { match } from 'src/app/shared/match-details.model';
 import { ButtonHighlightService } from 'src/app/sportsbook/button-highlight.service';
 
 @Component({
@@ -20,13 +21,12 @@ export class MatchesListComponent implements OnInit {
     }
     )
     
-    this.buttonHighlightService.highlightedButtons.subscribe( (highlightsData: {id: number, bettingOn: string}[]) =>{
+    this.buttonHighlightService.highlightedButtons.subscribe( (highlightsData: match[]) =>{
 
       this.resetHighlights(highlightsData);
     }
     )
   }
-  
   
   infoForHighlight: {id: number, bettingOn: string}[] = []; 
   
@@ -39,9 +39,7 @@ export class MatchesListComponent implements OnInit {
   
   resetHighlights(highlightsData: {id: number, bettingOn: string}[]){//load full list 
     
-    
     this.removeAllHighlights();
-    
     this.infoForHighlight = highlightsData;
     let btnsArr;  
     
