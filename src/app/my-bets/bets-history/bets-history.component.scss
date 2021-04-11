@@ -1,0 +1,124 @@
+$dark2: rgba(32,40,48,255);
+$dark1: rgba(29,35,41,255);
+$border: rgba(43,52,60,255); 
+
+.list{
+    background-color: $dark2;
+    min-height: 500px;
+    
+    &__header{
+        background-color: $dark1;
+        display: flex;
+        
+        &__text{
+            padding: 15px 40px;
+            background-color: $dark1;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            border: none;
+            outline: none;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__no-bets{
+        margin: 20px;
+    }
+    
+    &__bets{
+
+        max-width: 100%;
+        padding: 11px 70px;
+        font-size: 18px;
+        font-weight: bold;
+        border-bottom: 1px solid $border;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &__tooltip{
+            position: relative;
+            border-bottom: 1px dotted white;
+            cursor: pointer;
+            
+            &:hover &__matches-info{
+                visibility: visible;
+            }
+            
+            &__matches-info{
+                visibility: hidden;
+                height: unset;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                position: absolute;
+                z-index: 1;
+                top: -20px;
+                left: 110%;
+                padding: 10px;
+                
+                &__details{
+                    white-space: nowrap;
+                }
+            }
+        }
+        
+        &:hover{
+            background-color: rgba(37,45,55,255);
+        }
+        
+        @media screen and (max-width: 1000px) {
+            font-size: 16px;
+        }
+        @media screen and (max-width: 800px) {
+            font-size: 14px;
+            padding: 10px 10px;
+        }
+
+        &__bet-info{
+            display: flex;
+
+            &__odd, &__poss-win, &__bet-amount{
+                background-color: rgba(42,50,55,255);
+                padding: 10px 20px;
+                font-size: 16px;
+                font-weight: bold;
+                color: white;
+                border: none;
+                border-radius: 7px;
+                cursor: pointer;
+                margin-left: 15px;
+                max-width: 170px;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                
+                @media screen and (max-width: 740px) {
+                    font-size: 13px;
+                    padding: 8px 10px;
+                }
+                @media screen and (max-width: 620px) {
+                    font-size: 12px;
+                    padding: 8px 8px;
+                }
+            }
+            
+            &__odd{
+                @media screen and (max-width: 570px) {
+                    display: none;
+                }
+            }
+            &__bet-amount{
+                @media screen and (max-width: 470px) {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+

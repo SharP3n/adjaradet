@@ -1,0 +1,44 @@
+<div class="sportsbook">
+
+    <div class="sportsbook__list">
+        <div class="sportsbook__list__header">
+            <div class='qq'>
+                <a [routerLink]='["/sportsbook", "NBA"]'  (click)='resetHighlights(infoForHighlight)' routerLinkActive='active' class="sportsbook__list__header__specific NBA "><img src="assets/icons/basketball.png" alt="basketball"> NBA({{NBAMatches.length}})</a>
+            </div>
+            <a [routerLink]='["/sportsbook", "UFC"]'  (click)='resetHighlights(infoForHighlight)' routerLinkActive='active' class="sportsbook__list__header__specific UFC"> <img src="assets/icons/mma.png" alt="mma"> UFC({{UFCMatches.length}})</a>
+            <a [routerLink]='["/sportsbook", "UEFA"]' (click)='resetHighlights(infoForHighlight)'  routerLinkActive='active' class="sportsbook__list__header__specific UEFA"> <img src="assets/icons/soccer.png" alt="soccer"> UEFA({{UEFAMatches.length}})</a>
+        </div> 
+
+        <div class="sportsbook__list__container">
+            <div *ngIf='display==="NBA"'>
+                <div class="sportsbook__list__container__item" *ngFor='let NBAMatch of NBAMatches; let i = index'>
+                    <div class="sportsbook__list__container__names">{{NBAMatch.away}} - {{NBAMatch.home}}</div>
+                    <div class="sportsbook__list__container__item__odds">
+                        <button (click)='addToBet($event)'[attr.data-id]='i' class="sportsbook__list__container__item__odds__away away btn">AWAY {{NBAMatch.awayOdd}}</button>
+                        <button (click)='addToBet($event)'[attr.data-id]='i' class="sportsbook__list__container__item__odds__home home btn">HOME {{NBAMatch.homeOdd}}</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf='display==="UFC"'>
+                <div class="sportsbook__list__container__item" *ngFor='let UFCMatch of UFCMatches; let i = index'>
+                    <div class="sportsbook__list__container__names">{{UFCMatch.away}} - {{UFCMatch.home}}</div>
+                    <div class="sportsbook__list__container__item__odds">
+                        <button (click)='addToBet($event)' [attr.data-id]='NBAMatches.length + i' class="sportsbook__list__container__item__odds__away away btn">AWAY {{UFCMatch.awayOdd}}</button>
+                        <button (click)='addToBet($event)' [attr.data-id]='NBAMatches.length + i' class="sportsbook__list__container__item__odds__home home btn">HOME {{UFCMatch.homeOdd}}</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf='display==="UEFA"'>
+                <div class="sportsbook__list__container__item" *ngFor='let UEFAMatch of UEFAMatches;  let i = index'>
+                    <div class="sportsbook__list__container__names">{{UEFAMatch.away}} - {{UEFAMatch.home}}</div>
+                    <div class="sportsbook__list__container__item__odds">
+                        <button (click)='addToBet($event)' [attr.data-id]='NBAMatches.length + UFCMatches.length + i' class="sportsbook__list__container__item__odds__away away btn">AWAY {{UEFAMatch.awayOdd}}</button>
+                        <button (click)='addToBet($event)' [attr.data-id]='NBAMatches.length + UFCMatches.length + i' class="sportsbook__list__container__item__odds__home home btn">HOME {{UEFAMatch.homeOdd}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-ticket [newMatch]='bet'></app-ticket>
+</div>

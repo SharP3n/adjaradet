@@ -1,0 +1,109 @@
+$dark1: rgba(29,35,41,255);
+$green: #01AC2D; 
+$dark2: rgba(32,40,48,255);
+
+.navbar{
+    background-color: $dark1; 
+    display: flex;
+    align-items: center;
+    padding: 10px 120px;
+    
+    @media screen and (max-width: 1150px) {
+        padding: 7px 60px;
+    }
+    @media screen and (max-width: 800px) {
+        padding: 6px 10px;
+    }
+
+    .logo{
+        @media screen and (max-width: 610px) {
+            order: 1;
+        }   
+    }
+
+    .my-bets{
+        order: 3;
+    }
+    .sports{
+        order: 2;
+    }
+
+    &__item{
+        font-weight: bold;
+        margin: 0px 15px;
+        font-size: 17px;
+        @media screen and (max-width: 1150px) {
+            font-size: 15px;
+        }
+        @media screen and (max-width: 800px) {
+            font-size: 14px;
+        }
+        @media screen and (max-width: 610px) {
+            margin: auto;
+        }
+        @media screen and (max-width: 375px) {
+            font-size: 12px;
+        }    
+
+        &__link{
+            transition: color 0.3s;
+            &:hover{
+                color: #ccc;
+            }
+        }
+        
+        &__logo{
+            width: 250px;
+            margin-top: 4px;
+            @media screen and (max-width: 1150px) {
+                width: 200px;
+            }
+            @media screen and (max-width: 800px) {
+                width: 160px;
+            }
+            @media screen and (max-width: 800px) {
+                width: 130px;
+            }
+        }
+
+        &__account{
+            margin-left: auto;
+            display: flex;
+            order: 4;
+            
+            &__log-in, &__register{
+                cursor: pointer;
+                font-weight: bold;
+                color: white;
+                background-color: $green;
+                outline: none;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 5px;
+                display: flex;
+                justify-self: flex-end;
+                margin: 0px 15px;
+                
+                @media screen and (max-width: 1150px) {
+                    padding: 8px 13px;
+                    font-size: 15px;
+                }
+                @media screen and (max-width: 800px) {
+                    padding: 6px 11px;
+                    font-size: 14px;
+                    margin: 0px 7px;
+                }
+                @media screen and (max-width: 610px) {
+                    display: none;
+                }
+                
+            }
+
+            &__register{
+                background-color: #323d49;
+            }
+        }
+
+
+    }
+}
