@@ -2,9 +2,11 @@
 
     <div class="sportsbook__list">
         <div class="sportsbook__list__header">
-            <a [routerLink]='["/sportsbook", "NBA"]'  (click)='resetHighlights(infoForHighlight)' routerLinkActive='active' class="sportsbook__list__header__specific NBA "><img src="assets/icons/basketball.png" alt="basketball"> NBA<br>({{NBAMatches.length}} bets)</a>
-            <a [routerLink]='["/sportsbook", "UFC"]'  (click)='resetHighlights(infoForHighlight)' routerLinkActive='active' class="sportsbook__list__header__specific UFC"><img src="assets/icons/mma.png" alt="mma"> UFC<br>({{UFCMatches.length}} bets)</a>
-            <a [routerLink]='["/sportsbook", "UEFA"]' (click)='resetHighlights(infoForHighlight)'  routerLinkActive='active' class="sportsbook__list__header__specific UEFA"><img src="assets/icons/soccer.png" alt="soccer"> UEFA<br>({{UEFAMatches.length}} bets)</a>
+            <div class='qq'>
+                <a [routerLink]='["/sportsbook", "NBA"]'  (click)='resetHighlights(infoForHighlight)' routerLinkActive='active' class="sportsbook__list__header__specific NBA "><img src="assets/icons/basketball.png" alt="basketball"> NBA({{NBAMatches.length}})</a>
+            </div>
+            <a [routerLink]='["/sportsbook", "UFC"]'  (click)='resetHighlights(infoForHighlight)' routerLinkActive='active' class="sportsbook__list__header__specific UFC"> <img src="assets/icons/mma.png" alt="mma"> UFC({{UFCMatches.length}})</a>
+            <a [routerLink]='["/sportsbook", "UEFA"]' (click)='resetHighlights(infoForHighlight)'  routerLinkActive='active' class="sportsbook__list__header__specific UEFA"> <img src="assets/icons/soccer.png" alt="soccer"> UEFA({{UEFAMatches.length}})</a>
         </div> 
 
         <div class="sportsbook__list__container">

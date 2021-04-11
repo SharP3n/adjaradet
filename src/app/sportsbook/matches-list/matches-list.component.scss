@@ -3,10 +3,6 @@ $dark1: rgba(29,35,41,255);
 $border: rgba(43,52,60,255); 
 $yellow: #ffd206;
 
-.ticket{
-    background-color: red;
-}
-
 .sportsbook{
     display: flex;
     justify-content: center;
@@ -51,6 +47,7 @@ $yellow: #ffd206;
                 display: flex;
                 cursor: pointer;
                 align-items: center;
+                white-space: nowrap;
 
                 @media screen and (max-width: 600px) {
                     font-size: 14px;
@@ -72,7 +69,6 @@ $yellow: #ffd206;
         }
 
         &__container{
-
             &__item{
                 padding: 11px 40px;
                 font-size: 18px;
@@ -129,7 +125,7 @@ $yellow: #ffd206;
 }
 
 .active{
-    box-shadow: 0px 1px red; 
+    border-bottom: 1px solid red; 
 }
 
 .added-bet{
