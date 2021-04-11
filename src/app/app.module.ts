@@ -9,12 +9,13 @@ import { PicturesSliderComponent } from './home/pictures-slider/pictures-slider.
 import { SportsPicturesComponent } from './home/sports-pictures/sports-pictures.component';
 import { SportsbookComponent } from './sportsbook/sportsbook.component';
 import { MatchesListComponent } from './sportsbook/matches-list/matches-list.component';
-import { TicketComponent } from './sportsbook/ticket/ticket.component';
+import { TicketComponent } from './sportsbook/matches-list/ticket/ticket.component';
 import { MyBetsComponent } from './my-bets/my-bets.component';
 import { BetsHistoryComponent } from './my-bets/bets-history/bets-history.component';
 import { BetDetailsService } from './shared/bet-details.service';
 import { CommonModule } from '@angular/common';
 import { HighlightDirective} from './navbar/highlight.directive';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { HighlightDirective} from './navbar/highlight.directive';
     TicketComponent,
     MyBetsComponent,
     BetsHistoryComponent,
-    HighlightDirective    
+    HighlightDirective,
+    NotFoundComponent    
   ],
   imports: [
     BrowserModule,

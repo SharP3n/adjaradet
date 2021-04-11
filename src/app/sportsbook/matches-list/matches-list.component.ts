@@ -1,18 +1,28 @@
-import { Component, EventEmitter, ElementRef, OnInit, ViewChild, Output} from '@angular/core';
+import { Component, EventEmitter, ElementRef, OnInit, ViewChild, Output, AfterViewInit, OnChanges} from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { BetDetailsService } from 'src/app/shared/bet-details.service';
 import { match } from 'src/app/shared/match-details.model';
-import { ButtonHighlightService } from 'src/app/sportsbook/button-highlight.service';
+import { ButtonHighlightService } from 'src/app/sportsbook/matches-list/button-highlight.service';
 
 @Component({
   selector: 'app-matches-list',
   templateUrl: './matches-list.component.html',
   styleUrls: ['./matches-list.component.scss']
 })
-export class MatchesListComponent implements OnInit {
+export class MatchesListComponent implements OnInit{
 
-  constructor( private betDetailsService: BetDetailsService, private buttonHighlightService: ButtonHighlightService) { }
+  constructor( private route: ActivatedRoute, private betDetailsService: BetDetailsService, private buttonHighlightService: ButtonHighlightService) { }
   
   ngOnInit(): void {
+
+    this.display = this.route.snapshot.params['sport'];
+
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.display = params['sport'];
+      }
+    )
+
     this.betDetailsService.betPlaced.subscribe( () =>{
       let bet = document.querySelectorAll('.added-bet');
       bet.forEach( btn => {
@@ -22,8 +32,8 @@ export class MatchesListComponent implements OnInit {
     )
     
     this.buttonHighlightService.highlightedButtons.subscribe( (highlightsData: match[]) =>{
-
-      this.resetHighlights(highlightsData);
+      this.infoForHighlight = highlightsData;
+      this.resetHighlights(this.infoForHighlight);
     }
     )
   }
@@ -37,61 +47,40 @@ export class MatchesListComponent implements OnInit {
     });    
   }
   
-  resetHighlights(highlightsData: {id: number, bettingOn: string}[]){//load full list 
-    
-    this.removeAllHighlights();
-    this.infoForHighlight = highlightsData;
-    let btnsArr;  
-    
-    highlightsData.forEach(btnInfo => {
+  resetHighlights(highlightsData: {id: number, bettingOn: string}[]){ 
+
+    setTimeout(() => {
+  //setTimeout is gareshe(button it roca vidzaxeb funqcias) sportze gadasvlamde agebul matchebs iyenebda funqciashi
       
-      if(btnInfo.bettingOn === 'home'){
-        btnsArr = document.querySelectorAll('.home');
-      }
-      else if(btnInfo.bettingOn === 'away'){
-        btnsArr = document.querySelectorAll('.away');
-      }
-    
-      btnsArr.forEach(btn => {
-        if(btn.getAttribute('data-id') === btnInfo.id){
-          btn.classList.add('added-bet');
+      this.removeAllHighlights();
+      let btnsArr: NodeListOf<Element>;  
+      
+      highlightsData.forEach(btnInfo => {
+  
+        if(btnInfo.bettingOn === 'home'){
+          btnsArr = document.querySelectorAll('.home');
         }
-      });
-    });
-  }
-  
-  // removeHighlight(match: {id: number, bettingOn: string}){//fixHighLight
-  //   let btns;
-  //   if(match.bettingOn === 'home'){
-    //     btns = document.querySelectorAll('.home');
-    //   }
-    //   else if(match.bettingOn === 'away'){
-      //     btns = document.querySelectorAll('.away');
-      //   }
+        else if(btnInfo.bettingOn === 'away'){
+          btnsArr = document.querySelectorAll('.away');
+        }
       
-      //   // console.log(Number(match.id));
-      //   btns.forEach((btn: HTMLButtonElement) => {
-        
-        //     // console.log(Number(btn.getAttribute('data-id')));
-        
-        
-        //     if(Number(btn.getAttribute('data-id')) === Number(match.id)){
-          //       btn.classList.remove('added-bet')
-          //       console.log('removed')
-          //     }
-  //   });
-  // }
-  
+        btnsArr.forEach(btn => {
+          if(Number(btn.getAttribute('data-id')) === Number(btnInfo.id)){
+            btn.classList.add('added-bet');
+          }
+        });
+      });
+    }, 0);
+  }
   
   @ViewChild('NBA') NBA: ElementRef;
   @ViewChild('UFC') UFC: ElementRef;
   @ViewChild('UEFA') UEFA: ElementRef;
-  display = 'NBA';
-  //sport is going to ticket without a reason!
-  @Output() bet = new EventEmitter<{home: any, away: string, bettingOn: string, odd: number, id:number}>()
+  display: string;
+  bet: {home: any, away: string, bettingOn: string, odd: number, id:number}
   
   addToBet(e){
-    let index = e.target.id;
+    let index = e.target.getAttribute('data-id');
     
     let betDetails: {home: string, away: string, homeOdd: number, awayOdd: number};
     
@@ -116,62 +105,8 @@ export class MatchesListComponent implements OnInit {
       bettingOn = 'away';
     }
     
-    // if(e.target.classList.contains('active')){
-      
-      // }
-
-    // let awayBtn = document.querySelectorAll('.list__container__item__odds__away');
-    // let homeBtn = document.querySelectorAll('.list__container__item__odds__home');
-    // console.log(awayBtn)
-    // console.log(homeBtn)
-
-    // let btn = document.querySelectorAll('.btn');
-    // console.log(btn)
-
-    // btn.forEach(btn => {
-    //   console.log(btn.getAttribute('data-id'))
-    // });
-      
-      this.bet.emit({home: betDetails.home, away: betDetails.away, bettingOn: bettingOn, odd: odd, id: index});
-      // e.target.classList.toggle('added-bet');
-
-    // let btn =  document.querySelectorAll(`#${index}`);
-    // console.log(btn)
-
-    
+    this.bet = {home: betDetails.home, away: betDetails.away, bettingOn: bettingOn, odd: odd, id: index};
   }
-
-  
-  //toggle yellow color++
-  //if bets were placed remove yellows++
-  //remove duplicates from arr++
-  //can't give added-bet class to away and home of same match?
-  //if id is same we need to toggle between same id elements?
-  //after switching display, active is reset. localStorage?
-  
-
-
-  displayMatches(sport){ //MouseEvent
-    if(sport.target.classList.contains('NBA')){
-      this.display = 'NBA';
-      sport.target.classList.add('active');
-      this.UFC.nativeElement.classList.remove('active');
-      this.UEFA.nativeElement.classList.remove('active');
-    }
-    else if(sport.target.classList.contains("UFC")){
-      this.display = "UFC";
-      sport.target.classList.add('active');
-      this.NBA.nativeElement.classList.remove('active');
-      this.UEFA.nativeElement.classList.remove('active');
-    }
-    else if(sport.target.classList.contains('UEFA')){
-      this.display = 'UEFA';
-      sport.target.classList.add('active');
-      this.UFC.nativeElement.classList.remove('active');
-      this.NBA.nativeElement.classList.remove('active');
-    }
-  }
-
   
   NBAMatches = [
     {

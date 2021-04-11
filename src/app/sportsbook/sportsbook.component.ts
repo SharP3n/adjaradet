@@ -5,17 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './sportsbook.component.html',
   styleUrls: ['./sportsbook.component.scss']
 })
-export class SportsbookComponent implements OnInit {
+export class SportsbookComponent{
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  betDetails: object;
-
-  betPlaced(e){
-    this.betDetails = e;
-  }
 
 }

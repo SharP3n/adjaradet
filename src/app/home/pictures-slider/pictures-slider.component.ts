@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component} from "@angular/core";
 
 @Component({
   selector: 'app-pictures-slider',
@@ -7,8 +7,6 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class PicturesSliderComponent {
 
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/944/900/500`);
-  
 }
 
 

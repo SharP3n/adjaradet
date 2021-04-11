@@ -1,5 +1,4 @@
 import { Directive, ElementRef, HostBinding, HostListener, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
-import { __core_private_testing_placeholder__ } from '@angular/core/testing';
 
 @Directive({
     selector: '[appHighlight]'

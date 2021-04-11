@@ -6,10 +6,10 @@ import { match } from './match-details.model';
 @Injectable({
   providedIn: 'root'
 })
-export class BetDetailsService {//keep all bets!
+export class BetDetailsService {
 
   addedBets: fullBet[] = [
-  ] //home, away, odd, betAmount, possWin
+  ]
   
   newBet: fullBet;
   betPlaced = new EventEmitter;

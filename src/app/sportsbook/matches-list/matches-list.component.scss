@@ -7,99 +7,124 @@ $yellow: #ffd206;
     background-color: red;
 }
 
-.list{
-    background-color: $dark2;
+.sportsbook{
+    display: flex;
+    justify-content: center;
 
-    &__header{
-        background-color: $dark1;
-        display: flex;
+    @media screen and (max-width: 1430px) {
+        flex-direction: column;
+    }
 
-        &__specific{
-            padding: 15px 40px;
-            background-color: $dark1;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            border: none;
-            outline: none;
+    app-ticket{
+        width: 30%;
+
+        @media screen and (max-width: 1430px) {
+            width: 100%;
             display: flex;
-            cursor: pointer;
-            align-items: center;
-
-            @media screen and (max-width: 600px) {
-                font-size: 14px;
-                padding: 10px 20px;
-            }
-            @media screen and (max-width: 400px) {
-                font-size: 12px;
-                padding: 5px 10px;
-            }
-
-            img{
-                width: 30px;
-            }
-
-            &:hover{
-                background-color: rgb(34,40,50);
-            }  
         }
     }
 
-    &__container{
+    &__list{
+        width: 70%;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        
+        @media screen and (max-width: 1430px) {
+            width: 100%;
+        }
 
-        &__item{
-            padding: 11px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 1px solid $border;
+        background-color: $dark2;
+
+        &__header{
+            background-color: $dark1;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
 
-            &:hover{
-                background-color: rgba(37,45,55,255);
-            }
+            &__specific{
+                padding: 15px 40px;
+                background-color: $dark1;
+                color: white;
+                font-size: 17px;
+                font-weight: bold;
+                border: none;
+                outline: none;
+                display: flex;
+                cursor: pointer;
+                align-items: center;
 
-            @media screen and (max-width: 550px) {
-                font-size: 16px;
-                padding: 10px 10px;
-            }
-            @media screen and (max-width: 400px) {
-                font-size: 13px;
-            }
-
-            &__odds{
-                &__home, &__away{
-                    background-color: rgba(42,50,55,255);
+                @media screen and (max-width: 600px) {
+                    font-size: 14px;
                     padding: 10px 20px;
-                    font-size: 16px;
-                    font-weight: bold;
-                    color: white;
-                    border: none;
-                    border-radius: 7px;
-                    cursor: pointer;
-
-                    &:hover{
-                        background-color: rgb(46,54,63);
-                    }
-
-                    @media screen and (max-width: 450px) {
-                        font-size: 13px;
-                        padding: 8px 10px;
-                    }
-                    @media screen and (max-width: 400px) {
-                        font-size: 12px;
-                        padding: 8px 8px;
-                    }
+                }
+                @media screen and (max-width: 400px) {
+                    font-size: 12px;
+                    padding: 5px 10px;
                 }
 
-                &__away{
-                    margin-right: 10px;
+                img{
+                    width: 30px;
                 }
+
+                &:hover{
+                    background-color: rgb(34,40,50);
+                }  
             }
         }
 
+        &__container{
+
+            &__item{
+                padding: 11px 40px;
+                font-size: 18px;
+                font-weight: bold;
+                border-bottom: 1px solid $border;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                &:hover{
+                    background-color: rgba(37,45,55,255);
+                }
+
+                @media screen and (max-width: 550px) {
+                    font-size: 16px;
+                    padding: 10px 10px;
+                }
+                @media screen and (max-width: 400px) {
+                    font-size: 13px;
+                }
+
+                &__odds{
+                    &__home, &__away{
+                        background-color: rgba(42,50,55,255);
+                        padding: 10px 20px;
+                        font-size: 16px;
+                        font-weight: bold;
+                        color: white;
+                        border: none;
+                        border-radius: 7px;
+                        cursor: pointer;
+
+                        &:hover{
+                            background-color: rgb(46,54,63);
+                        }
+
+                        @media screen and (max-width: 450px) {
+                            font-size: 13px;
+                            padding: 8px 10px;
+                        }
+                        @media screen and (max-width: 400px) {
+                            font-size: 12px;
+                            padding: 8px 8px;
+                        }
+                    }
+
+                    &__away{
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
     }
 }
 

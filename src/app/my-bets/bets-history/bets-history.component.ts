@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BetDetailsService } from 'src/app/shared/bet-details.service';
 import { fullBet } from 'src/app/shared/full-bet-details.model';
 
@@ -13,9 +13,9 @@ export class BetsHistoryComponent implements OnInit {
 
   placedBets: fullBet[] = [];
 
-  ngOnInit(): void {//home, away, odd, betAmount, possWin
+  ngOnInit(): void {
 
-    this.placedBets = this.betDetailsService.getData();//observable
+    this.placedBets = this.betDetailsService.getData();
     
   }
 

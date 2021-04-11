@@ -22,6 +22,10 @@ $border: rgba(43,52,60,255);
             align-items: center;
         }
     }
+
+    &__no-bets{
+        margin: 20px;
+    }
     
     &__bets{
 
@@ -118,6 +122,3 @@ $border: rgba(43,52,60,255);
     }
 }
 
-.active{
-    box-shadow: 0px 1px red; 
-}
