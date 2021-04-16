@@ -1,40 +1,15 @@
 <div class='ticket'>
         <div class="ticket__container">
             <div class="ticket__container__header">
-                 BET SLIP({{matches.length}} bets)
+                 BET SLIP({{matches.length}} matches)
                 <div class="ticket__container__header__matches" *ngIf='matches.length > 0'>
                     <div class="ticket__container__header__matches__data" *ngFor='let match of matches; let i = index'>
-
-                        <div class="ticket__container__header__matches__data__wrapper">
-
-                            <div class="ticket__container__header__matches__data__wrapper__name">
-                                {{match.home}} VS {{match.away}}
-                            </div> 
-                            <button [attr.data-id]='i' (click)='removeMatch($event)' class="ticket__container__header__matches__data__wrapper__delete">x</button>
-                        </div>
-
-                        <div class="ticket__container__header__matches__data__wrapper">
-                            <div class="ticket__container__header__matches__data__wrapper__betting-on">
-                                {{match.bettingOn}} 
-                            </div>
-                            <div class="ticket__container__header__matches__data__wrapper__odd">
-                                {{match.odd}}                
-                            </div> 
-                        </div>
+                        <app-match [match]='match' [id]='i'></app-match>
                     </div>
                 </div>
             </div>
-            <div class="ticket__container__bet-details">
-                <div class="ticket__container__bet-details__betAmount">
-                    INPUT YOUR BET
-                    <input [disabled]='!inputCanBeFilled' #inputBet min='0' (change)='calculatePossWin(inputBet)' placeholder="$" class='ticket__container__bet-details__betAmount__input' type="number">
-                </div>
-                <div class="ticket__container__bet-details__info">
-                    <div class="ticket__container__bet-details__info__odd">Odds: {{combinedOdd}}</div>
-                    <div class="ticket__container__bet-details__info__win">Possible Win: {{possWin}}$</div>
-                </div>
-                <button [disabled]='!betCanBePlaced' (click)='placeBet(inputBet)' class="ticket__container__bet-details__place-bet">PLACE BET</button>
-
-            </div>
+            <app-bet-place
+            [matches]='matches'
+            ></app-bet-place>
         </div>
 </div>

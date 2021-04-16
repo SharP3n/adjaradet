@@ -1,4 +1,4 @@
-import { Bet } from "../sportsbook/bet-details.model";
+import { Bet } from "../sportsbook/matches-list/bet-details.model";
 import { match } from "./match-details.model";
 
 export class fullBet{

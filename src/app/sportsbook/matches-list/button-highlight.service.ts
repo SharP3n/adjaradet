@@ -8,12 +8,16 @@ import { match } from "../../shared/match-details.model";
 export class ButtonHighlightService {
 
   highlightedButtons = new EventEmitter<{id: number, bettingOn: string}[]>();
-
-  matchesData: match[] = [];
-
+  matches;
+  
   highlightButtons(matches: match[]){
-    this.matchesData = matches;
-    this.highlightedButtons.emit(this.matchesData)
+    this.matches = matches;
+    this.highlightedButtons.emit(matches)
+  }
+  
+  fakeEvent = new EventEmitter<void>();
+  fakeFire(){
+    this.highlightedButtons.emit(this.matches)
   }
 
 

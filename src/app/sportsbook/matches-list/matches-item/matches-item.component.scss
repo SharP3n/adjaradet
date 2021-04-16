@@ -1,0 +1,23 @@
+$border: rgba(43,52,60,255); 
+
+.match{
+    padding: 11px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid $border;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:hover{
+        background-color: rgba(37,45,55,255);
+    }
+
+    @media screen and (max-width: 550px) {
+        font-size: 16px;
+        padding: 10px 10px;
+    }
+    @media screen and (max-width: 400px) {
+        font-size: 13px;
+    }
+}

@@ -16,6 +16,11 @@ import { BetDetailsService } from './shared/bet-details.service';
 import { CommonModule } from '@angular/common';
 import { HighlightDirective} from './navbar/highlight.directive';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MatchesHeaderComponent } from './sportsbook/matches-list/matches-header/matches-header.component';
+import { MatchesItemComponent } from './sportsbook/matches-list/matches-item/matches-item.component';
+import { MatchOddsComponent } from './sportsbook/matches-list/matches-item/match-odds/match-odds.component';
+import { BetPlaceComponent } from './sportsbook/matches-list/ticket/bet-place/bet-place.component';
+import { MatchComponent } from './sportsbook/matches-list/ticket/match/match.component';
 
 
 @NgModule({
@@ -31,7 +36,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MyBetsComponent,
     BetsHistoryComponent,
     HighlightDirective,
-    NotFoundComponent    
+    NotFoundComponent,
+    MatchesHeaderComponent,
+    MatchesItemComponent,
+    MatchOddsComponent,
+    BetPlaceComponent,
+    MatchComponent    
   ],
   imports: [
     BrowserModule,
