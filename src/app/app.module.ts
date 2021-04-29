@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -21,7 +20,11 @@ import { MatchesItemComponent } from './sportsbook/matches-list/matches-item/mat
 import { MatchOddsComponent } from './sportsbook/matches-list/matches-item/match-odds/match-odds.component';
 import { BetPlaceComponent } from './sportsbook/matches-list/ticket/bet-place/bet-place.component';
 import { MatchComponent } from './sportsbook/matches-list/ticket/match/match.component';
-
+import { LogInComponent } from './navbar/log-in/log-in.component';
+import { FormsModule } from '@angular/forms';
+import { ShortenPipe } from './sportsbook/matches-list/matches-item/shorten.pipe';
+import { HttpClientModule } from '@angular/common/http';
+import { MessageComponent } from './navbar/log-in/message/message.component'
 
 @NgModule({
   declarations: [
@@ -41,12 +44,17 @@ import { MatchComponent } from './sportsbook/matches-list/ticket/match/match.com
     MatchesItemComponent,
     MatchOddsComponent,
     BetPlaceComponent,
-    MatchComponent    
+    MatchComponent,
+    LogInComponent,
+    ShortenPipe,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [ BetDetailsService ],
   bootstrap: [AppComponent]

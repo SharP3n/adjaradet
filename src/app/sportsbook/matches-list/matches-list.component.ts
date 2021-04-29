@@ -1,21 +1,33 @@
-import { Component, EventEmitter, ElementRef, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { viewClassName } from '@angular/compiler';
+import { Component, EventEmitter, ElementRef, OnInit, ViewChild, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { BetDetailsService } from 'src/app/shared/bet-details.service';
 import { match } from 'src/app/shared/match-details.model';
 import { ButtonHighlightService } from 'src/app/sportsbook/matches-list/button-highlight.service';
 import { DataService } from './data.service';
+import { MatchesHeaderComponent } from './matches-header/matches-header.component'
 
 @Component({
   selector: 'app-matches-list',
   templateUrl: './matches-list.component.html',
   styleUrls: ['./matches-list.component.scss']
 })
-export class MatchesListComponent implements OnInit, OnChanges{
+export class MatchesListComponent implements OnInit, OnChanges, AfterViewInit{
 
-  constructor( public dataService: DataService, private route: ActivatedRoute, private betDetailsService: BetDetailsService, private buttonHighlightService: ButtonHighlightService) { }
+  constructor( private dataService: DataService, private route: ActivatedRoute, private betDetailsService: BetDetailsService, private buttonHighlightService: ButtonHighlightService) { }
+
+  @ViewChild(MatchesHeaderComponent) HeaderComponent: MatchesHeaderComponent;
+  
+  ngAfterViewInit(){
+    this.dataService.fetchMatches().subscribe(matches => {
+      this.dataService.organiseMatchesData(matches) 
+      this.getMatches(this.HeaderComponent.activeSport)
+    });
+  }
+  
   
   ngOnInit(): void {
-
+    
     this.betDetailsService.betPlaced.subscribe( () =>{
       let bet = document.querySelectorAll('.added-bet');
       bet.forEach( btn => {
@@ -23,39 +35,24 @@ export class MatchesListComponent implements OnInit, OnChanges{
       });
     }
     )
-    
-    // this.buttonHighlightService.highlightedButtons.subscribe( (highlightsData: match[]) =>{
-    //   this.infoForHighlight = highlightsData;
-    //   this.resetHighlights(this.infoForHighlight);
-    // }
-    // )
   }
 
-  getMatches(e){
-    this.matches = this.dataService.returnSpecificMatches(e);
+
+  getMatches(sport: string){
+    this.matches = this.dataService.returnSpecificMatches(sport);
   }
+
   matches = [];
-
-
   activeSport: string;
-
   ngOnChanges(changes: SimpleChanges){
     console.log(changes)
     if(changes.currentValue && changes.currentValue !== changes.previousValue){
-
     }
   }
-
   
-  infoForHighlight: {id: number, bettingOn: string}[] = []; 
   
-  // removeAllHighlights(){
-  //   let highlightedBtns = document.querySelectorAll('.added-bet');
-  //   highlightedBtns.forEach(btn => {
-  //     btn.classList.remove('added-bet');
-  //   });    
-  // }
   
+  // infoForHighlight: {id: number, bettingOn: string}[] = []; 
   resetHighlights(highlightsData: {id: number, bettingOn: string}[]){ 
 
   //   setTimeout(() => {

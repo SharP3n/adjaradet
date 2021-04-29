@@ -11,8 +11,8 @@ export class ButtonHighlightService {
   matches;
   
   highlightButtons(matches: match[]){
-    this.matches = matches;
-    this.highlightedButtons.emit(matches)
+    // this.matches = matches;
+    // this.highlightedButtons.emit(matches)
   }
   
   fakeEvent = new EventEmitter<void>();

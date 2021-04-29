@@ -23,10 +23,6 @@ export class MatchesHeaderComponent implements OnInit {
       }
       )    
   }
-
-  fireEvent(){
-    this.ButtonHighlightsService.fakeFire();
-  }
     
   @Output() ActiveSport = new EventEmitter<string>(); 
   activeSport: string;

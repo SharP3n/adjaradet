@@ -3,10 +3,12 @@
     <li class='navbar__item sports'><a appHighlight [defaultColor]='betsQuantity' routerLink='/betsHistory' class=''>MY BETS({{betsQuantity}})</a></li>
     <li class='navbar__item my-bets'><a routerLink='/sportsbook/NBA' class='navbar__item__link' >SPORTS</a></li>
     <ul class='navbar__item__account'>
-        <li class='navbar__item__account'><button class='navbar__item__account__log-in'>Log in</button></li>
-        <li class='navbar__item__account'><button class='navbar__item__account__register'>Register</button></li>
+        <li class='navbar__item__account'><button (click)='onOpenModal("log in")' class='navbar__item__account__log-in'>Log in</button></li>
+        <li class='navbar__item__account'><button (click)='onOpenModal("register")' class='navbar__item__account__register'>Register</button></li>
     </ul>  
     
 </ul>
 
+<app-log-in
+></app-log-in>
 
