@@ -3,9 +3,20 @@
     <li class='navbar__item sports'><a appHighlight [defaultColor]='betsQuantity' routerLink='/betsHistory' class=''>MY BETS({{betsQuantity}})</a></li>
     <li class='navbar__item my-bets'><a routerLink='/sportsbook/NBA' class='navbar__item__link' >SPORTS</a></li>
     <ul class='navbar__item__account'>
-        <li class='navbar__item__account'><button (click)='onOpenModal("log in")' class='navbar__item__account__log-in'>Log in</button></li>
-        <li class='navbar__item__account'><button (click)='onOpenModal("register")' class='navbar__item__account__register'>Register</button></li>
+        <li><button (click)='onOpenModal("log in")' class='navbar__item__account__log-in'>Log in</button></li>
+        <li><button (click)='onOpenModal("register")' class='navbar__item__account__register'>Register</button></li>
+        <li><button (click)='logOut()' class='navbar__item__account__log-out'>Log out</button></li>
+
+        <div class="navbar__item__account__dropdown">
+          <span class="navbar__item__account__dropdown__name">ACCOUNT<img src="/assets/icons/dropdown.png" alt="dropdown"></span>
+          <div class="navbar__item__account__dropdown__dropdown-content">
+            <button (click)='onOpenModal("log in")' class='navbar__item__account__dropdown__dropdown-content__item'>Log In</button>
+            <button (click)='onOpenModal("register")' class='navbar__item__account__dropdown__dropdown-content__item'>Sign up</button>
+            <button (click)='logOut()' class='navbar__item__account__dropdown__dropdown-content__item'>Log Out</button>
+          </div>
+        </div>
     </ul>  
+
     
 </ul>
 

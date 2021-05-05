@@ -43,36 +43,49 @@ export class LogInComponent implements OnInit {
 
   inputMessage: string;
 
-  onLogin(form: {username: string, password: string, email: string}){
+  onLogin(form){
+    console.log(form)
 
-    // this.accountService.checkIfUserExists(form);
-    this.inputMessage = `welcome ${String(form.username)}`;
-    this.accountService.message.emit(this.inputMessage);
-    this.accountService.activeAccount = form;
-    this.display = false;
-    this.logInForm.reset();
+    if(!form.valid){
+      return;
+    }
+
+    const email = form.value.email;
+    const password = form.value.password;
+    const username = form.value.username;
+
+    this.accountService.logIn(email, password).subscribe(
+      resData => {
+        console.log(resData);
+        
+        this.accountService.activeAccount = {username: username, email: email, password: password}
+      }
+    )
   }
 
   onRegister(form){
     //automatically move to log in after register]
-    // console.log(form)
-    // const newAcc = {form.username, form.email, form.password1}
-    this.accountService.StoreAccounts({username: form.username, email: form.email, password: form.password1})
-    this.registerForm.reset();
-    this.display = false;//action = log in
 
-      
-    // setTimeout(() => {
-      
-    //   this.accountService.fetchAccounts().subscribe(accounts => {
-    //     console.log(accounts)
-    //   });
-    // }, 0);
-    // ,() => {
-    //   this.accountService.message.emit('Error Occurred, Check Network Connection')//customize errors
-    // });
-      
+    if(!form.valid){
+      return;
+    }    
+    const email = form.value.email;
+    const password = form.value.password1;
 
+    this.accountService.signup(email, password).subscribe(
+      resData => {
+        console.log(resData)
+      },
+      error => {
+        console.log(error);
+        switch(error.error.error){
+          case 'EMAIL_EXISTS': 
+            //error = 'this email already exists'
+        }
+      }
+    );
+
+    form.reset();
   }
 }
 

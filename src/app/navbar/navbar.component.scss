@@ -1,6 +1,5 @@
 $dark1: rgba(29,35,41,255);
 $green: #01AC2D; 
-$dark2: rgba(32,40,48,255);
 
 .navbar{
     background-color: $dark1; 
@@ -19,6 +18,9 @@ $dark2: rgba(32,40,48,255);
         @media screen and (max-width: 610px) {
             order: 1;
         }   
+        @media screen and (max-width: 390px) {
+            display: none;
+        }
     }
 
     .my-bets{
@@ -41,8 +43,8 @@ $dark2: rgba(32,40,48,255);
         @media screen and (max-width: 610px) {
             margin: auto;
         }
-        @media screen and (max-width: 375px) {
-            font-size: 12px;
+        @media screen and (max-width: 450px) {
+            font-size: 11px;
         }    
 
         &__link{
@@ -70,8 +72,70 @@ $dark2: rgba(32,40,48,255);
             margin-left: auto;
             display: flex;
             order: 4;
+            align-items: center;
             
-            &__log-in, &__register{
+            &__dropdown {
+                cursor: pointer;
+                
+                @media screen and (min-width: 640px) {
+                    display: none;
+                }
+                
+                &__name{
+                    display: flex;
+                    align-items: center;
+                    font-weight: bold;
+                    font-size: 14px;
+                    @media screen and (max-width: 450px) {
+                        font-size: 11px;
+                    }    
+                    
+                    img{
+                        width: 20px;
+                    }
+                }
+                
+                &:hover &__dropdown-content {
+                    display: block;
+                }
+                
+                &__dropdown-content {
+                    border-radius: 3px;
+                    display: none;
+                    position: absolute; 
+                    background-color: $dark1;
+                    // padding: 10px 18px 0px 18px;
+                    z-index: 1;
+
+                    &__item{
+                        padding: 8px 0px;
+                        text-align: center;
+                        width: 100%;
+                        transition-duration: 0.3s;
+                        background-color: $dark1;
+                        color: white;
+                        outline: none;
+                        border: none;
+
+                        @media screen and (max-width: 450px) {
+                            font-size: 11px;
+                            margin: 3px 0px;
+                            padding: 5px 0px;
+                        }    
+
+                        &:hover{
+                            color: $green
+                        }
+                    }
+                }
+            }
+            
+            &__log-in, &__register, &__log-out{
+
+                @media screen and (max-width: 640px) {
+                    display: none;
+                }
+
                 cursor: pointer;
                 font-weight: bold;
                 color: white;
@@ -101,6 +165,9 @@ $dark2: rgba(32,40,48,255);
 
             &__register{
                 background-color: #323d49;
+            }
+            &__log-out{
+                background-color: red;
             }
         }
 

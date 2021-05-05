@@ -52,7 +52,7 @@ export class MatchesListComponent implements OnInit, OnChanges, AfterViewInit{
   
   
   
-  // infoForHighlight: {id: number, bettingOn: string}[] = []; 
+  // infoForHighlighft: {id: number, bettingOn: string}[] = []; 
   resetHighlights(highlightsData: {id: number, bettingOn: string}[]){ 
 
   //   setTimeout(() => {

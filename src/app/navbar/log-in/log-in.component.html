@@ -4,7 +4,7 @@
             LOG IN
         </div>
 
-        <form class="modal__log-in__form" (ngSubmit)='onLogin(logInForm.value)' #logInForm='ngForm'>
+        <form class="modal__log-in__form" (ngSubmit)='onLogin(logInForm)' #logInForm='ngForm'>
             <label for='name' class="modal__log-in__form__username">USERNAME:</label>
             <input #username='ngModel' required id='username' name='username' type="text" maxlength="15" class="modal__log-in__form__username-input" ngModel>
             <div class="modal__log-in__form__username-validity" *ngIf='!username.valid && username.touched'>Please Input username</div>
@@ -33,11 +33,11 @@
             </div>
         </form>
     </div>
-
+<!-- split into components -->
     <ng-template #register>
 
         <div class="modal__register">
-            <form class="modal__register__form" (ngSubmit)='onRegister(registerForm.value)' #registerForm='ngForm'>
+            <form class="modal__register__form" (ngSubmit)='onRegister(registerForm)' #registerForm='ngForm'>
                 <label for='name' class="modal____form__username">USERNAME:</label>
                 <input #username='ngModel' required id='username' name='username' type="text" maxlength="15" class="modal__log-in__form__username-input" ngModel>
                 <div class="modal__log-in__form__username-validity" *ngIf='!username.valid && username.touched'>Please Input username</div>

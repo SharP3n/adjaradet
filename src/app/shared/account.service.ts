@@ -1,16 +1,70 @@
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable, OnInit } from '@angular/core';
+import { ComponentFactoryResolver, EventEmitter, Injectable, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Account } from './account.model';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { MessageComponent } from '../navbar/log-in/message/message.component'
+import { PlaceholderDirective } from './placeholder.directive';
+
+interface authResponse{
+  kind: string;
+  idToken: string;
+  email: string;
+  refreshToken: string;
+  expiresIn: string;
+  localId: string;
+  registered?: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AccountService implements OnInit {
 
   // account: NgForm;
+  
+  @ViewChild(PlaceholderDirective, {static: false}) messageHost: PlaceholderDirective; 
+   
+  signup(email: string, password: string){
+    return this.http.post<authResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyChqR-cUB1DmNV5sGf77yrpdeu0_gNa-LY',
+    {
+      email: email,
+      password: password,
+      returnSecureToken: true
+    }
+    )
+    // .pipe(catchError(error => {
+
+    // }))
+  }
+
+  logIn(email: string, password: string){
+    return this.http.post<authResponse>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyChqR-cUB1DmNV5sGf77yrpdeu0_gNa-LY',
+      {
+        email: email,
+        password: password,
+        returnSecureToken: true
+      }
+    )
+  }
+
+  logOut(){
+    this.message.emit('Logged Out');
+    // const messageCmpFactory = this.componentFactoryRes.resolveComponentFactory(MessageComponent)
+    // const hostViewContainerRef = this.messageHost.viewContainerRef;
+    // hostViewContainerRef.clear();
+
+    // hostViewContainerRef.createComponent(messageCmpFactory)
+    delete this.activeAccount;
+  }
+  
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+  
   
   displayModal = new EventEmitter<{displayModal: boolean, action: string}>()
   message = new EventEmitter<string>();
@@ -18,6 +72,8 @@ export class AccountService implements OnInit {
   toggleModal(displayModal: boolean, action: string){
     this.displayModal.emit({displayModal: displayModal, action: action});
   }
+
+  
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
@@ -127,5 +183,5 @@ export class AccountService implements OnInit {
 
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private componentFactoryRes: ComponentFactoryResolver) { }
 }
