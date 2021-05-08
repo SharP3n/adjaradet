@@ -23,7 +23,6 @@ interface authResponse{
 
 export class AccountService implements OnInit {
 
-  // account: NgForm;
   
   @ViewChild(PlaceholderDirective, {static: false}) messageHost: PlaceholderDirective; 
    
@@ -58,7 +57,6 @@ export class AccountService implements OnInit {
     // hostViewContainerRef.clear();
 
     // hostViewContainerRef.createComponent(messageCmpFactory)
-    delete this.activeAccount;
   }
   
 //////////////////////////////////////////////////////////////////////////////////////
@@ -79,8 +77,6 @@ export class AccountService implements OnInit {
 //////////////////////////////////////////////////////////////////////////////////////
 
   accountsArr: Account[] = [];
-
-  activeAccount: {username: string, email: string, password: string};
 
   //store accountsArr in firebase++
   //get accountsArr from firebase++

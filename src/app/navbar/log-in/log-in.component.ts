@@ -1,6 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Account } from 'src/app/shared/account.model';
 import { AccountService } from 'src/app/shared/account.service';
+import * as accountActions from './store/account.actions'
 
 @Component({
   selector: 'app-log-in',
@@ -9,13 +13,20 @@ import { AccountService } from 'src/app/shared/account.service';
 })
 export class LogInComponent implements OnInit {
 
-  constructor(public accountService: AccountService) {}
+  constructor(
+    private accountService: AccountService,
+    private store: Store<{accounts: Account[]}>
+  ) {}
+
+  accounts: Observable<Account[]>
 
   ngOnInit(): void {
     this.accountService.displayModal.subscribe((modalInfo: {displayModal: boolean, action: string}) => {
       this.action = modalInfo.action;
-      this.display = modalInfo.displayModal;
+      this.showModal = modalInfo.displayModal;
     })
+    
+    this.accounts = this.store.select('accounts');
 
     // this.accountService.fetchAccounts().subscribe(accounts => {
     //   this.accountService.accountsArr = accounts;
@@ -29,10 +40,10 @@ export class LogInComponent implements OnInit {
   @ViewChild('registerForm') registerForm: NgForm; 
 
   action: string;
-  display: boolean;
+  showModal: boolean;
 
   onCancelModal(state){
-    this.display = false;
+    this.showModal = false;
     if(state === 'log in'){
       this.logInForm.reset();
     }
@@ -56,18 +67,21 @@ export class LogInComponent implements OnInit {
 
     this.accountService.logIn(email, password).subscribe(
       resData => {
-        console.log(resData);
         
-        this.accountService.activeAccount = {username: username, email: email, password: password}
+        this.store.dispatch(new accountActions.changeUser({username: username, email: email, password: password}))
       }
     )
+
+    form.reset();
+    this.showModal = false;
   }
 
   onRegister(form){
-    //automatically move to log in after register]
+    //automatically move to log in after register
 
-    if(!form.valid){
+    if(!form.valid || form.value.password1 !== form.value.password2){
       return;
+
     }    
     const email = form.value.email;
     const password = form.value.password1;
@@ -86,8 +100,25 @@ export class LogInComponent implements OnInit {
     );
 
     form.reset();
+    this.showModal = false;
   }
-}
+  
+  doubleCheckValidity(password1, password2, submitBtn: HTMLButtonElement){
+    
+    // if(password1.value !== password2.value || !this.registerForm.valid){
+    //   submitBtn.style.backgroundColor = 'red';
+    //   submitBtn.style.cursor = 'not-allowed'
+    //   submitBtn.disabled = true;
+    // }
+    // else if (this.registerForm.valid){
+    //   console.log('shevida2')
+    //   submitBtn.style.backgroundColor = 'green';
+    //   submitBtn.style.cursor = 'pointer'
+    //   submitBtn.disabled = false;
+    // }
+  }
 
+  
+}
 
 

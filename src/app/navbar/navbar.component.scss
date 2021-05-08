@@ -5,17 +5,16 @@ $green: #01AC2D;
     background-color: $dark1; 
     display: flex;
     align-items: center;
-    padding: 10px 120px;
+    padding: 10px 80px;
     
     @media screen and (max-width: 1150px) {
-        padding: 7px 60px;
-    }
-    @media screen and (max-width: 800px) {
         padding: 6px 10px;
+    }
+    @media screen and (max-width: 0px) {
     }
 
     .logo{
-        @media screen and (max-width: 610px) {
+        @media screen and (max-width: 800px) {
             order: 1;
         }   
         @media screen and (max-width: 390px) {
@@ -34,13 +33,10 @@ $green: #01AC2D;
         font-weight: bold;
         margin: 0px 15px;
         font-size: 17px;
-        @media screen and (max-width: 1150px) {
-            font-size: 15px;
-        }
-        @media screen and (max-width: 800px) {
+        @media screen and (max-width: 1000px) {
             font-size: 14px;
         }
-        @media screen and (max-width: 610px) {
+        @media screen and (max-width: 800px) {
             margin: auto;
         }
         @media screen and (max-width: 450px) {
@@ -60,10 +56,10 @@ $green: #01AC2D;
             @media screen and (max-width: 1150px) {
                 width: 200px;
             }
-            @media screen and (max-width: 800px) {
+            @media screen and (max-width: 1000px) {
                 width: 160px;
             }
-            @media screen and (max-width: 800px) {
+            @media screen and (max-width: 900px) {
                 width: 130px;
             }
         }
@@ -77,7 +73,7 @@ $green: #01AC2D;
             &__dropdown {
                 cursor: pointer;
                 
-                @media screen and (min-width: 640px) {
+                @media screen and (min-width: 800px) {
                     display: none;
                 }
                 
@@ -104,9 +100,9 @@ $green: #01AC2D;
                     display: none;
                     position: absolute; 
                     background-color: $dark1;
-                    // padding: 10px 18px 0px 18px;
+                    padding-top: 5px;
                     z-index: 1;
-
+                    
                     &__item{
                         padding: 8px 0px;
                         text-align: center;
@@ -116,11 +112,13 @@ $green: #01AC2D;
                         color: white;
                         outline: none;
                         border: none;
-
+                        display: block;
+                        padding: 5px 15px;
+                        
                         @media screen and (max-width: 450px) {
                             font-size: 11px;
                             margin: 3px 0px;
-                            padding: 5px 0px;
+                            padding: 5px 10px;
                         }    
 
                         &:hover{
@@ -130,9 +128,9 @@ $green: #01AC2D;
                 }
             }
             
-            &__log-in, &__register, &__log-out{
+            &__log-in, &__register, &__log-out, &__info{
 
-                @media screen and (max-width: 640px) {
+                @media screen and (max-width: 800px) {
                     display: none;
                 }
 
@@ -152,25 +150,22 @@ $green: #01AC2D;
                     padding: 8px 13px;
                     font-size: 15px;
                 }
-                @media screen and (max-width: 800px) {
+                @media screen and (max-width: 900px) {
                     padding: 6px 11px;
                     font-size: 14px;
                     margin: 0px 7px;
                 }
-                @media screen and (max-width: 610px) {
+                @media screen and (max-width: 800px) {
                     display: none;
                 }
-                
             }
 
-            &__register{
+            &__register, &__info{
                 background-color: #323d49;
             }
             &__log-out{
                 background-color: red;
             }
         }
-
-
     }
 }

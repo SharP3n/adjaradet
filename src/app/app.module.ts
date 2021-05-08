@@ -9,15 +9,18 @@ import { SportsPicturesComponent } from './home/sports-pictures/sports-pictures.
 import { CommonModule } from '@angular/common';
 import { HighlightDirective} from './navbar/highlight.directive';
 import { NotFoundComponent } from './not-found/not-found.component';
-
 import { LogInComponent } from './navbar/log-in/log-in.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { MessageComponent } from './navbar/log-in/message/message.component'
 import { PlaceholderDirective } from './shared/placeholder.directive';
-import { SportsbettingModule } from './shared/sportsbetting.module';
+import { SportsBookModule } from './shared/sportsbook.module';
 import { CoreModule } from './core.module';
-import { SportsbettingRouteModule } from './shared/sportsbetting-route.module';
+import { StoreModule } from '@ngrx/store';
+import { accountReducer } from './navbar/log-in/store/account.reducer';
+import { environment } from 'src/environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AccountInfoComponent } from './navbar/account-info/account-info.component';
 
 @NgModule({
   declarations: [
@@ -30,16 +33,20 @@ import { SportsbettingRouteModule } from './shared/sportsbetting-route.module';
     LogInComponent,
     MessageComponent,
     HighlightDirective,
-    PlaceholderDirective
+    PlaceholderDirective,
+    AccountInfoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule,
     FormsModule,
     HttpClientModule,
-    SportsbettingModule,
+    SportsBookModule,
     CoreModule,
+    StoreModule.forRoot({accounts: accountReducer}),
+    CommonModule,
+
+    environment.production ? [] : StoreDevtoolsModule.instrument(),
   ],
   providers: [],
   bootstrap: [AppComponent]

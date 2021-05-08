@@ -93,3 +93,13 @@ $dark1: rgba(29,35,41,255);
 input.ng-invalid.ng-touched{
     border: 1px solid red;
 }
+
+.valid{
+    cursor: pointer;
+    background-color: green;
+}
+
+.invalid{
+    cursor: not-allowed;
+    background-color: red;
+}

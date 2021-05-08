@@ -6,13 +6,16 @@
         <li><button (click)='onOpenModal("log in")' class='navbar__item__account__log-in'>Log in</button></li>
         <li><button (click)='onOpenModal("register")' class='navbar__item__account__register'>Register</button></li>
         <li><button (click)='logOut()' class='navbar__item__account__log-out'>Log out</button></li>
-
+        <li><a routerLink='/account-info' class='navbar__item__account__info'>Account</a></li>
+        
         <div class="navbar__item__account__dropdown">
           <span class="navbar__item__account__dropdown__name">ACCOUNT<img src="/assets/icons/dropdown.png" alt="dropdown"></span>
           <div class="navbar__item__account__dropdown__dropdown-content">
             <button (click)='onOpenModal("log in")' class='navbar__item__account__dropdown__dropdown-content__item'>Log In</button>
-            <button (click)='onOpenModal("register")' class='navbar__item__account__dropdown__dropdown-content__item'>Sign up</button>
+            <button (click)='onOpenModal("register")' class='navbar__item__account__dropdown__dropdown-content__item'>Register</button>
             <button (click)='logOut()' class='navbar__item__account__dropdown__dropdown-content__item'>Log Out</button>
+            <a routerLink='/account-info' class='navbar__item__account__dropdown__dropdown-content__item'>Account</a>
+            
           </div>
         </div>
     </ul>  
@@ -20,6 +23,5 @@
     
 </ul>
 
-<app-log-in
-></app-log-in>
+<app-log-in></app-log-in>
 

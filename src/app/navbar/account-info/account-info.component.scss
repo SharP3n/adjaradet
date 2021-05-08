@@ -1,0 +1,35 @@
+.info{
+    margin-top: 20px;
+    &__username, &__email, &__password{
+        font-size: 20px;
+        margin: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__password{
+
+        &__input{
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: default;
+            color: white;
+            max-width: 120px;
+            font-size: 20px;
+        }
+
+        &__toggle-visibility{
+            
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            
+            img{
+                vertical-align: middle;
+                width: 25px;
+            }
+        }
+    }
+}
