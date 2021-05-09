@@ -13,7 +13,7 @@ export class ButtonHighlightService {
 
   highlightButtons(matches: match[]){
     this.matchesData = matches;
-    this.highlightedButtons.emit(this.matchesData)
+    // this.highlightedButtons.emit(this.matchesData)
   }
 
 

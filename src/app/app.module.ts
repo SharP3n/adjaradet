@@ -9,19 +9,36 @@ import { SportsPicturesComponent } from './home/sports-pictures/sports-pictures.
 import { CommonModule } from '@angular/common';
 import { HighlightDirective} from './navbar/highlight.directive';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LogInComponent } from './navbar/log-in/log-in.component';
+import { LogInComponent } from './navbar/modal/log-in/log-in.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
-import { MessageComponent } from './navbar/log-in/message/message.component'
+import { MessageComponent } from './navbar/modal/log-in/message/message.component'
 import { PlaceholderDirective } from './shared/placeholder.directive';
-import { SportsBookModule } from './shared/sportsbook.module';
+
 import { CoreModule } from './core.module';
 import { StoreModule } from '@ngrx/store';
-import { accountReducer } from './navbar/log-in/store/account.reducer';
+import { accountReducer } from './navbar/modal/log-in/store/account.reducer';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AccountInfoComponent } from './navbar/account-info/account-info.component';
+import { RegisterComponent } from './navbar/modal/register/register.component';
+import { ModalComponent } from './navbar/modal/modal.component';
+import { SportsBookModule } from './shared/sportsbook.module';
 
+
+// import { SportsbookComponent } from './sportsbook/sportsbook.component';
+// import { MatchesListComponent } from './sportsbook/matches-list/matches-list.component';
+// import { TicketComponent } from './sportsbook/matches-list/ticket/ticket.component';
+// import { MyBetsComponent } from './my-bets/my-bets.component';
+// import { BetsHistoryComponent } from './my-bets/bets-history/bets-history.component';
+// import { MatchesHeaderComponent } from './sportsbook/matches-list/matches-header/matches-header.component';
+// import { MatchesItemComponent } from './sportsbook/matches-list/matches-item/matches-item.component';
+// import { MatchOddsComponent } from './sportsbook/matches-list/matches-item/match-odds/match-odds.component';
+// import { BetPlaceComponent } from './sportsbook/matches-list/ticket/bet-place/bet-place.component';
+// import { MatchComponent } from './sportsbook/matches-list/ticket/match/match.component';
+// import { RouterModule, Routes } from '@angular/router';
+// import { ShortenPipe } from './sportsbook/matches-list/matches-item/shorten.pipe';
+// import { SportsBookRouteModule } from './shared/sportsbook-route.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,15 +51,29 @@ import { AccountInfoComponent } from './navbar/account-info/account-info.compone
     MessageComponent,
     HighlightDirective,
     PlaceholderDirective,
-    AccountInfoComponent
+    AccountInfoComponent,
+    RegisterComponent,
+    ModalComponent,
+    
+    // SportsbookComponent,
+    // MatchesListComponent,
+    // TicketComponent,
+    // MyBetsComponent,
+    // BetsHistoryComponent,
+    // MatchesHeaderComponent,
+    // MatchesItemComponent,
+    // MatchOddsComponent,
+    // BetPlaceComponent,
+    // MatchComponent,
+    // ShortenPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    SportsBookModule,
     CoreModule,
+    SportsBookModule,
     StoreModule.forRoot({accounts: accountReducer}),
     CommonModule,
 

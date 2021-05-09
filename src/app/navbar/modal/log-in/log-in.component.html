@@ -1,0 +1,37 @@
+<div class="log-in">
+
+    <div class="log-in__header">
+        LOG IN
+    </div>
+
+    <form class="log-in__form" (ngSubmit)='onLogin(logInForm)' #logInForm='ngForm'>
+        <label for='name' class="log-in__form__username">USERNAME:</label>
+        <input #username='ngModel' required id='username' name='username' type="text" maxlength="15" class="log-in__form__username-input" ngModel>
+        <div class="log-in__form__username-validity" *ngIf='!username.valid && username.touched'>Please Input username</div>
+        <br>
+        
+        <label for='email' class="log-in__form__email">EMAIL:</label>
+        <input required email id='email' #email='ngModel' name='email' type="email" class="log-in__form__email-input" ngModel>
+        <div class="log-in__form__username-validity" *ngIf='!email.valid && email.touched'>Please Input Valid email</div>
+        <br>
+        
+        <label for='passwod' class="log-in__form__password">PASSWORD</label>
+        <input required id='passwod' #password='ngModel' name='password' type="password" class="log-in__form__password-input" ngModel>
+        <div class="log-in__form__username-validity" *ngIf='!password.valid && password.touched'>Please Input Password</div>
+        <br>
+
+        <div class='log-in__form__btn-wrapper'>
+            
+            <button
+            type='button'
+            (click)='onCancelModal()'
+            class='log-in__form__btn-wrapper__cancel'>Cancel
+            </button>
+            <button
+            [disabled]='!logInForm.valid'
+            type='submit'
+            class='log-in__form__btn-wrapper__submit'>Log In</button>
+        </div>
+    </form>
+
+</div>

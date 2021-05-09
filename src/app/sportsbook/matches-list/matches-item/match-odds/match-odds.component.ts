@@ -8,6 +8,7 @@ import { NewMatchService } from '../../new-match.service';
   templateUrl: './match-odds.component.html',
   styleUrls: ['./match-odds.component.scss']
 })
+
 export class MatchOddsComponent implements OnInit, OnChanges {
 
   constructor(public dataService: DataService, private newMatchService: NewMatchService, private buttonHighlightService: ButtonHighlightService) { }
@@ -52,22 +53,6 @@ export class MatchOddsComponent implements OnInit, OnChanges {
       }
     });
   }
-
-  // checkIdentity(matches){
-  //   matches.forEach(match => {
-  //     if(match.home === this.match.home && match.away === this.match.away){
-  //       if(match.bettingOn === 'home'){
-  //         if(this.homeBtn.nativeElement.classList.contains('added-bet')){
-  //           console.log('repeat')
-  //         }
-  //       }
-  //       else if(match.bettingOn === 'away'){
-  //         this.awayBtn.nativeElement.classList.add('added-bet');
-  //         this.highlightsArr.push({away: match.away, home: match.home, bettingOn: match.bettingOn})
-  //       }
-  //     }
-  //   });
-  // }
 
   ngOnChanges(changes: SimpleChanges){
   }

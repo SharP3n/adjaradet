@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, HostListener, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input, OnChanges, Renderer2} from '@angular/core';
 
 @Directive({
     selector: '[appHighlight]'
@@ -23,20 +23,14 @@ export class HighlightDirective implements OnChanges{
     ngOnchangesCount = 0;
     
     ngOnChanges(){
-
-        if(this.ngOnchangesCount === 0){
-            localStorage.setItem('ShadesOfGreen', JSON.stringify(this.shadesOfGreen))
-        }
     
-        this.shadesOfGreen = JSON.parse(localStorage.getItem('ShadesOfGreen'));
         this.defaultColor = `rgb(${this.shadesOfGreen}, 255, ${this.shadesOfGreen})`;
         this.color = this.defaultColor;
         
-        if(this.shadesOfGreen > 0 && this.ngOnchangesCount > 0){//will not be fired at first input
+        if(this.shadesOfGreen > 0 && this.ngOnchangesCount > 0){
             this.shadesOfGreen -= 40;
             this.defaultColor = `rgb(${this.shadesOfGreen}, 255, ${this.shadesOfGreen})`;
             this.color = this.defaultColor;
-            localStorage.setItem('ShadesOfGreen', JSON.stringify(this.shadesOfGreen))
         }
         this.ngOnchangesCount++;
     }

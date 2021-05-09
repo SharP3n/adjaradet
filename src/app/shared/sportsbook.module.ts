@@ -9,7 +9,7 @@ import { MatchesItemComponent } from '../sportsbook/matches-list/matches-item/ma
 import { MatchOddsComponent } from '../sportsbook/matches-list/matches-item/match-odds/match-odds.component';
 import { BetPlaceComponent } from '../sportsbook/matches-list/ticket/bet-place/bet-place.component';
 import { MatchComponent } from '../sportsbook/matches-list/ticket/match/match.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ShortenPipe } from '../sportsbook/matches-list/matches-item/shorten.pipe';
 import { SportsBookRouteModule } from './sportsbook-route.module';

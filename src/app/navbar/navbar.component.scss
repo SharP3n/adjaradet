@@ -21,6 +21,16 @@ $green: #01AC2D;
             display: none;
         }
     }
+    
+    .mini-logo{
+        @media screen and (max-width: 390px) {
+            display: block;
+            padding: auto;
+        }
+        @media screen and (min-width: 390px) {
+            display: none;
+        }
+    }
 
     .my-bets{
         order: 3;
@@ -63,6 +73,10 @@ $green: #01AC2D;
                 width: 130px;
             }
         }
+        &__mini-logo{
+            width: 25px;
+            margin-top: 2px;
+        }
 
         &__account{
             margin-left: auto;
@@ -72,6 +86,7 @@ $green: #01AC2D;
             
             &__dropdown {
                 cursor: pointer;
+                text-decoration: underline;
                 
                 @media screen and (min-width: 800px) {
                     display: none;
@@ -114,7 +129,8 @@ $green: #01AC2D;
                         border: none;
                         display: block;
                         padding: 5px 15px;
-                        
+                        cursor: pointer;
+
                         @media screen and (max-width: 450px) {
                             font-size: 11px;
                             margin: 3px 0px;
@@ -123,6 +139,12 @@ $green: #01AC2D;
 
                         &:hover{
                             color: $green
+                        }
+
+                        &--log-out{
+                            &:hover{
+                                color: red;
+                            }
                         }
                     }
                 }

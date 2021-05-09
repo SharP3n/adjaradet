@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sportsbook.component.scss']
 })
 export class SportsbookComponent{
+  constructor(){}
 
+  
 
 }
+
+

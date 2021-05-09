@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Account } from './account.model';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { MessageComponent } from '../navbar/log-in/message/message.component'
+import { MessageComponent } from '../navbar/modal/log-in/message/message.component'
 import { PlaceholderDirective } from './placeholder.directive';
 
 interface authResponse{
@@ -23,7 +23,6 @@ interface authResponse{
 
 export class AccountService implements OnInit {
 
-  
   @ViewChild(PlaceholderDirective, {static: false}) messageHost: PlaceholderDirective; 
    
   signup(email: string, password: string){
@@ -71,7 +70,6 @@ export class AccountService implements OnInit {
     this.displayModal.emit({displayModal: displayModal, action: action});
   }
 
-  
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
