@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BetDetailsService } from 'src/app/shared/bet-details.service';
-import { fullBet } from 'src/app/shared/full-bet-details.model';
+import { FullBet } from 'src/app/shared/full-bet-details.model';
 
 @Component({
   selector: 'app-bets-history',
@@ -11,12 +11,10 @@ export class BetsHistoryComponent implements OnInit {
 
   constructor(private betDetailsService: BetDetailsService) {}
 
-  placedBets: fullBet[] = [];
+  placedBets: FullBet[] = [];
 
   ngOnInit(): void {
-
     this.placedBets = this.betDetailsService.getData();
-    
   }
 
 }

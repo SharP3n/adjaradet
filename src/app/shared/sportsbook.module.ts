@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ShortenPipe } from '../sportsbook/matches-list/matches-item/shorten.pipe';
 import { SportsBookRouteModule } from './sportsbook-route.module';
+import { OddsHighlightDirective } from '../sportsbook/matches-list/matches-item/match-odds/odds-highlight.directive';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { SportsBookRouteModule } from './sportsbook-route.module';
         MatchOddsComponent,
         BetPlaceComponent,
         MatchComponent,
-        ShortenPipe
+        ShortenPipe,
+        OddsHighlightDirective,
     ],
     imports: [
         SportsBookRouteModule, CommonModule,

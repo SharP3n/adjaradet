@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
-import { __core_private_testing_placeholder__ } from '@angular/core/testing';
 import { map } from 'rxjs/operators';
-import { match } from 'src/app/shared/match-details.model';
+import { Match } from 'src/app/shared/match-details.model';
 
 @Injectable({
   providedIn: 'root'
@@ -103,7 +102,7 @@ export class DataService {
     this.UEFAMatches = matches[2];
   }
 
-  NBAMatches: match[] = [
+  NBAMatches: Match[] = [
     // {
     //   home: 'nets',
     //   away: 'spurs',

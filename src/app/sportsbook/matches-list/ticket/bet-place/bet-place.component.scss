@@ -21,7 +21,9 @@ $green: #01AC2D;
         align-items: center;
 
         &__input{
-            padding: 5px;
+            padding: 4px;
+            font-weight: bold;
+            font-size: 16px;
             @media screen and (max-width: 500px) {
                 padding: 0px;
             }

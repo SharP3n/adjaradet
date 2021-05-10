@@ -21,6 +21,7 @@ export class MatchesItemComponent implements OnInit {
   
   ngOnInit(): void {
     this.isFetcheing = true;
+    // console.log('ksadkjfoiasdjfiulasbndgia');
     // this.postsService.fetchPosts;
     
     // this.postsService.fetchPosts().subscribe(posts => {

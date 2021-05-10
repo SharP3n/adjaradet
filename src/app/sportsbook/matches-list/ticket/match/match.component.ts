@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DataService } from '../../data.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class MatchComponent implements OnInit, OnChanges {
   @Input() id: number;
   odd: number;
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
     if(this.match.bettingOn === 'home'){
       this.odd = this.match.homeOdd;
     }

@@ -13,7 +13,6 @@ import { LogInComponent } from './navbar/modal/log-in/log-in.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { MessageComponent } from './navbar/modal/log-in/message/message.component'
-import { PlaceholderDirective } from './shared/placeholder.directive';
 
 import { CoreModule } from './core.module';
 import { StoreModule } from '@ngrx/store';
@@ -50,7 +49,6 @@ import { SportsBookModule } from './shared/sportsbook.module';
     LogInComponent,
     MessageComponent,
     HighlightDirective,
-    PlaceholderDirective,
     AccountInfoComponent,
     RegisterComponent,
     ModalComponent,

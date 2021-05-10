@@ -12,6 +12,10 @@ export class MatchesHeaderComponent implements OnInit {
 
   constructor(public dataService: DataService, private activeRoute: ActivatedRoute, private ButtonHighlightsService: ButtonHighlightService) { }
   
+  // highlightBtns(){
+    // this.ButtonHighlightsService.resetHighlights.emit();
+  // }
+
   ngOnInit(): void {
     
     // this.activeSport = this.activeRoute.snapshot.params['sport'];

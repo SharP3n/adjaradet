@@ -1,20 +1,20 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Bet } from '../sportsbook/matches-list/bet-details.model';
-import { fullBet } from './full-bet-details.model';
-import { match } from './match-details.model';
+import { FullBet } from './full-bet-details.model';
+import { Match } from './match-details.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BetDetailsService {
 
-  addedBets: fullBet[] = []
+  addedBets: FullBet[] = []
   
-  newBet: fullBet;
+  newBet: FullBet;
   betPlaced = new EventEmitter;
   
-  createBet(matchesDetails: match[], betDetails: Bet){
-    this.newBet = new fullBet(betDetails, matchesDetails)
+  createBet(matchesDetails: Match[], betDetails: Bet){
+    this.newBet = new FullBet(betDetails, matchesDetails)
     this.addedBets.push(this.newBet);
     this.betPlaced.emit();
   }

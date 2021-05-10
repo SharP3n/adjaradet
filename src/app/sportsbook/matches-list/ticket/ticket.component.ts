@@ -1,8 +1,6 @@
 import { Component, OnInit,} from '@angular/core';
-import { Bet } from 'src/app/sportsbook/matches-list/bet-details.model';
-import { BetDetailsService } from 'src/app/shared/bet-details.service';
 import { ButtonHighlightService } from '../button-highlight.service'
-import { match } from 'src/app/shared/match-details.model';
+import { Match } from 'src/app/shared/match-details.model';
 import { DataService } from '../data.service';
 import { NewMatchService } from '../new-match.service';
 
@@ -11,10 +9,11 @@ import { NewMatchService } from '../new-match.service';
   templateUrl: './ticket.component.html',
   styleUrls: ['./ticket.component.scss']
 })
+
 export class TicketComponent implements OnInit{
 
   possWin: number;
-  matches = [];
+  matches: Match[] = [];
   combinedOdd: number;
   inputCanBeFilled = false;
   betCanBePlaced = false;
@@ -22,14 +21,14 @@ export class TicketComponent implements OnInit{
   constructor(private newMatchService: NewMatchService, public dataService: DataService,
     private buttonHighlightService: ButtonHighlightService) { }
 
-  checkMatchIdentity(newMatch){
+  checkMatchIdentity(newMatch){//refactor!!!!!!!!!!!!!!!!!!!! to service??????
 
     if(this.matches.length > 0){
 
-      let canBeAdded = true;
+      let matchCanBeAdded = true;
       for (const match of this.matches) {
         if(match.home === newMatch.home && match.away === newMatch.away){
-          canBeAdded = false;
+          matchCanBeAdded = false;
           this.matches.splice(this.matches.indexOf(match), 1);
           if(match.bettingOn !== newMatch.bettingOn){
             this.matches.push(newMatch);
@@ -40,7 +39,7 @@ export class TicketComponent implements OnInit{
         }
       }
 
-      if(canBeAdded){
+      if(matchCanBeAdded){
         this.matches.push(newMatch)
         this.matches = this.matches.slice();
       }
@@ -51,26 +50,24 @@ export class TicketComponent implements OnInit{
       this.inputCanBeFilled = true;
     }
   }
-  
-  highlightBtns(){
-    this.buttonHighlightService.highlightButtons(this.matches)
-  }
 
   ngOnInit(){
     this.newMatchService.newMatch.subscribe((newMatch) => {
       this.checkMatchIdentity(newMatch);
-      this.highlightBtns();
+      this.buttonHighlightService.formHighlightData(this.matches)
     })
     
     this.dataService.betWasPlaced.subscribe(() => {
       this.matches = [];
+      this.buttonHighlightService.formHighlightData(this.matches)
     })
     
     this.dataService.idForMatchRemove.subscribe((id) => {
       this.matches.splice(id, 1)
       this.matches = this.matches.slice();
-      this.highlightBtns();
+      this.buttonHighlightService.formHighlightData(this.matches)
     });
+
   }
   
 

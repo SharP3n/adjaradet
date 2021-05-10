@@ -2,7 +2,7 @@ import { viewClassName } from '@angular/compiler';
 import { Component, EventEmitter, ElementRef, OnInit, ViewChild, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { BetDetailsService } from 'src/app/shared/bet-details.service';
-import { match } from 'src/app/shared/match-details.model';
+import { Match } from 'src/app/shared/match-details.model';
 import { ButtonHighlightService } from 'src/app/sportsbook/matches-list/button-highlight.service';
 import { DataService } from './data.service';
 import { MatchesHeaderComponent } from './matches-header/matches-header.component'
@@ -14,7 +14,7 @@ import { MatchesHeaderComponent } from './matches-header/matches-header.componen
 })
 export class MatchesListComponent implements OnInit, OnChanges, AfterViewInit{
 
-  constructor( private dataService: DataService, private route: ActivatedRoute, private betDetailsService: BetDetailsService, private buttonHighlightService: ButtonHighlightService) { }
+  constructor( public dataService: DataService, private route: ActivatedRoute, private betDetailsService: BetDetailsService, private buttonHighlightService: ButtonHighlightService) { }
 
   @ViewChild(MatchesHeaderComponent) HeaderComponent: MatchesHeaderComponent;
   
@@ -27,7 +27,6 @@ export class MatchesListComponent implements OnInit, OnChanges, AfterViewInit{
   
   
   ngOnInit(): void {
-    
     this.betDetailsService.betPlaced.subscribe( () =>{
       let bet = document.querySelectorAll('.added-bet');
       bet.forEach( btn => {

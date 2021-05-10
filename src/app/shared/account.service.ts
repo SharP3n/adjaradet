@@ -5,7 +5,6 @@ import { Account } from './account.model';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { MessageComponent } from '../navbar/modal/log-in/message/message.component'
-import { PlaceholderDirective } from './placeholder.directive';
 
 interface authResponse{
   kind: string;
@@ -23,7 +22,7 @@ interface authResponse{
 
 export class AccountService implements OnInit {
 
-  @ViewChild(PlaceholderDirective, {static: false}) messageHost: PlaceholderDirective; 
+  // @ViewChild(PlaceholderDirective, {static: false}) messageHost: PlaceholderDirective; 
    
   signup(email: string, password: string){
     return this.http.post<authResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyChqR-cUB1DmNV5sGf77yrpdeu0_gNa-LY',
