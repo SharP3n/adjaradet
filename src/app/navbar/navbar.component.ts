@@ -27,15 +27,13 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  
-
   onOpenModal(purpose: string){
     this.accountService.toggleModal(true, purpose);
   }
 
   logOut(){
     this.accountService.logOut();
-    this.store.dispatch(new accountActions.removeUser())
+    // this.store.dispatch(new accountActions.removeUser())
     this.accountService.message.emit({message: 'Logged Out', error: false});
   }
 

@@ -7,8 +7,9 @@ import { throwError } from 'rxjs';
 import { MessageComponent } from '../message/message.component'
 import { Store } from '@ngrx/store';
 import * as accountActions from '../navbar/modal/log-in/store/account.actions'
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 
-interface authResponse{
+interface authResponse{//this gets returned somewhere(maybe), so if I need it i can use it (maybe)
   kind: string;
   idToken: string;
   email: string;
@@ -58,7 +59,16 @@ export class AccountService implements OnInit {
     // }))
   }
 
+  loggedIn: boolean;
   logOut(){
+    this.store.dispatch(new accountActions.removeUser())
+    this.loggedIn = false;
+    localStorage.setItem('userData', null);
+    if(this.router.url === '/betsHistory' || this.router.url === '/account-info'){
+      this.router.navigate(['/'])
+    }
+
+
     // const messageCmpFactory = this.componentFactoryRes.resolveComponentFactory(MessageComponent)
     // const hostViewContainerRef = this.messageHost.viewContainerRef;
     // hostViewContainerRef.clear();
@@ -125,12 +135,15 @@ export class AccountService implements OnInit {
 
 
   saveLogInData(account: Account){
-    localStorage.setItem('userData', JSON.stringify(account))
+    if(account){
+      localStorage.setItem('userData', JSON.stringify(account))
+      this.loggedIn = true;
+    }
   }
 
   counter = 0;
+  constructor(private http: HttpClient, private componentFactoryRes: ComponentFactoryResolver, private store: Store<{account: Account}>, private router: Router) { 
 
-  constructor(private http: HttpClient, private componentFactoryRes: ComponentFactoryResolver, private store: Store<{account: Account}>) { 
     this.store.select('account').subscribe((account)=>{
       if(this.counter > 0){
         this.saveLogInData(account);
@@ -146,8 +159,9 @@ export class AccountService implements OnInit {
       return
     }
     this.message.emit({message:`welcome ${userData.email}`, error: false});
-
     this.store.dispatch(new accountActions.changeUser({username: userData.username, email: userData.email, password: userData.password, money: 10}))
+
+    this.loggedIn = true;
   }
   
 

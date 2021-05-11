@@ -17,11 +17,11 @@ $dark1: rgba(29,35,41,255);
 
 .error{
     border: 1px solid red;
-    text-shadow: 1px 1px red, -1px -1px red;
+    text-shadow: 2px 2px red, 2px 0px red;
 }
 
 .not-error{
     border: 1px solid green;
-    text-shadow: 1px 1px green, 1px 0px green;
+    text-shadow: 2px 2px green, 2px 0px green;
 }
 

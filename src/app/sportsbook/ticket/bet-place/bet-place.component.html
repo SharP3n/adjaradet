@@ -7,5 +7,7 @@
         <div class="bet-details__info__odd">Odds: {{odd}}</div>
         <div class="bet-details__info__win">Possible Win: {{betInfo?.possWin}}$</div>
     </div>
-    <button [disabled]='!betInfo?.betCanBePlaced' (click)='placeBet(inputBet)' class="bet-details__place-bet">PLACE BET</button>
+    <div *ngIf='!accountService.loggedIn' class="bet-details__reminder">*you have to be logged in to place a bet</div>
+    <button [disabled]='!betInfo?.betCanBePlaced || !accountService.loggedIn' (click)='placeBet(inputBet)' class="bet-details__place-bet">PLACE BET</button>
+
 </div>

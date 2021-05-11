@@ -29,10 +29,11 @@ export class BetDetailsService {
   account: Account
 
   checkBalance(betAmount: number){
-    console.log(this.account)
   }
 
   // constructor(private store: Store<{account: Account}>) { }
+
+  creatingBet = new EventEmitter<boolean>();
 
 
   ngOnInit(): void {

@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { Match } from 'src/app/shared/match-details.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class DataService {
 

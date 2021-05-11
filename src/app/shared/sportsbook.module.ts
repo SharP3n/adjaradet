@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { ShortenPipe } from '../sportsbook/matches-list/matches-item/shorten.pipe';
 import { SportsBookRouteModule } from './sportsbook-route.module';
 import { OddsHighlightDirective } from '../sportsbook/matches-list/matches-item/match-odds/odds-highlight.directive';
+import { CanDeactivateGuard } from '../sportsbook/ticket/bet-place/can-deactivate-guard.service';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,9 @@ import { OddsHighlightDirective } from '../sportsbook/matches-list/matches-item/
     ],
     exports: [
         RouterModule
+    ],
+    providers: [
+        CanDeactivateGuard
     ]
 })
 

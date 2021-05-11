@@ -47,6 +47,12 @@ $green: #01AC2D;
         }
     }
 
+    &__reminder{
+        color: red;
+        padding: 2px 15px;
+        font-style: italic;
+    }
+
     &__place-bet{
         padding: 10px;
         font-size: 19px;
