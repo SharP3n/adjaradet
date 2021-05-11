@@ -19,25 +19,25 @@ export class MatchessService{
   //   })
   // }
 
-  deletePosts(){
-    return this.http.delete('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
-  }
+  // deletePosts(){
+  //   return this.http.delete('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
+  // }
 
-  fetchPosts(){
-    return this.http.get<{[key: string]: Account}>('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
-    .pipe(
-      map(responseData => {
-      const postsArr: Account[] = [];
-      for(const key in responseData){
-        postsArr.push({...responseData[key], id: key});
-      }
-      return postsArr;
-    }),
-    catchError(errorRes => {
-      return throwError(errorRes); 
-    })
-    )
-  }
+  // fetchPosts(){
+  //   return this.http.get<{[key: string]: Account}>('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
+  //   .pipe(
+  //     map(responseData => {
+  //     const postsArr: Account[] = [];
+  //     for(const key in responseData){
+  //       postsArr.push({...responseData[key], id: key});
+  //     }
+  //     return postsArr;
+  //   }),
+  //   catchError(errorRes => {
+  //     return throwError(errorRes); 
+  //   })
+  //   )
+  // }
 
   constructor(private http: HttpClient){}
 }

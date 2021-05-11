@@ -5,6 +5,8 @@ import { Account } from './account.model';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { MessageComponent } from '../message/message.component'
+import { Store } from '@ngrx/store';
+import * as accountActions from '../navbar/modal/log-in/store/account.actions'
 
 interface authResponse{
   kind: string;
@@ -96,9 +98,9 @@ export class AccountService implements OnInit {
   //   })
   // }
 
-  deletePosts(){
-    this.http.delete('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
-  }
+  // deletePosts(){
+  //   this.http.delete('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
+  // }
 
   // fetchAccounts(){
   //   return this.http.get<{[key: string]: Account}>('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
@@ -121,11 +123,44 @@ export class AccountService implements OnInit {
   //   )
   // }
 
+
+  saveLogInData(account: Account){
+    localStorage.setItem('userData', JSON.stringify(account))
+  }
+
+  counter = 0;
+
+  constructor(private http: HttpClient, private componentFactoryRes: ComponentFactoryResolver, private store: Store<{account: Account}>) { 
+    this.store.select('account').subscribe((account)=>{
+      if(this.counter > 0){
+        this.saveLogInData(account);
+      }
+    })
+    this.counter++;
+  }
+  account: Account;
+
+  autoLogIn(){
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    if(!userData){
+      return
+    }
+    this.message.emit({message:`welcome ${userData.email}`, error: false});
+
+    this.store.dispatch(new accountActions.changeUser({username: userData.username, email: userData.email, password: userData.password, money: 10}))
+  }
+  
+
   ngOnInit(){
+    // this.store.select('account').subscribe((account)=>{
+    //   console.log(account)
+    //   this.account = account;
+    // })
+
+
     // this.accountsArr = this.fetchAccounts()
     // console.log(this.accountsArr)
     // console.log(this.fetchAccounts())
-
   }
 
   // createAndStorePost(newAcc: {username: string, email: string, password: string}){
@@ -163,6 +198,4 @@ export class AccountService implements OnInit {
   // }
 
 
-
-  constructor(private http: HttpClient, private componentFactoryRes: ComponentFactoryResolver) { }
 }

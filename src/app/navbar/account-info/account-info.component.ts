@@ -12,10 +12,10 @@ export class AccountInfoComponent implements OnInit {
 
   @ViewChild('password') password: ElementRef;
 
-  constructor(private store: Store<{accounts: Account}>) { }
+  constructor(private store: Store<{account: Account}>) { }
 
   ngOnInit(): void {
-    this.store.select('accounts').subscribe((account)=>{
+    this.store.select('account').subscribe((account)=>{
       this.account = account;
     })
   }

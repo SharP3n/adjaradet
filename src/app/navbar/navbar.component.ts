@@ -11,17 +11,18 @@ import * as accountActions from './modal/log-in/store/account.actions'
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  account: Account
   constructor(private betDetailsService: BetDetailsService,
-              private accountService: AccountService,
-              private store: Store<{accounts: Account}>) { }
-
+    private accountService: AccountService,
+    private store: Store<{account: Account}>) { }
+    
+  account: Account
+  
   ngOnInit(): void {
     this.betDetailsService.betPlaced.subscribe(() =>{
       this.betsQuantity++;
     })
 
-    this.store.select('accounts').subscribe(acc=>{
+    this.store.select('account').subscribe(acc=>{
        this.account = acc
     });
   }

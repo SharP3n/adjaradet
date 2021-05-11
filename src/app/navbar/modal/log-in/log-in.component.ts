@@ -16,13 +16,13 @@ export class LogInComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private store: Store<{accounts: Account[]}>
+    private store: Store<{account: Account}>
   ) {}
 
-  account: Observable<Account[]>
+  account: Observable<Account>
 
   ngOnInit(): void {
-    this.account = this.store.select('accounts');
+    this.account = this.store.select('account');
   }
 
   @ViewChild('logInForm') logInForm: NgForm; 

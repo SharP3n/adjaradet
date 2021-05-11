@@ -62,7 +62,7 @@ import { PlaceHolderDirective } from './shared/placeholder.directive';
     HttpClientModule,
     CoreModule,
     SportsBookModule,
-    StoreModule.forRoot({accounts: accountReducer}),
+    StoreModule.forRoot({account: accountReducer}),
     CommonModule,
 
     environment.production ? [] : StoreDevtoolsModule.instrument(),
