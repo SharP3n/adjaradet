@@ -1,26 +1,50 @@
+$green: #01AC2D; 
+$dark2: rgba(32,40,48,255);
+
 .info{
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    &__header{
+        margin-bottom: 40px;
+        background-color: $dark2;
+        color: $green;
+        width: 100%;
+        text-align: center;
+        padding: 13px;
+        font-size: 23px;
+        font-weight: bold;
+        letter-spacing: 4px;
+        word-spacing: 9px;
+    }
+    
     &__username, &__email, &__password, &__balance{
-        font-size: 20px;
+        font-size: 22px;
+        font-weight: bold;
+        letter-spacing: 3px;
+        color: white;
+        word-spacing: 8px;
         margin: 10px;
         display: flex;
         align-items: center;
     }
-
+    
     &__password{
-
+        
         &__input{
             background-color: transparent;
             border: none;
             outline: none;
             cursor: default;
-            color: white;
             max-width: 120px;
             font-size: 20px;
+            color: $green;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
         &__toggle-visibility{
-            
             background-color: transparent;
             border: none;
             outline: none;

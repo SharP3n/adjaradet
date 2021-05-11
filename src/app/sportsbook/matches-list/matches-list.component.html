@@ -5,6 +5,7 @@
 
         <div class="sportsbook__list__container">
 
+            <div class="sportsbook__list__container__loader" *ngIf='matches.length === 0'></div>
             <ng-container *ngFor='let match of matches; let i = index'>
                 <app-matches-item
                 [match] = 'match'
