@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Account } from 'src/app/shared/account.model';
+import * as accountActions from '../../navbar/modal/log-in/store/account.actions'
 
 @Component({
   selector: 'app-account-info',
@@ -11,13 +12,15 @@ export class AccountInfoComponent implements OnInit {
 
   @ViewChild('password') password: ElementRef;
 
-  constructor(private store: Store<{accounts: Account[]}>) { }
+  constructor(private store: Store<{accounts: Account}>) { }
 
   ngOnInit(): void {
-    this.accounts = this.store.select('accounts');
+    this.store.select('accounts').subscribe((account)=>{
+      this.account = account;
+    })
   }
   
-  accounts: Observable<Account[]>
+  account: Account;
 
   toggleVisibility() {
     if (this.password.nativeElement.type === "password") {

@@ -4,25 +4,22 @@
     <li class='navbar__item sports'><a appHighlight [defaultColor]='betsQuantity' routerLink='/betsHistory' class=''>MY BETS({{betsQuantity}})</a></li>
     <li class='navbar__item my-bets'><a routerLink='/sportsbook/NBA' class='navbar__item__link' >SPORTS</a></li>
     <ul class='navbar__item__account'>
-        <li *ngIf="(account | async | json)===undefined"><button (click)='onOpenModal("log in")' class='navbar__item__account__log-in'>Log in</button></li>
-        <li *ngIf="(account | async | json)===undefined"><button (click)='onOpenModal("register")' class='navbar__item__account__register'>Register</button></li>
-        <li *ngIf="(account | async | json)!==undefined"><button (click)='logOut()' class='navbar__item__account__log-out'>Log out</button></li>
-        <li *ngIf="(account | async | json)!==undefined"><a routerLink='/account-info' class='navbar__item__account__info'>Account</a></li>
+        <li *ngIf="!account"><button (click)='onOpenModal("log in")' class='navbar__item__account__log-in'>Log in</button></li>
+        <li *ngIf="!account"><button (click)='onOpenModal("register")' class='navbar__item__account__register'>Register</button></li>
+        <li *ngIf="account"><button (click)='logOut()' class='navbar__item__account__log-out'>Log out</button></li>
+        <li *ngIf="account"><a routerLink='/account-info' class='navbar__item__account__info'>Account</a></li>
         
         <div class="navbar__item__account__dropdown">
           <span class="navbar__item__account__dropdown__name">ACCOUNT<img src="/assets/icons/dropdown.png" alt="dropdown"></span>
           <div class="navbar__item__account__dropdown__dropdown-content">
-            <button *ngIf="(account | async | json)===undefined" (click)='onOpenModal("log in")' class='navbar__item__account__dropdown__dropdown-content__item'>Log In</button>
-            <button *ngIf="(account | async | json)===undefined" (click)='onOpenModal("register")' class='navbar__item__account__dropdown__dropdown-content__item'>Register</button>
-            <button *ngIf="(account | async | json)!==undefined" (click)='logOut()' class='navbar__item__account__dropdown__dropdown-content__item  navbar__item__account__dropdown__dropdown-content__item--log-out' >Log Out</button>
-            <button *ngIf="(account | async | json)!==undefined" routerLink='/account-info' class='navbar__item__account__dropdown__dropdown-content__item'>Account</button>
+            <button *ngIf="!account" (click)='onOpenModal("log in")' class='navbar__item__account__dropdown__dropdown-content__item'>Log In</button>
+            <button *ngIf="!account" (click)='onOpenModal("register")' class='navbar__item__account__dropdown__dropdown-content__item'>Register</button>
+            <button *ngIf="account" (click)='logOut()' class='navbar__item__account__dropdown__dropdown-content__item  navbar__item__account__dropdown__dropdown-content__item--log-out' >Log Out</button>
+            <button *ngIf="account" routerLink='/account-info' class='navbar__item__account__dropdown__dropdown-content__item'>Account</button>
             
           </div>
         </div>
     </ul>  
-
-    
 </ul>
-
 <app-modal></app-modal>
 

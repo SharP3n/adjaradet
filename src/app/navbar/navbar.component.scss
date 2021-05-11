@@ -14,7 +14,7 @@ $green: #01AC2D;
     }
 
     .logo{
-        @media screen and (max-width: 800px) {
+        @media screen and (max-width: 650px) {
             order: 1;
         }   
         @media screen and (max-width: 390px) {
@@ -46,7 +46,7 @@ $green: #01AC2D;
         @media screen and (max-width: 1000px) {
             font-size: 14px;
         }
-        @media screen and (max-width: 800px) {
+        @media screen and (max-width: 650px) {
             margin: auto;
         }
         @media screen and (max-width: 450px) {
@@ -88,7 +88,7 @@ $green: #01AC2D;
                 cursor: pointer;
                 text-decoration: underline;
                 
-                @media screen and (min-width: 800px) {
+                @media screen and (min-width: 650px) {
                     display: none;
                 }
                 
@@ -152,10 +152,6 @@ $green: #01AC2D;
             
             &__log-in, &__register, &__log-out, &__info{
 
-                @media screen and (max-width: 800px) {
-                    display: none;
-                }
-
                 cursor: pointer;
                 font-weight: bold;
                 color: white;
@@ -177,9 +173,10 @@ $green: #01AC2D;
                     font-size: 14px;
                     margin: 0px 7px;
                 }
-                @media screen and (max-width: 800px) {
+                @media screen and (max-width: 650px) {
                     display: none;
                 }
+
             }
 
             &__register, &__info{

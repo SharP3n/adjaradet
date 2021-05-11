@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { ComponentFactoryResolver, EventEmitter, Injectable, OnInit, ViewChild } from '@angular/core';
+import { ComponentFactoryResolver, EventEmitter, Injectable, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Account } from './account.model';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { MessageComponent } from '../navbar/modal/log-in/message/message.component'
+import { MessageComponent } from '../message/message.component'
 
 interface authResponse{
   kind: string;
@@ -23,7 +23,10 @@ interface authResponse{
 export class AccountService implements OnInit {
 
   // @ViewChild(PlaceholderDirective, {static: false}) messageHost: PlaceholderDirective; 
-   
+
+  accountData = new EventEmitter<Account>();
+  message = new EventEmitter<{message: string, error: boolean}>();
+
   signup(email: string, password: string){
     return this.http.post<authResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyChqR-cUB1DmNV5sGf77yrpdeu0_gNa-LY',
     {
@@ -43,13 +46,17 @@ export class AccountService implements OnInit {
       {
         email: email,
         password: password,
-        returnSecureToken: true
+        returnSecureToken: true,
       }
     )
+    
+    // .pipe(catchError(error => {
+    //   return throwError(error);
+    //   // this.message.emit(error)
+    // }))
   }
 
   logOut(){
-    this.message.emit('Logged Out');
     // const messageCmpFactory = this.componentFactoryRes.resolveComponentFactory(MessageComponent)
     // const hostViewContainerRef = this.messageHost.viewContainerRef;
     // hostViewContainerRef.clear();
@@ -61,9 +68,7 @@ export class AccountService implements OnInit {
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
   
-  
   displayModal = new EventEmitter<{displayModal: boolean, action: string}>()
-  message = new EventEmitter<string>();
 
   toggleModal(displayModal: boolean, action: string){
     this.displayModal.emit({displayModal: displayModal, action: action});
@@ -73,71 +78,54 @@ export class AccountService implements OnInit {
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 
-  accountsArr: Account[] = [];
+  // accountsArr: Account[] = [];
 
-  //store accountsArr in firebase++
-  //get accountsArr from firebase++
-  //assign to accountsArr
-  //compare it to log in 
+  // StoreAccounts(account: Account){
+  //   this.message.emit('heloooo ' + account.username);
 
-  StoreAccounts(account: Account){
+  //   this.deletePosts();
+  //   this.accountsArr.push(account);
 
-    //delete, post again
-
-    this.deletePosts();
-    console.log(this.accountsArr)
-    this.accountsArr.push(account);
-    console.log(this.accountsArr);
-
-    this.http.post(
-      'https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json',
-      this.accountsArr
-    ).subscribe(responseData => {
-      console.log(responseData)
-    })
-  }
+  //   this.http.post(
+  //     'https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json',
+  //     this.accountsArr
+  //   ).subscribe(responseData => {
+  //     console.log(responseData)
+  //   }, error => {
+  //     console.log(error)
+  //   })
+  // }
 
   deletePosts(){
     this.http.delete('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
   }
 
-  fetchAccounts(){
-    return this.http.get<{[key: string]: Account}>('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
-    .pipe(
-      map(responseData => {
-      const postsArr: Account[] = [];
-      for(const key in responseData){
-        postsArr.push({...responseData[key], id: key});
-      }
-      return postsArr;
-    }),
+  // fetchAccounts(){
+  //   return this.http.get<{[key: string]: Account}>('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
+  //   .pipe(
+  //     map(responseData => {
+  //     const postsArr: Account[] = [];
+  //     for(const key in responseData){
+  //       postsArr.push({...responseData[key], id: key});
+  //     }
+  //     return postsArr;
+  //   }, error => {
+  //     console.log(error)
+  //   }
+  //   ),
 
-    // catchError(errorRes => {
-    //   return throwError(errorRes); 
-    // })
-    )
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  //   catchError(errorRes => {
+  //     // console.log('errrrrr' + errorRes) 
+  //     return throwError(errorRes);
+  //   })
+  //   )
+  // }
 
   ngOnInit(){
     // this.accountsArr = this.fetchAccounts()
     // console.log(this.accountsArr)
     // console.log(this.fetchAccounts())
+
   }
 
   // createAndStorePost(newAcc: {username: string, email: string, password: string}){

@@ -33,11 +33,17 @@ export class RegisterComponent implements OnInit {
         form.reset();
       },
       error => {
-        console.log(error);
-        switch(error.error.error){
-          case 'EMAIL_EXISTS': 
-          //error = 'this email already exists'
+        if(error?.error?.error?.message){
+          this.accountService.message.emit({message: error?.error?.error?.message.replace(/_/g, " "), error: true})
         }
+        else{
+          this.accountService.message.emit({message: 'something went wrong, Check your connection', error: true})
+        }
+        // console.log(error);
+        // switch(error.error.error){
+        //   case 'EMAIL_EXISTS': 
+        //   //error = 'this email already exists'
+        // }
       }
     );
   }

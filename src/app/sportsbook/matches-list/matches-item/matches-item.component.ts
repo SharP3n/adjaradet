@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { ButtonHighlightService } from '../button-highlight.service';
+import { ButtonHighlightService } from '../../button-highlight.service';
 import { DataService } from '../data.service';
 import { NewMatchService } from '../new-match.service';
 import { map } from 'rxjs/operators';

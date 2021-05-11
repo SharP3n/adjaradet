@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ButtonHighlightService } from '../button-highlight.service';
+import { ButtonHighlightService } from '../../button-highlight.service';
 import { DataService } from '../data.service';
 
 @Component({

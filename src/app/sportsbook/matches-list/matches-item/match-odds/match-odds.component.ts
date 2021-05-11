@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
-import { ButtonHighlightService } from '../../button-highlight.service';
+import { ButtonHighlightService } from '../../../button-highlight.service';
 import { DataService } from '../../data.service';
 import { NewMatchService } from '../../new-match.service';
 

@@ -15,6 +15,4 @@ export interface Match{
     awayOdd?: number;
     id?: string
     bettingOn?: string;
-    addedToBet?: boolean;
-    
 }

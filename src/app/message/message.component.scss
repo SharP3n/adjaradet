@@ -1,0 +1,27 @@
+$green: #01AC2D; 
+$dark1: rgba(29,35,41,255);
+
+.message{
+    position: absolute;
+    bottom: 50px;
+    left: 30px;
+    background-color: $dark1;
+    opacity: 0.9;
+    padding: 10px 20px;
+    font-size: 19px;
+    // border: 1px dashed $green;
+    font-weight: bold;
+    transition-duration: 1s;
+    z-index: 10;
+}
+
+.error{
+    border: 1px solid red;
+    text-shadow: 1px 1px red, -1px -1px red;
+}
+
+.not-error{
+    border: 1px solid green;
+    text-shadow: 1px 1px green, 1px 0px green;
+}
+

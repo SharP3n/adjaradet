@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Match } from 'src/app/shared/match-details.model';
 
@@ -67,6 +68,7 @@ export class DataService {
   betWasPlaced = new EventEmitter<void>();
   placeBet(){
     this.betWasPlaced.emit();
+    // this.store.dispatch()
   }
   
   idForMatchRemove = new EventEmitter<number>();

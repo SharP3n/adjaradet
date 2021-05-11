@@ -12,7 +12,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LogInComponent } from './navbar/modal/log-in/log-in.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
-import { MessageComponent } from './navbar/modal/log-in/message/message.component'
+import { MessageComponent } from './message/message.component'
 
 import { CoreModule } from './core.module';
 import { StoreModule } from '@ngrx/store';
@@ -23,6 +23,7 @@ import { AccountInfoComponent } from './navbar/account-info/account-info.compone
 import { RegisterComponent } from './navbar/modal/register/register.component';
 import { ModalComponent } from './navbar/modal/modal.component';
 import { SportsBookModule } from './shared/sportsbook.module';
+import { PlaceHolderDirective } from './shared/placeholder.directive';
 
 
 // import { SportsbookComponent } from './sportsbook/sportsbook.component';
@@ -52,18 +53,7 @@ import { SportsBookModule } from './shared/sportsbook.module';
     AccountInfoComponent,
     RegisterComponent,
     ModalComponent,
-    
-    // SportsbookComponent,
-    // MatchesListComponent,
-    // TicketComponent,
-    // MyBetsComponent,
-    // BetsHistoryComponent,
-    // MatchesHeaderComponent,
-    // MatchesItemComponent,
-    // MatchOddsComponent,
-    // BetPlaceComponent,
-    // MatchComponent,
-    // ShortenPipe
+    PlaceHolderDirective
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { Component, EventEmitter, ElementRef, OnInit, ViewChild, OnChanges, Simp
 import { ActivatedRoute, Params } from '@angular/router';
 import { BetDetailsService } from 'src/app/shared/bet-details.service';
 import { Match } from 'src/app/shared/match-details.model';
-import { ButtonHighlightService } from 'src/app/sportsbook/matches-list/button-highlight.service';
+import { ButtonHighlightService } from 'src/app/sportsbook/button-highlight.service';
 import { DataService } from './data.service';
 import { MatchesHeaderComponent } from './matches-header/matches-header.component'
 

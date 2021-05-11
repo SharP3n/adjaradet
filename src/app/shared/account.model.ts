@@ -1,16 +1,18 @@
 export interface Account {
-    username: string;
+    username?: string;
     email: string;
     password: string;
     id?: string
+    money: number;
 }
 
-export class Account{
+// export class Account{ ???????maybe needed in account reducer??????
 
-    constructor(public username: string, public email: string, public password: string){
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
+//     constructor(public username: string, public email: string, public password: string){
+//         this.username = username;
+//         this.email = email;
+//         this.password = password;
+        
+//     }
     
-}
+// }

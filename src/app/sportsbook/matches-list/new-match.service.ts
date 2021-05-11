@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { ButtonHighlightService } from './button-highlight.service';
+import { ButtonHighlightService } from '../button-highlight.service';
 
 @Injectable({
   providedIn: 'root'
