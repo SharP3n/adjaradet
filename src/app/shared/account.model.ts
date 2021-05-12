@@ -3,7 +3,7 @@ export interface Account {
     email: string;
     password: string;
     id?: string
-    money: number;
+    balance: number;
 }
 
 // export class Account{ ???????maybe needed in account reducer??????

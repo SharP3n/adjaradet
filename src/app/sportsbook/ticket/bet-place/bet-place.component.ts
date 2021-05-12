@@ -42,9 +42,12 @@ export class BetPlaceComponent implements OnInit, OnChanges {
     });
 
     this.betDetails = new Bet(this.betInfo.odd, Number(betAmount.value), this.betInfo.possWin)
-    this.betDetailsService.createBet(this.matches, this.betDetails);
-    this.dataService.placeBet();
-    this.clearData(betAmount);
+    if(this.betDetailsService.createBet(this.matches, this.betDetails)){
+      this.dataService.placeBet();
+    }
+    else{
+      this.clearData(betAmount);
+    }
   }
 
   betInfo: {odd: number, possWin: number, betCanBePlaced: boolean};

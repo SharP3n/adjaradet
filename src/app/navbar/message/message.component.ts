@@ -37,7 +37,7 @@ export class MessageComponent implements OnInit, OnChanges {
 
     setTimeout(() => {
       this.state = 'inactive'
-    }, 5000);
+    }, 4000);
 
   }
 

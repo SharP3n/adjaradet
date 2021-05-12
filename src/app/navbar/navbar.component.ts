@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
       setTimeout(()=>{
         this.showMessage = false;
       }, 1000)
-    }, 6000);
+    }, 5000);
   }
 
   account: Account;
@@ -36,8 +36,8 @@ export class NavbarComponent implements OnInit {
       this.betsQuantity++;
     })
 
-    this.store.select('account').subscribe(acc=>{
-       this.account = acc
+    this.store.select('account').subscribe(account=>{
+       this.account = account
     });
 
     this.accountService.message.subscribe((message) => {
@@ -60,8 +60,8 @@ export class NavbarComponent implements OnInit {
               this.showMessage = true;
               this.autoCancelMessage(message);
             }
-          }, 3000);
-        }, 3000);
+          }, 2500);
+        }, 2500);
       }
     })
   }

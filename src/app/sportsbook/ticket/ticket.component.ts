@@ -4,6 +4,7 @@ import { Match } from 'src/app/shared/match-details.model';
 import { DataService } from '../matches-list/data.service';
 import { NewMatchService } from '../matches-list/new-match.service'
 import { AccountService } from 'src/app/shared/account.service';
+import { BetDetailsService } from 'src/app/shared/bet-details.service';
 
 @Component({
   selector: 'app-ticket',
@@ -20,7 +21,7 @@ export class TicketComponent implements OnInit{
   betCanBePlaced = false;
 
   constructor(private newMatchService: NewMatchService, private dataService: DataService,
-    private buttonHighlightService: ButtonHighlightService) { }
+    private buttonHighlightService: ButtonHighlightService, private betDetailsService: BetDetailsService) { }
 
   checkMatchIdentity(newMatch){//refactor!!!!!!!!!!!!!!!!!!!! to service??????
 
@@ -70,6 +71,11 @@ export class TicketComponent implements OnInit{
       this.matches = this.matches.slice();
       this.buttonHighlightService.formHighlightData(this.matches)
     });
+    
+    this.betDetailsService.betCanNotBePlaced.subscribe(()=>{
+      this.matches = [];
+      this.buttonHighlightService.formHighlightData(this.matches)
+    })
 
   }
   

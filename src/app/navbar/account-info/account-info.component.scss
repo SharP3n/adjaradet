@@ -19,7 +19,7 @@ $dark2: rgba(32,40,48,255);
         word-spacing: 9px;
     }
     
-    &__username, &__email, &__password, &__balance{
+    &__username, &__email, &__password, &__balance, &__input-label{
         font-size: 22px;
         font-weight: bold;
         letter-spacing: 3px;
@@ -28,6 +28,25 @@ $dark2: rgba(32,40,48,255);
         margin: 10px;
         display: flex;
         align-items: center;
+    }
+
+    &__wrapper{
+        margin: 10px;
+        &__input-balance, &__input-submit{
+            font-size: 19px;
+            max-width: 100px;
+            border-radius: 0px;
+            border: none;
+            outline: none;
+            font-weight: bold;
+        }
+
+        &__input-submit{
+            background-color: $green;
+            cursor: pointer;
+        }
+
+
     }
     
     &__password{

@@ -16,32 +16,46 @@ export class BetDetailsService {
 
   addedBets: FullBet[] = []
   newBet: FullBet;
-  betPlaced = new EventEmitter;
+  betPlaced = new EventEmitter;////////////////void?
+  betCanNotBePlaced = new EventEmitter<void>();
+  creatingBet = new EventEmitter<boolean>();
+  account: Account;
 
-  constructor(private accountService: AccountService){}
+  constructor(private accountService: AccountService, private store: Store<{account: Account}>){
+    this.store.select('account').subscribe((account)=>{
+      this.account = account;
+    })
+  }
   
   createBet(matchesDetails: Match[], betDetails: Bet){
-    this.newBet = new FullBet(betDetails, matchesDetails)
-    this.addedBets.push(this.newBet);
-    // console.log(betDetails.betAmount)
-    this.checkBalance(betDetails.betAmount);
-    this.betPlaced.emit();
-    this.accountService.message.emit({message: 'Your Bet Was Placed', error: false})
-    // this.store.dispatch(new accountActions.inputBalance(betDetails.betAmount))
+    if(this.checkBalance(betDetails.betAmount)){
+      this.newBet = new FullBet(betDetails, matchesDetails)
+      this.addedBets.push(this.newBet);
+      this.store.dispatch(new accountActions.updateBalance(this.account.balance - betDetails.betAmount))
+      this.betPlaced.emit();
+      this.accountService.message.emit({message: `Your Bet Was Placed`, error: false})
+      return true;
+    }
+    else{
+      this.betCanNotBePlaced.emit();
+      return false;
+    }
   }
-
-  account: Account
 
   checkBalance(betAmount: number){
+    if(this.account.balance < betAmount){
+      this.accountService.message.emit({message: 'Not Enough Money On Your Account', error: true})
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 
-  // constructor(private store: Store<{account: Account}>) { }
-
-  creatingBet = new EventEmitter<boolean>();
-
-
   ngOnInit(): void {
-
+    this.store.select('account').subscribe((account)=>{
+      console.log(account)
+    })
   }
   getData(){
     return this.addedBets;

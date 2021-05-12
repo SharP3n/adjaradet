@@ -10,10 +10,11 @@ export function accountReducer(state: Account = currentState, action: accountAct
             return action.payload;            
         case accountActions.REMOVE_USER:
             return undefined;
-        // case accountActions.GET_USER:
-            // return currentState;
-        case accountActions.INPUT_BALANCE:
-            
+        case accountActions.UPDATE_BALANCE:
+            return {
+                ...state,
+                money: action.payload
+            }
 
         default: 
             return state;  
