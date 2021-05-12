@@ -23,11 +23,9 @@ $green: #01AC2D;
     }
     
     .mini-logo{
-        @media screen and (max-width: 390px) {
-            display: block;
-            padding: auto;
-        }
-        @media screen and (min-width: 390px) {
+       display: block;
+        padding: auto;
+        @media screen and (min-width: 391px) {
             display: none;
         }
     }

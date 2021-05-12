@@ -13,10 +13,10 @@ import { AccountService } from 'src/app/shared/account.service';
         'transform': 'translateX(-100%)'
       })),
       state('active', style({
-        'left': '30px',
+        'left': '25px',
         'transform': 'translateX(0)'
       })),
-      transition('inactive <=> active', animate(1000)),
+      transition('inactive <=> active', animate(900)),
     ])
   ]
 })

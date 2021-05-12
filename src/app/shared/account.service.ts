@@ -159,8 +159,9 @@ export class AccountService implements OnInit {
       return
     }
     this.store.dispatch(new accountActions.changeUser({username: userData.username, email: userData.email, password: userData.password, money: 10}))
-    //emit message
-    // this.message.emit({message:`welcome ${userData.email}`, error: false});
+    // setTimeout(() => {
+    //   this.message.emit({message:`welcome back ${userData.email}`, error: false});
+    // }, 2000);
     this.loggedIn = true;
   }
   

@@ -7,6 +7,7 @@ import * as accountActions from '../navbar/modal/log-in/store/account.actions'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Account } from './account.model';
+import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class BetDetailsService {
   addedBets: FullBet[] = []
   newBet: FullBet;
   betPlaced = new EventEmitter;
+
+  constructor(private accountService: AccountService){}
   
   createBet(matchesDetails: Match[], betDetails: Bet){
     this.newBet = new FullBet(betDetails, matchesDetails)
@@ -23,6 +26,7 @@ export class BetDetailsService {
     // console.log(betDetails.betAmount)
     this.checkBalance(betDetails.betAmount);
     this.betPlaced.emit();
+    this.accountService.message.emit({message: 'Your Bet Was Placed', error: false})
     // this.store.dispatch(new accountActions.inputBalance(betDetails.betAmount))
   }
 
