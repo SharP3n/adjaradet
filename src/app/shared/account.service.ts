@@ -38,9 +38,6 @@ export class AccountService implements OnInit {
       returnSecureToken: true
     }
     )
-    // .pipe(catchError(error => {
-
-    // }))
   }
 
   logIn(email: string, password: string){
@@ -158,7 +155,7 @@ export class AccountService implements OnInit {
     if(!userData){
       return
     }
-    this.store.dispatch(new accountActions.changeUser({username: userData.username, email: userData.email, password: userData.password, balance: 10}))
+    this.store.dispatch(new accountActions.changeUser({email: userData.email, password: userData.password, balance: 10}))
     // setTimeout(() => {
     //   this.message.emit({message:`welcome back ${userData.email}`, error: false});
     // }, 2000);

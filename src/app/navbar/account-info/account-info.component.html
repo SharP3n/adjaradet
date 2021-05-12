@@ -2,9 +2,7 @@
     <div class="info__header">
         YOUR ACCOUNT INFO
     </div>
-    <div class="info__username">
-        username: {{account?.username}}
-    </div>
+
     <div class="info__email">
         email: {{account?.email}}
     </div>
@@ -18,7 +16,7 @@
         </button>
     </div>
 
-    <div class="info__balance">balance: {{account?.balance}$</div>
+    <div class="info__balance">balance: {{account?.balance}}$</div>
     <div class="info__input-label">Input money on your account:</div>
     <div class="info__wrapper">
         <input class='info__wrapper__input-balance' min='0' max='2000' placeholder="$" #moneyAmount type="number"> 

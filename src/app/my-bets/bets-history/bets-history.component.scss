@@ -24,7 +24,11 @@ $border: rgba(43,52,60,255);
     }
 
     &__no-bets{
-        margin: 20px;
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+        word-spacing: 4px;
+        letter-spacing: 2px;
     }
     
     &__bets{

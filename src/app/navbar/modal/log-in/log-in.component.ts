@@ -37,13 +37,11 @@ export class LogInComponent implements OnInit {
 
     const email: string = form.value.email;
     const password: string = form.value.password;
-    const username = form.value.username;
 
     this.accountService.logIn(email, password).subscribe(
       () => {
-        this.store.dispatch(new accountActions.changeUser({username: username, email: email, password: password, balance: 10}))
+        this.store.dispatch(new accountActions.changeUser({email: email, password: password, balance: 10}))
         this.accountService.message.emit({message: `welcome ${email}`, error: false})
-        // this.accountService.accountData.emit({email: email, password: password, money: 10})
       },error => {
         if(error?.error?.error?.message){
           this.accountService.message.emit({message: error?.error?.error?.message.replace(/_/g, " "), error: true})

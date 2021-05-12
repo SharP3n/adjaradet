@@ -13,7 +13,7 @@ export function accountReducer(state: Account = currentState, action: accountAct
         case accountActions.UPDATE_BALANCE:
             return {
                 ...state,
-                money: action.payload
+                balance: action.payload
             }
 
         default: 
