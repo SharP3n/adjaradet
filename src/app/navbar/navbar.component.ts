@@ -11,11 +11,25 @@ import * as accountActions from './modal/log-in/store/account.actions'
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  constructor(private betDetailsService: BetDetailsService,
-    private accountService: AccountService,
-    private store: Store<{account: Account}>) { }
-    
-  account: Account
+  constructor(
+  private betDetailsService: BetDetailsService,
+  private accountService: AccountService,
+  private store: Store<{account: Account}>) { }
+  
+  showMessage = false;
+  messageData: {message: string, error: boolean, state: string}
+
+  autoCancelMessage(message){
+    setTimeout(() => {
+      this.messageData = {message: message.message, error: message.error, state: 'inactive'}
+      
+      setTimeout(()=>{
+        this.showMessage = false;
+      }, 1000)
+    }, 6000);
+  }
+
+  account: Account;
   
   ngOnInit(): void {
     this.betDetailsService.betPlaced.subscribe(() =>{
@@ -25,7 +39,44 @@ export class NavbarComponent implements OnInit {
     this.store.select('account').subscribe(acc=>{
        this.account = acc
     });
+
+    this.accountService.message.subscribe((message) => {
+      if(!this.showMessage){
+        this.messageData = {message: message.message, error: message.error, state: 'active'}
+        this.showMessage = true;
+        this.autoCancelMessage(message);
+      }
+      else{
+        setTimeout(() => {
+          if(!this.showMessage){
+            this.messageData = {message: message.message, error: message.error, state: 'active'}
+            this.showMessage = true;
+            this.autoCancelMessage(message);
+          }
+
+          setTimeout(() => {
+            if(!this.showMessage){
+              this.messageData = {message: message.message, error: message.error, state: 'active'}
+              this.showMessage = true;
+              this.autoCancelMessage(message);
+            }
+          }, 3000);
+        }, 3000);
+      }
+    })
   }
+
+
+
+
+
+
+
+
+
+
+
+
 
   onOpenModal(purpose: string){
     this.accountService.toggleModal(true, purpose);

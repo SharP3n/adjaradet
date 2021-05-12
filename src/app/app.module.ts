@@ -12,7 +12,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LogInComponent } from './navbar/modal/log-in/log-in.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
-import { MessageComponent } from './message/message.component'
+import { MessageComponent } from './navbar/message/message.component'
 
 import { CoreModule } from './core.module';
 import { StoreModule } from '@ngrx/store';
@@ -25,6 +25,7 @@ import { ModalComponent } from './navbar/modal/modal.component';
 import { SportsBookModule } from './shared/sportsbook.module';
 import { PlaceHolderDirective } from './shared/placeholder.directive';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 // import { SportsbookComponent } from './sportsbook/sportsbook.component';
 // import { MatchesListComponent } from './sportsbook/matches-list/matches-list.component';
@@ -53,9 +54,10 @@ import { PlaceHolderDirective } from './shared/placeholder.directive';
     AccountInfoComponent,
     RegisterComponent,
     ModalComponent,
-    PlaceHolderDirective
+    PlaceHolderDirective,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Bet } from '../sportsbook/matches-list/bet-details.model';
+import { Bet } from '../sportsbook/bet-details.model';
 import { FullBet } from './full-bet-details.model';
 import { Match } from './match-details.model';
 import * as accountActions from '../navbar/modal/log-in/store/account.actions'

@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Account } from './account.model';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { MessageComponent } from '../message/message.component'
+import { MessageComponent } from '../navbar/message/message.component'
 import { Store } from '@ngrx/store';
 import * as accountActions from '../navbar/modal/log-in/store/account.actions'
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
@@ -158,9 +158,9 @@ export class AccountService implements OnInit {
     if(!userData){
       return
     }
-    this.message.emit({message:`welcome ${userData.email}`, error: false});
     this.store.dispatch(new accountActions.changeUser({username: userData.username, email: userData.email, password: userData.password, money: 10}))
-
+    //emit message
+    // this.message.emit({message:`welcome ${userData.email}`, error: false});
     this.loggedIn = true;
   }
   

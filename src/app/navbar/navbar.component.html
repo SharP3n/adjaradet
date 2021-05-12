@@ -16,10 +16,11 @@
             <button *ngIf="!account" (click)='onOpenModal("register")' class='navbar__item__account__dropdown__dropdown-content__item'>Register</button>
             <button *ngIf="account" (click)='logOut()' class='navbar__item__account__dropdown__dropdown-content__item  navbar__item__account__dropdown__dropdown-content__item--log-out' >Log Out</button>
             <button *ngIf="account" routerLink='/account-info' class='navbar__item__account__dropdown__dropdown-content__item'>Account</button>
-            
           </div>
         </div>
     </ul>  
 </ul>
 <app-modal></app-modal>
+
+<app-message *ngIf='showMessage' [messageData]='messageData'></app-message>
 
