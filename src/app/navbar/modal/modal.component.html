@@ -1,7 +1,6 @@
-<div class="modal" (click)='closeModal($event)' *ngIf='showModal'>
+<div class="modal" (click)='closeModal($event.target)' *ngIf='showModal'>
 
     <div class="modal__wrapper">
-
         <div class='modal__log-in' *ngIf='action === "log in"; else register'>
             <app-log-in></app-log-in>
         </div>
@@ -9,11 +8,7 @@
         <ng-template class='modal__register' #register>
             <app-register></app-register>
         </ng-template>
-
     </div>
 </div>
 
-<div>
-<!-- {{accounts | async | json}} -->
-</div>
 

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Account } from 'src/app/shared/account.model';
-import { AccountService } from 'src/app/shared/account.service';
+import { Account } from 'src/app/shared/models/account.model';
+import { AccountService } from 'src/app/shared/services/account.service';
 import * as accountActions from '../../navbar/modal/log-in/store/account.actions'
 
 @Component({

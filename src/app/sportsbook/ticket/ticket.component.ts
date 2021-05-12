@@ -1,10 +1,8 @@
 import { Component, OnInit,} from '@angular/core';
 import { ButtonHighlightService } from '../button-highlight.service'
-import { Match } from 'src/app/shared/match-details.model';
+import { Match } from 'src/app/shared/models/match-details.model';
 import { DataService } from '../matches-list/data.service';
-import { NewMatchService } from '../matches-list/new-match.service'
-import { AccountService } from 'src/app/shared/account.service';
-import { BetDetailsService } from 'src/app/shared/bet-details.service';
+import { BetDetailsService } from 'src/app/shared/services/bet-details.service';
 
 @Component({
   selector: 'app-ticket',
@@ -16,18 +14,20 @@ export class TicketComponent implements OnInit{
 
   possWin: number;
   matches: Match[] = [];
-  combinedOdd: number;
   inputCanBeFilled = false;
   betCanBePlaced = false;
 
-  constructor(private newMatchService: NewMatchService, private dataService: DataService,
-    private buttonHighlightService: ButtonHighlightService, private betDetailsService: BetDetailsService) { }
+  constructor(
+  private dataService: DataService,
+  private buttonHighlightService: ButtonHighlightService,
+  private betDetailsService: BetDetailsService) { }
 
-  checkMatchIdentity(newMatch){//refactor!!!!!!!!!!!!!!!!!!!! to service??????
+  checkMatchIdentity(newMatch: Match){
 
     if(this.matches.length > 0){
       let matchCanBeAdded = true;
       for (const match of this.matches) {
+
         if(match.home === newMatch.home && match.away === newMatch.away){
           matchCanBeAdded = false;
           this.matches.splice(this.matches.indexOf(match), 1);
@@ -56,7 +56,7 @@ export class TicketComponent implements OnInit{
     
     this.buttonHighlightService.formHighlightData(this.matches)
 
-    this.newMatchService.newMatch.subscribe((newMatch) => {
+    this.dataService.newMatch.subscribe((newMatch) => {
       this.checkMatchIdentity(newMatch);
       this.buttonHighlightService.formHighlightData(this.matches)
     })

@@ -10,11 +10,7 @@ $yellow: #ffd206;
         border: none;
         border-radius: 7px;
         cursor: pointer;
-
-        &:hover{
-            background-color: rgb(46,54,63);
-        }
-
+        
         @media screen and (max-width: 450px) {
             font-size: 13px;
             padding: 8px 10px;

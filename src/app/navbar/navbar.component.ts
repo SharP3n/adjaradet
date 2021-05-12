@@ -1,9 +1,7 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { BetDetailsService } from 'src/app/shared/bet-details.service';
-import { AccountService } from '../shared/account.service';
-import * as accountActions from './modal/log-in/store/account.actions'
+import { BetDetailsService } from 'src/app/shared/services/bet-details.service';
+import { AccountService } from '../shared/services/account.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,10 +17,9 @@ export class NavbarComponent implements OnInit {
   showMessage = false;
   messageData: {message: string, error: boolean, state: string}
 
-  autoCancelMessage(message){
+  autoCancelMessage(message: {message: string, error: boolean, state: string}){
     setTimeout(() => {
       this.messageData = {message: message.message, error: message.error, state: 'inactive'}
-      
       setTimeout(()=>{
         this.showMessage = false;
       }, 1000)
@@ -40,7 +37,7 @@ export class NavbarComponent implements OnInit {
        this.account = account
     });
 
-    this.accountService.message.subscribe((message) => {
+    this.accountService.message.subscribe((message: {message: string, error: boolean, state: string}) => {
       if(!this.showMessage){
         this.messageData = {message: message.message, error: message.error, state: 'active'}
         this.showMessage = true;

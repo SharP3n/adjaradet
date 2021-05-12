@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
-import { Match } from 'src/app/shared/match-details.model';
+import { Account } from 'src/app/shared/models/account.model';
+import { Match } from 'src/app/shared/models/match-details.model';
 
 @Injectable({
   providedIn: 'root' 
@@ -25,15 +25,41 @@ export class DataService {
     }
   }
 
-  calculatePossWin(input, matches){
+  fetchMatches(){
+    return this.http.get<{[key: string]: Account}>('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
+    .pipe(
+      map(responseData => {
+      const postsArr: Account[] = [];
+      for(const key in responseData){
+        postsArr.push({...responseData[key], id: key});
+      }
+      return postsArr;
+    })
+    )
+  }
 
+  organiseMatchesData(matches){ 
+      matches.forEach((specificMatches: Match, index: number) => {
+      matches[index] = Object.values(specificMatches);
+      matches[index].splice(-1);
+    });
+
+    this.NBAMatches = matches[0];
+    this.UFCMatches = matches[1];
+    this.UEFAMatches = matches[2];
+  }
+
+  NBAMatches: Match[] = []
+  UFCMatches: Match[] = []
+  UEFAMatches: Match[] = []
+
+  calculatePossWin(input: HTMLInputElement, matches: Match[]){
     let possWin: number;
     let betCanBePlaced: boolean;
     let bettingData: object;
     let combinedOdd: number;
 
     matches.forEach((match, i) => {
-
       let odd: number; 
 
       if(match.bettingOn === 'away'){
@@ -51,7 +77,7 @@ export class DataService {
         combinedOdd = Math.round(combinedOdd * 100) / 100;
       }
       
-      possWin = input.value * combinedOdd;
+      possWin = +input.value * combinedOdd;
       possWin = Math.round(possWin * 100) / 100;
       
     });
@@ -65,10 +91,10 @@ export class DataService {
     return bettingData = {odd: combinedOdd, possWin: possWin, betCanBePlaced: betCanBePlaced}
   }
 
+  newMatch = new EventEmitter<Match>()
   betWasPlaced = new EventEmitter<void>();
   placeBet(){
     this.betWasPlaced.emit();
-    // this.store.dispatch()
   }
   
   idForMatchRemove = new EventEmitter<number>();
@@ -76,104 +102,5 @@ export class DataService {
     this.idForMatchRemove.emit(id)
   }
 
-  fetchMatches(){
-    return this.http.get<{[key: string]: Account}>('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
-    .pipe(
-      map(responseData => {
-      const postsArr: Account[] = [];
-      for(const key in responseData){
-        postsArr.push({...responseData[key], id: key});
-      }
-      return postsArr;
-    }),//catcherror
-    )
-  }
-
-  ////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////
-
-  organiseMatchesData(matches){ 
-    matches.forEach((specificMatches, index) => {
-      matches[index] = Object.values(specificMatches)
-      matches[index].splice(-1);
-    });
-
-    this.NBAMatches = matches[0];//object of arrs to firebase?
-    this.UFCMatches = matches[1];
-    this.UEFAMatches = matches[2];
-  }
-
-  NBAMatches: Match[] = [
-    // {
-    //   home: 'nets',
-    //   away: 'spurs',
-    //   homeOdd: 1.1,
-    //   awayOdd: 2.9
-    // },
-    // {
-    //   home: 'nets',
-    //   away: 'celtics',
-    //   homeOdd: 1.2,
-    //   awayOdd: 2.8
-    // },
-    // {
-    //   home: 'nets',
-    //   away: '76ers',
-    //   homeOdd: 1.3,
-    //   awayOdd: 2.7
-    // },
-    // {
-    //   home: 'nets',
-    //   away: 'nuggets',
-    //   homeOdd: 1.4,
-    //   awayOdd: 2.6
-    // }
-  ]
-  UFCMatches = [
-    // {
-    //   home: 'Ngannou',
-    //   away: 'Miocic',
-    //   homeOdd: 1.1,
-    //   awayOdd: 2.9
-    // },
-    // {
-    //   home: 'Blachovicz',
-    //   away: 'Adesanya',
-    //   homeOdd: 1.2,
-    //   awayOdd: 2.8
-    // },
-    // {
-    //   home: 'Poirier',
-    //   away: 'McGregor',
-    //   homeOdd: 1.3,
-    //   awayOdd: 2.7
-    // },
-    // {
-    //   home: 'Ferguson',
-    //   away: 'Nurmagomedov',
-    //   homeOdd: 1.4,
-    //   awayOdd: 2.6
-    // }
-  ]
-  UEFAMatches = [
-    // {
-    //   home: 'Georgia',
-    //   away: 'Spain',
-    //   homeOdd: 1.1,
-    //   awayOdd: 2.9
-    // },
-    // {
-    //   home: 'Greece',
-    //   away: 'Georgia',
-    //   homeOdd: 1.2,
-    //   awayOdd: 2.8
-    // },
-    // {
-    //   home: 'Germany',
-    //   away: 'Brazil',
-    //   homeOdd: 1.3,
-    //   awayOdd: 2.7
-    // }
-  ]
+  
 }

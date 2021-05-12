@@ -5,10 +5,6 @@
     </div>
 
     <form class="log-in__form" (ngSubmit)='onLogin(logInForm)' #logInForm='ngForm'>
-        <!-- <label for='name' class="log-in__form__username">USERNAME:</label> -->
-        <!-- <input #username='ngModel' required id='username' name='username' type="text" maxlength="15" class="log-in__form__username-input" ngModel> -->
-        <!-- <div class="log-in__form__username-validity" *ngIf='!username.valid && username.touched'>Please Input username</div> -->
-        <!-- <br> -->
         
         <label for='email' class="log-in__form__email">EMAIL:</label>
         <input required email id='email' #email='ngModel' name='email' type="email" class="log-in__form__email-input" ngModel>

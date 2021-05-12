@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Account } from 'src/app/shared/account.model';
-import { AccountService } from 'src/app/shared/account.service';
+import { Account } from 'src/app/shared/models/account.model';
+import { AccountService } from 'src/app/shared/services/account.service';
 import * as accountActions from './store/account.actions'
 
 @Component({
@@ -20,16 +20,14 @@ export class LogInComponent implements OnInit {
   ) {}
 
   account: Observable<Account>
+  @ViewChild('logInForm') logInForm: NgForm; 
+  inputMessage: string;
 
   ngOnInit(): void {
     this.account = this.store.select('account');
   }
-
-  @ViewChild('logInForm') logInForm: NgForm; 
-
-  inputMessage: string;
   
-  onLogin(form){
+  onLogin(form: NgForm){
 
     if(!form.valid){
       return;
@@ -53,7 +51,7 @@ export class LogInComponent implements OnInit {
     )
 
     form.reset();
-    this.accountService.toggleModal(false, '');//show log-in
+    this.accountService.toggleModal(false, '');
   }
   
   onCancelModal(){

@@ -1,8 +1,4 @@
 <div class="match">
     <div class="match__team-names">{{match.away | shorten | uppercase}} - {{match.home | shorten | uppercase}}</div>
-    <app-match-odds
-    [match]='match'
-    ></app-match-odds>
-
-    <p *ngIf='error'>error occured: {{error | json}}</p>
+    <app-match-odds [match]='match'></app-match-odds>
 </div>

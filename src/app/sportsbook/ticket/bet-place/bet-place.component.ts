@@ -1,10 +1,9 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, EventEmitter, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AccountService } from 'src/app/shared/account.service';
-import { BetDetailsService } from 'src/app/shared/bet-details.service';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
+import { Match } from 'src/app/shared/models/match-details.model';
+import { AccountService } from 'src/app/shared/services/account.service';
+import { BetDetailsService } from 'src/app/shared/services/bet-details.service';
 import { Bet } from '../../bet-details.model';
 import { DataService } from '../../matches-list/data.service';
-import { CanComponentDeactivate } from './can-deactivate-guard.service';
 
 @Component({
   selector: 'app-bet-place',
@@ -13,17 +12,10 @@ import { CanComponentDeactivate } from './can-deactivate-guard.service';
 })
 export class BetPlaceComponent implements OnInit, OnChanges {
 
-  // canDeactivate(): Observable<boolean> | Promise<boolean> | boolean{
-  //   console.log(this.inputCanBeFilled)
-  //   if(this.inputCanBeFilled){
-  //     return confirm('Do You Want To Stop Placing Bet?')
-  //   }
-  //   else{
-  //     return true;
-  //   }
-  // }
-
-  constructor(private dataService: DataService, private betDetailsService: BetDetailsService,  public accountService: AccountService) { }
+  constructor(
+  private dataService: DataService,
+  private betDetailsService: BetDetailsService,
+  public accountService: AccountService) { }
 
   ngOnInit(): void {
   }
@@ -32,16 +24,16 @@ export class BetPlaceComponent implements OnInit, OnChanges {
 
   inputCanBeFilled = false;
   betDetails: Bet;
-  @Input() matches;//interface
+  @Input() matches: Match[];
 
-  placeBet(betAmount){
-    this.matches.forEach(bet => {
-      delete bet.odd;
-      delete bet.bettingOn;
-      delete bet.id;
+  placeBet(betAmount: HTMLInputElement){
+    this.matches.forEach(match => {
+      delete match.odd;
+      delete match.bettingOn;
+      delete match.id;
     });
 
-    this.betDetails = new Bet(this.betInfo.odd, Number(betAmount.value), this.betInfo.possWin)
+    this.betDetails = new Bet(this.betInfo.odd, +betAmount.value, this.betInfo.possWin)
     if(this.betDetailsService.createBet(this.matches, this.betDetails)){
       this.dataService.placeBet();
     }
@@ -53,7 +45,7 @@ export class BetPlaceComponent implements OnInit, OnChanges {
   betInfo: {odd: number, possWin: number, betCanBePlaced: boolean};
   odd: number;
   
-  calculatePossWin(inputBet, matches){
+  calculatePossWin(inputBet: HTMLInputElement, matches: Match[]){
     this.betInfo = this.dataService.calculatePossWin(inputBet, matches);
     this.odd = this.betInfo.odd;
   }
@@ -82,7 +74,7 @@ export class BetPlaceComponent implements OnInit, OnChanges {
         this.inputCanBeFilled = true;
         this.betDetailsService.creatingBet.emit(this.inputCanBeFilled)
         if(this.inputBet.nativeElement.value === ''){
-          this.odd =  this.dataService.calculatePossWin(this.inputBet, this.matches).odd;
+          this.odd =  this.dataService.calculatePossWin(this.inputBet.nativeElement, this.matches).odd;
         }
         else if(this.inputBet.nativeElement.value > 0){
           this.betInfo = this.dataService.calculatePossWin(this.inputBet.nativeElement, this.matches);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/shared/account.service';
+import { AccountService } from 'src/app/shared/services/account.service';
 
 @Component({
   selector: 'app-modal',
@@ -22,8 +22,8 @@ export class ModalComponent implements OnInit {
   action: string;
   showModal: boolean;
 
-  closeModal(e){
-    if(e.target.classList.contains('modal')){
+  closeModal(modal:HTMLDivElement){
+    if(modal.classList.contains('modal')){
       this.showModal=false;
     }
   }

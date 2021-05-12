@@ -1,6 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
-import { AccountService } from 'src/app/shared/account.service';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-message',
@@ -24,12 +23,11 @@ import { AccountService } from 'src/app/shared/account.service';
 export class MessageComponent implements OnInit, OnChanges {
 
   constructor() { }
-  // @ViewChild('messageElem') messageElem: ElementRef;
 
   state = 'inactive'
   @Input() messageData: {message: string, error: boolean, state: string};
 
-  ngOnChanges(changes){
+  ngOnChanges(){
 
     setTimeout(() => {
     this.state = this.messageData?.state;
@@ -38,11 +36,9 @@ export class MessageComponent implements OnInit, OnChanges {
     setTimeout(() => {
       this.state = 'inactive'
     }, 4000);
-
   }
 
   ngOnInit(): void {
-
   }
 
 }

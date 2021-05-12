@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { Account } from "src/app/shared/account.model";
+import { Account } from "src/app/shared/models/account.model";
 
 export const CHANGE_USER = 'CHANGE_USER';
 export const REMOVE_USER = 'REMOVE_USER';

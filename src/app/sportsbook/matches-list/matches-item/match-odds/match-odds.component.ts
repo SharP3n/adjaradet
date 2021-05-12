@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Match } from 'src/app/shared/models/match-details.model';
 import { ButtonHighlightService } from '../../../button-highlight.service';
 import { DataService } from '../../data.service';
-import { NewMatchService } from '../../new-match.service';
 
 @Component({
   selector: 'app-match-odds',
@@ -9,9 +9,9 @@ import { NewMatchService } from '../../new-match.service';
   styleUrls: ['./match-odds.component.scss']
 })
 
-export class MatchOddsComponent implements OnInit, AfterViewInit{
+export class MatchOddsComponent implements OnInit{
 
-  constructor(public dataService: DataService, private newMatchService: NewMatchService, private buttonHighlightService: ButtonHighlightService) { }
+  constructor(public dataService: DataService, private buttonHighlightService: ButtonHighlightService) { }
 
   @ViewChild('home') homeBtn: ElementRef;
   @ViewChild('away') awayBtn: ElementRef;
@@ -19,46 +19,15 @@ export class MatchOddsComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
     
-    this.buttonHighlightService.highlightButtons.subscribe((matches)=>{
-      // this.matches = matches;
-      // console.log(matches)
-      this.highlightsArr = matches;
-      this.removeHighlights();
-      if(matches?.length > 0 && matches){
-        // this.applyHighlights(matches)
-      }
+    this.buttonHighlightService.highlightButtons.subscribe((matchesInBet: Match[])=>{
+      this.highlightsArr = matchesInBet;
     })
-  }
-  
-  i = 0;
-  ngAfterViewInit(){
-
-    // this.buttonHighlightService.resetHighlights.emit();
-  }
-
-  ////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////
-
-  //1. get matchesData + bettingOn to match-odds
-  //2. compare in pipe (or in ngStyle)
-  //3. apply highlight from pipe
-  //4. check for issues
-  // ngOnChanges(changes: SimpleChanges){
-    //   this.match = changes.match.currentValue
-    //   console.log(this.match)//can be filtered!
-    // }
-    
-    // match;
-  removeHighlights(){
-    this.homeBtn.nativeElement.classList.remove('added-bet')
-    this.awayBtn.nativeElement.classList.remove('added-bet')
   }
 
   @Input() match: {home: string, away: string, homeOdd: number, awayOdd: number};
 
   addToBet(bettingOn: string){
-    this.newMatchService.addNewMatch(this.match, bettingOn);
+    this.dataService.newMatch.emit({home: this.match.home, away: this.match.away, awayOdd: this.match.awayOdd, homeOdd: this.match.homeOdd, bettingOn: bettingOn})
   }
 
 }

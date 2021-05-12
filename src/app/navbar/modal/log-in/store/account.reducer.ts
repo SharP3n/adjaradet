@@ -1,4 +1,4 @@
-import { Account } from "src/app/shared/account.model";
+import { Account } from "src/app/shared/models/account.model";
 import * as accountActions from './account.actions'
 
 const currentState: Account = null;

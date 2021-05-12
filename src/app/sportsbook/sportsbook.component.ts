@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BetDetailsService } from '../shared/bet-details.service';
+import { BetDetailsService } from '../shared/services/bet-details.service';
 import { CanComponentDeactivate } from './ticket/bet-place/can-deactivate-guard.service';
 
 @Component({
@@ -14,9 +13,7 @@ export class SportsbookComponent implements OnInit, CanComponentDeactivate{
 
   creatingBet: boolean;
 
-  canDeactivate()
-  // : Observable<boolean> | Promise<boolean> | boolean
-  {
+  canDeactivate(){
     if(this.creatingBet){
       return confirm('Do You Want To Stop Placing Bet?')
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AccountService } from 'src/app/shared/account.service';
+import { AccountService } from 'src/app/shared/services/account.service';
 
 @Component({
   selector: 'app-register',
@@ -18,18 +18,15 @@ export class RegisterComponent implements OnInit {
 
   showModal: boolean;
 
-  onRegister(form){
+  onRegister(form: NgForm){
 
-    // if(!form.valid || form.value.password1 !== form.value.password2){
-    //   return;
-    // }    
     const email = form.value.email;
     const password = form.value.password1;
 
-    this.accountService.signup(email, password).subscribe(//only used for error
+    this.accountService.signup(email, password).subscribe(
       resData => {
         console.log(resData)
-        this.accountService.toggleModal(true, 'log in')//to log-in
+        this.accountService.toggleModal(true, 'log in')
         form.reset();
       },
       error => {
@@ -39,11 +36,6 @@ export class RegisterComponent implements OnInit {
         else{
           this.accountService.message.emit({message: 'something went wrong, Check your connection', error: true})
         }
-        // console.log(error);
-        // switch(error.error.error){
-        //   case 'EMAIL_EXISTS': 
-        //   //error = 'this email already exists'
-        // }
       }
     );
   }

@@ -1,5 +1,5 @@
-import { Directive, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { Match } from 'src/app/shared/match-details.model';
+import { Directive, HostBinding, Input, OnChanges, OnInit} from '@angular/core';
+import { Match } from 'src/app/shared/models/match-details.model';
 import { ButtonHighlightService } from '../../../button-highlight.service';
 
 @Directive({
@@ -13,7 +13,7 @@ export class OddsHighlightDirective implements OnChanges, OnInit{
     @Input('bettingOn') bettingOn: string;
     @HostBinding('style.backgroundColor') backgroundColor: string;
 
-    constructor( private buttonHighlightService: ButtonHighlightService){}
+    constructor(private buttonHighlightService: ButtonHighlightService){}
 
     ngOnInit(){
         this.applyHighlights();
@@ -33,6 +33,4 @@ export class OddsHighlightDirective implements OnChanges, OnInit{
             });
         }
     }
-    
-
 }

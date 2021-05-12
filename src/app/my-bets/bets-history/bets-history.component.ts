@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BetDetailsService } from 'src/app/shared/bet-details.service';
-import { FullBet } from 'src/app/shared/full-bet-details.model';
+import { BetDetailsService } from 'src/app/shared/services/bet-details.service';
+import { FullBet } from 'src/app/shared/models/full-bet-details.model';
 
 @Component({
   selector: 'app-bets-history',
