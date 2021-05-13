@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-message',
@@ -20,25 +20,25 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
   ]
 })
 
-export class MessageComponent implements OnInit, OnChanges {
+export class MessageComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(private changeDetector: ChangeDetectorRef) { }
 
-  state = 'inactive'
   @Input() messageData: {message: string, error: boolean, state: string};
+  state = 'inactive'
 
-  ngOnChanges(){
-
-    setTimeout(() => {
+  ngAfterViewInit(){
     this.state = this.messageData?.state;
-    }, 0);
-
+ 
     setTimeout(() => {
       this.state = 'inactive'
     }, 4000);
+    this.changeDetector.detectChanges()
   }
 
   ngOnInit(): void {
+
   }
+  
 
 }

@@ -19,7 +19,7 @@ interface authResponse{
   providedIn: 'root'
 })
 
-export class AccountService implements OnInit {
+export class AccountService{
 
   accountData = new EventEmitter<Account>();
   message = new EventEmitter<{message: string, error: boolean}>();
@@ -88,7 +88,5 @@ export class AccountService implements OnInit {
     this.loggedIn = true;
   }
   
-  ngOnInit(){
-  }
 
 }

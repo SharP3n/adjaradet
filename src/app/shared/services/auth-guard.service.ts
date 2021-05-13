@@ -5,7 +5,7 @@ import { Injectable, OnInit } from '@angular/core'
 
 @Injectable()
 
-export class AuthGuard implements CanActivate, OnInit{
+export class AuthGuard implements CanActivate{
     canActivate(): Observable<boolean> | Promise<boolean> | boolean{
         return this.checkAccountActivity();
     }
@@ -18,9 +18,6 @@ export class AuthGuard implements CanActivate, OnInit{
             this.router.navigate(['/']);
             return false;
         }
-    }
-
-    ngOnInit(){
     }
 
     constructor(private accountService: AccountService, private router: Router){

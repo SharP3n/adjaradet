@@ -2,7 +2,7 @@
     <span class="list__header">
     <div class="list__header__text">BETS HISTORY ({{placedBets?.length}} bets)</div> </span>
 
-    <h1 *ngIf='placedBets?.length === 0' class="list__no-bets">THERE ARE NO BETS TO DISPLAY</h1>
+    <h1 *ngIf='placedBets?.length === 0' class="list__no-bets">THERE ARE NO BETS TO DISPLAY 😕</h1>
 
     <div class="list__bets" *ngFor='let bet of placedBets'>
         <div class="list__bets__tooltip">

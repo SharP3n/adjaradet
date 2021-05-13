@@ -11,7 +11,7 @@ import { AccountService } from './account.service';
   providedIn: 'root'
 })
 
-export class BetDetailsService {
+export class BetDetailsService{
 
   addedBets: FullBet[] = []
   newBet: FullBet;
@@ -49,12 +49,6 @@ export class BetDetailsService {
     else{
       return true;
     }
-  }
-
-  ngOnInit(): void {
-    this.store.select('account').subscribe((account)=>{
-      console.log(account)
-    })
   }
   
   getData(){
