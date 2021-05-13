@@ -1,10 +1,14 @@
+<div class="info__header">
+    YOUR ACCOUNT INFO
+</div>
 <div class="info">
-    <div class="info__header">
-        YOUR ACCOUNT INFO
-    </div>
 
+    <div class='info__logo'>
+        <div class="info__logo__name">MASTERCARD</div>
+        <img class='info__logo__img' src="assets/icons/mastercard.png" alt="mastercard">
+    </div>
     <div class="info__email">
-        email: {{account?.email}}
+        {{account?.email}}
     </div>
     <div class="info__password">password: 
         <input class='info__password__input' [value]='account?.password' type="password" readonly="readonly" #password >
@@ -17,10 +21,12 @@
     </div>
 
     <div class="info__balance">balance: {{account?.balance}}$</div>
-    <div class="info__input-label">Input money on your account:</div>
     <div class="info__wrapper">
-        <input class='info__wrapper__input-balance' min='0' max='2000' placeholder="$" #moneyAmount type="number"> 
-        <button class='info__wrapper__input-submit' (click)='addMoney(moneyAmount)'>submit</button>
+        <div class="info__wrapper__input-label">input money:</div>
+        <div>
+            <input class='info__wrapper__input-balance' min='0' max='2000' placeholder="$" #moneyAmount type="number"> 
+            <button class='info__wrapper__input-submit' (click)='addMoney(moneyAmount)'>submit</button>
+        </div>
     </div>
 </div>
 
