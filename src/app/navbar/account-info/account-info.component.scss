@@ -105,3 +105,13 @@ $dark2: rgba(32,40,48,255);
         }
     }
 }
+
+.disabled{
+    color: gray;
+    cursor: not-allowed;
+}
+
+.active{
+    color: white;
+    cursor: pointer;
+}
