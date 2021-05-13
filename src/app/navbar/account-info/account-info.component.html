@@ -9,9 +9,9 @@
     <div class="info__password">password: 
         <input class='info__password__input' [value]='account?.password' type="password" readonly="readonly" #password >
         <button class='info__password__toggle-visibility' (click)="toggleVisibility()">
-            <img *ngIf='password.type !== "password"; else visible' src="/assets/icons/visible.png" alt="visible">
+            <img *ngIf='password.type !== "password"; else visible' src="assets/icons/visible.png" alt="visible">
             <ng-template #visible>
-                <img  src="/assets/icons/not-visible.png" alt="visible">
+                <img  src="assets/icons/not-visible.png" alt="invisible">
             </ng-template>
         </button>
     </div>
