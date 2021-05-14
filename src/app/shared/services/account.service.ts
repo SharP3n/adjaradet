@@ -6,6 +6,7 @@ import * as accountActions from '../store/account.actions'
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { BalanceService } from './balance.service';
+import { BetsHistoryService } from './bets-history.service';
 
 interface authResponse{
   kind: string;
@@ -48,6 +49,7 @@ export class AccountService{
   logOut(){
     this.store.dispatch(new accountActions.removeUser())
     this.loggedIn = false;
+    this.betsHistoryService.allBets = []
     localStorage.setItem('userData', null);
     if(this.router.url === '/betsHistory' || this.router.url === '/account-info'){
       this.router.navigate(['/'])
@@ -71,7 +73,8 @@ export class AccountService{
     private http: HttpClient, 
     private store: Store<{account: Account}>, 
     private router: Router,
-    private balanceService: BalanceService
+    private balanceService: BalanceService,
+    private betsHistoryService: BetsHistoryService,
   ) { 
     this.store.select('account').subscribe((account)=>{
       if(this.counter > 0){
@@ -87,8 +90,9 @@ export class AccountService{
     if(!userData){
       return
     }
-    this.store.dispatch(new accountActions.changeUser({email: userData.email, password: userData.password, balance: 10}))
+    this.store.dispatch(new accountActions.changeUser({email: userData.email, password: userData.password, balance: null}))
     this.balanceService.StoreAccountBalance(userData.email)
+    this.betsHistoryService.StoreAccountBets(userData.email)
     this.loggedIn = true;
   }
   

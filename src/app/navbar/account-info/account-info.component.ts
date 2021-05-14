@@ -17,7 +17,6 @@ export class AccountInfoComponent implements OnInit {
 
   constructor(
     private store: Store<{account: Account}>,
-    private accountService: AccountService,
     private balanceService: BalanceService,
     private messageService: MessageService
   ) { }
@@ -26,6 +25,12 @@ export class AccountInfoComponent implements OnInit {
     this.store.select('account').subscribe((account)=>{
       this.account = account;
     })
+  }
+
+  checkForEnter(e, moneyAmount: HTMLInputElement){
+    if(e.key === 'Enter'){
+      this.addMoney(moneyAmount)
+    }
   }
   
   addMoney(moneyAmount: HTMLInputElement){

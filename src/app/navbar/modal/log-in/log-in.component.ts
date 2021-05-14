@@ -1,10 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Account } from 'src/app/shared/models/account.model';
 import { AccountService } from 'src/app/shared/services/account.service';
 import { BalanceService } from 'src/app/shared/services/balance.service';
+import { BetsHistoryService } from 'src/app/shared/services/bets-history.service';
 import { MessageService } from 'src/app/shared/services/message.service';
 import * as accountActions from '../../../shared/store/account.actions'
 
@@ -20,7 +21,8 @@ export class LogInComponent implements OnInit {
     private accountService: AccountService,
     private store: Store<{account: Account}>,
     private balanceServie: BalanceService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private betsHistoryService: BetsHistoryService,
   ) {}
 
   account: Observable<Account>
@@ -39,7 +41,6 @@ export class LogInComponent implements OnInit {
       this.showStatuses = true;
       return;
     }
-
     const email: string = form.value.email;
     const password: string = form.value.password;
 
@@ -47,6 +48,7 @@ export class LogInComponent implements OnInit {
       () => {
         this.store.dispatch(new accountActions.changeUser({email: email, password: password, balance: null}))
         this.balanceServie.StoreAccountBalance(email);
+        this.betsHistoryService.StoreAccountBets(email);
         this.messageService.message.next({message: `welcome ${email}`, error: false})
       },error => {
         if(error?.error?.error?.message){

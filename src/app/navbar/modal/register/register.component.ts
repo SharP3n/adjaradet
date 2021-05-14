@@ -17,7 +17,6 @@ export class RegisterComponent implements OnInit {
     private messageService: MessageService,
   ) { }
 
-
   ngOnInit(): void {
   }
 

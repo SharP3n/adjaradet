@@ -4,7 +4,6 @@ import { Account } from "src/app/shared/models/account.model";
 export const CHANGE_USER = 'CHANGE_USER';
 export const REMOVE_USER = 'REMOVE_USER';
 export const UPDATE_BALANCE = 'UPDATE_BALANCE';
-export const GET_USER = 'GET_USER';
 
 export class changeUser implements Action {
     readonly type = CHANGE_USER;

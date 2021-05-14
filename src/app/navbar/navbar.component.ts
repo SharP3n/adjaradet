@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import { BetDetailsService } from 'src/app/shared/services/bet-details.service';
+import { SubSink } from 'subsink';
 import { AccountService } from '../shared/services/account.service';
+import { BetsHistoryService } from '../shared/services/bets-history.service';
 import { MessageService } from '../shared/services/message.service';
 
 @Component({
@@ -12,10 +12,10 @@ import { MessageService } from '../shared/services/message.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
-  private betDetailsService: BetDetailsService,
-  private accountService: AccountService,
-  private store: Store<{account: Account}>,
-  private messageService: MessageService
+    private accountService: AccountService,
+    private store: Store<{account: Account}>,
+    private messageService: MessageService,
+    private betsHistoryService: BetsHistoryService
   ) { }
   
   showMessage = false;
@@ -33,15 +33,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   account: Account;
   
   ngOnInit(): void {
-    this.activatedSub2 = this.betDetailsService.betPlaced.subscribe(() =>{
-      this.betsQuantity++;
+    this.subs.sink = this.betsHistoryService.betsUpdated.subscribe((betsQuantity) =>{
+      this.betsQuantity = betsQuantity
     })
 
     this.store.select('account').subscribe(account=>{
        this.account = account
     });
 
-    this.activatedSub = this.messageService.message.subscribe((message: {message: string, error: boolean, state: string}) => {
+    this.subs.sink = this.messageService.message.subscribe((message: {message: string, error: boolean, state: string}) => {
 
       if(!this.showMessage){
         this.messageData = {message: message.message, error: message.error, state: 'active'}
@@ -68,23 +68,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     })
   }
 
-  private activatedSub: Subscription;
-  private activatedSub2: Subscription;
+  private subs = new SubSink();
+
   ngOnDestroy(){
-    this.activatedSub.unsubscribe();
-
+    this.subs.unsubscribe();
   }
-
-
-
-
-
-
-
-
-
-
-
 
   onOpenModal(purpose: string){
     this.accountService.toggleModal(true, purpose);

@@ -3,20 +3,19 @@
     <div class="list__header__text">BETS HISTORY ({{placedBets?.length}} bets)</div> </span>
 
     <h1 *ngIf='placedBets?.length === 0' class="list__no-bets">THERE ARE NO BETS TO DISPLAY 😕</h1>
-
     <div class="list__bets" *ngFor='let bet of placedBets'>
         <div class="list__bets__tooltip">
-            VIEW MATCHES ({{bet.matchDetails.length}})
+            VIEW MATCHES ({{bet.bet.matchDetails.length}})
             <span class="list__bets__tooltip__matches-info">
-                <div class='list__bets__tooltip__matches-info__details' *ngFor='let match of bet.matchDetails'>
+                <div class='list__bets__tooltip__matches-info__details' *ngFor='let match of bet.bet.matchDetails'>
                     {{match.away}} VS {{match.home}}
                 </div>    
             </span>
         </div>
         <div class="list__bets__bet-info">
-            <div class="list__bets__bet-info__odd">ODD: {{bet.betDetails.odd}}</div>
-            <div class="list__bets__bet-info__bet-amount">BET: {{bet.betDetails.betAmount}}$</div>
-            <div class="list__bets__bet-info__poss-win">POSSIBLE WIN: {{bet.betDetails.possWin}}$</div>
+            <div class="list__bets__bet-info__odd">ODD: {{bet.bet.betDetails.odd}}</div>
+            <div class="list__bets__bet-info__bet-amount">BET: {{bet.bet.betDetails.betAmount}}$</div>
+            <div class="list__bets__bet-info__poss-win">POSSIBLE WIN: {{bet.bet.betDetails.possWin}}$</div>
         </div>
     </div>
 <div>

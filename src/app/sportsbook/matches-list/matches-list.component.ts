@@ -1,10 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { BetDetailsService } from 'src/app/shared/services/bet-details.service';
 import { MessageService } from 'src/app/shared/services/message.service';
 import { SubSink } from 'subsink';
 import { DataService } from './data.service';
 import { MatchesHeaderComponent } from './matches-header/matches-header.component'
-
 
 @Component({
   selector: 'app-matches-list',
@@ -13,7 +11,7 @@ import { MatchesHeaderComponent } from './matches-header/matches-header.componen
 })
 export class MatchesListComponent implements OnInit, AfterViewInit, OnDestroy{
 
-  constructor( public dataService: DataService, private betDetailsService: BetDetailsService, private messageService: MessageService) { }
+  constructor( public dataService: DataService, private messageService: MessageService) { }
 
   @ViewChild(MatchesHeaderComponent) HeaderComponent: MatchesHeaderComponent;
   
@@ -27,13 +25,6 @@ export class MatchesListComponent implements OnInit, AfterViewInit, OnDestroy{
   }
   
   ngOnInit(): void {
-    this.subs.sink = this.betDetailsService.betPlaced.subscribe( () =>{
-      let bet = document.querySelectorAll('.added-bet');
-      bet.forEach( btn => {
-        btn.classList.remove('added-bet');
-      });
-    }
-    )
   }
 
   private subs = new SubSink();

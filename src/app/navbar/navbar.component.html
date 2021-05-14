@@ -1,11 +1,12 @@
 <ul class='navbar'>
     <li class='navbar__item logo'><a routerLink='/' ><img class='navbar__item__logo' src="./assets/pictures/logo.png" alt="adjaradet"></a></li>
     <li class='navbar__item mini-logo'><a routerLink='/' ><img class='navbar__item__mini-logo' src="./assets/icons/mini-logo.png" alt="adjaradet"></a></li>
-    <li *ngIf="account" class='navbar__item sports'><a appHighlight [defaultColor]='betsQuantity' routerLink='/betsHistory' class=''>MY BETS({{betsQuantity}})</a></li>
-    <li class='navbar__item my-bets'><a routerLink='/sportsbook/NBA' class='navbar__item__link' >SPORTS</a></li>
+    <li *ngIf="account" class='navbar__item sports'><a class='navbar__item__link' routerLink='/betsHistory'>MY BETS({{betsQuantity}})</a></li>
+    <li class='navbar__item my-bets'><a routerLink='/sportsbook/NBA' class='navbar__item__link'>SPORTS</a></li>
     <ul class='navbar__item__account'>
         <li *ngIf="!account"><button (click)='onOpenModal("log in")' class='navbar__item__account__log-in'>Log in</button></li>
         <li *ngIf="!account"><button (click)='onOpenModal("register")' class='navbar__item__account__register'>Register</button></li>
+        <li *ngIf="account"><div class='navbar__item__account__balance'>Balance: {{this.account.balance}}$</div></li>
         <li *ngIf="account"><button (click)='logOut()' class='navbar__item__account__log-out'>Log out</button></li>
         <li *ngIf="account"><button routerLink='/account-info' class='navbar__item__account__info'>Account</button></li>
         
