@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AccountService } from 'src/app/shared/services/account.service';
 import { BalanceService } from 'src/app/shared/services/balance.service';
+import { MessageService } from 'src/app/shared/services/message.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,12 @@ import { BalanceService } from 'src/app/shared/services/balance.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private accountService: AccountService, private balanceService: BalanceService) { }
+  constructor(
+    private accountService: AccountService,
+    private balanceService: BalanceService,
+    private messageService: MessageService,
+  ) { }
+
 
   ngOnInit(): void {
   }
@@ -31,9 +37,10 @@ export class RegisterComponent implements OnInit {
     const password = form.value.password1;
 
     this.accountService.signup(email, password).subscribe(
-      resData => {
+      () => {
         this.balanceService.addBalanceInDB(email, 10).subscribe(()=>{
-          console.log('balance added');
+        }, () => {
+          this.messageService.message.next({message: 'something went wrong, Check your connection', error: true})
         })
         
         this.accountService.toggleModal(true, 'log in')
@@ -41,10 +48,10 @@ export class RegisterComponent implements OnInit {
       },
       error => {
         if(error?.error?.error?.message){
-          this.accountService.message.next({message: error?.error?.error?.message.replace(/_/g, " "), error: true})
+          this.messageService.message.next({message: error?.error?.error?.message.replace(/_/g, " "), error: true})
         }
         else{
-          this.accountService.message.next({message: 'something went wrong, Check your connection', error: true})
+          this.messageService.message.next({message: 'something went wrong, Check your connection', error: true})
         }
       }
     );

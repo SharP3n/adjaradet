@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Account } from '../models/account.model';
 import * as accountActions from '../store/account.actions'
 import { AccountService } from './account.service';
+import { MessageService } from './message.service';
 
 
 @Injectable({
@@ -28,10 +29,11 @@ export class BalanceService {
         }
       });
       this.updateBalanceInDB(balanceData).subscribe(()=>{
-
-      }, error => {
-        
+      }, () => {
+        this.messageService.message.next({message: 'something went wrong, Check your connection', error: true})
       })
+    }, ()=> {
+      this.messageService.message.next({message: 'something went wrong, Check your connection', error: true})
     })
   }
 
@@ -60,10 +62,12 @@ export class BalanceService {
           this.store.dispatch(new accountActions.updateBalance(specific.balance))
         }
       });
+    }, () => {
+      this.messageService.message.next({message: 'something went wrong, Check your connection', error: true})
     });
   }
 
-  constructor(private http: HttpClient, private store: Store<{account: Account}>) {
+  constructor(private http: HttpClient, private store: Store<{account: Account}>, private messageService: MessageService) {
     
   }
 }

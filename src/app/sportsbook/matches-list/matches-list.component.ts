@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { BetDetailsService } from 'src/app/shared/services/bet-details.service';
+import { MessageService } from 'src/app/shared/services/message.service';
 import { SubSink } from 'subsink';
 import { DataService } from './data.service';
 import { MatchesHeaderComponent } from './matches-header/matches-header.component'
@@ -12,7 +13,7 @@ import { MatchesHeaderComponent } from './matches-header/matches-header.componen
 })
 export class MatchesListComponent implements OnInit, AfterViewInit, OnDestroy{
 
-  constructor( public dataService: DataService, private betDetailsService: BetDetailsService) { }
+  constructor( public dataService: DataService, private betDetailsService: BetDetailsService, private messageService: MessageService) { }
 
   @ViewChild(MatchesHeaderComponent) HeaderComponent: MatchesHeaderComponent;
   
@@ -20,6 +21,8 @@ export class MatchesListComponent implements OnInit, AfterViewInit, OnDestroy{
     this.subs.sink = this.dataService.fetchMatches().subscribe(matches => {
       this.dataService.organiseMatchesData(matches) 
       this.getMatches(this.HeaderComponent.activeSport)
+    }, ()=> {
+      this.messageService.message.next({message: 'something went wrong, Check your connection', error: true})
     });
   }
   
