@@ -7,6 +7,8 @@ import * as accountActions from '../store/account.actions'
 import { Account } from '../models/account.model';
 import { AccountService } from './account.service';
 import { Subject } from 'rxjs';
+import { BalanceService } from './balance.service';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,12 @@ export class BetDetailsService{
   creatingBet = new Subject<boolean>();
   account: Account;
 
-  constructor(private accountService: AccountService, private store: Store<{account: Account}>){
+  constructor(
+    private accountService: AccountService,
+    private store: Store<{account: Account}>,
+    private balanceService: BalanceService,
+    private messageService: MessageService
+  ){
     this.store.select('account').subscribe((account)=>{
       this.account = account;
     })
@@ -33,7 +40,9 @@ export class BetDetailsService{
       this.addedBets.push(this.newBet);
       this.store.dispatch(new accountActions.updateBalance(this.account.balance - betDetails.betAmount))
       this.betPlaced.next();
-      this.accountService.message.next({message: `Your Bet Was Placed`, error: false})
+      this.messageService.message.next({message: `Your Bet Was Placed`, error: false})
+      this.balanceService.changeBalance(this.account.email, this.account.balance)
+      
       return true;
     }
     else{
@@ -44,7 +53,7 @@ export class BetDetailsService{
 
   checkBalance(betAmount: number){
     if(this.account.balance < betAmount){
-      this.accountService.message.next({message: 'Not Enough Money On Your Account', error: true})
+      this.messageService.message.next({message: 'Not Enough Money On Your Account', error: true})
       return false;
     }
     else{

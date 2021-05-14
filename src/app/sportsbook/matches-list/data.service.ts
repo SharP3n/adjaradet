@@ -39,7 +39,6 @@ export class DataService {
   }
 
   organiseMatchesData(matches: Match[][]){ 
-
     this.NBAMatches = matches[0];
     this.UFCMatches = matches[1];
     this.UEFAMatches = matches[2];

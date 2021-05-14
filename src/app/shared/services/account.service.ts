@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import * as accountActions from '../store/account.actions'
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { BalanceService } from './balance.service';
 
 interface authResponse{
   kind: string;
@@ -21,8 +22,6 @@ interface authResponse{
 })
 
 export class AccountService{
-
-  message = new Subject<{message: string, error: boolean}>();
 
   signup(email: string, password: string){
     return this.http.post<authResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyChqR-cUB1DmNV5sGf77yrpdeu0_gNa-LY',
@@ -68,8 +67,12 @@ export class AccountService{
   }
 
   counter = 0;
-  constructor(private http: HttpClient, private store: Store<{account: Account}>, private router: Router) { 
-
+  constructor(
+    private http: HttpClient, 
+    private store: Store<{account: Account}>, 
+    private router: Router,
+    private balanceService: BalanceService
+  ) { 
     this.store.select('account').subscribe((account)=>{
       if(this.counter > 0){
         this.saveLogInData(account);
@@ -85,6 +88,7 @@ export class AccountService{
       return
     }
     this.store.dispatch(new accountActions.changeUser({email: userData.email, password: userData.password, balance: 10}))
+    this.balanceService.StoreAccountBalance(userData.email)
     this.loggedIn = true;
   }
   

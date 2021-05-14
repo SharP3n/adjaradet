@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { BetDetailsService } from 'src/app/shared/services/bet-details.service';
 import { AccountService } from '../shared/services/account.service';
+import { MessageService } from '../shared/services/message.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
   private betDetailsService: BetDetailsService,
   private accountService: AccountService,
-  private store: Store<{account: Account}>) { }
+  private store: Store<{account: Account}>,
+  private messageService: MessageService
+  ) { }
   
   showMessage = false;
   messageData: {message: string, error: boolean, state: string}
@@ -38,7 +41,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
        this.account = account
     });
 
-    this.activatedSub = this.accountService.message.subscribe((message: {message: string, error: boolean, state: string}) => {
+    this.activatedSub = this.messageService.message.subscribe((message: {message: string, error: boolean, state: string}) => {
 
       if(!this.showMessage){
         this.messageData = {message: message.message, error: message.error, state: 'active'}
@@ -89,8 +92,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   logOut(){
     this.accountService.logOut();
-    // this.store.dispatch(new accountActions.removeUser())
-    this.accountService.message.next({message: 'Logged Out', error: false});
+    this.messageService.message.next({message: 'Logged Out', error: false});
   }
 
   betsQuantity = 0;

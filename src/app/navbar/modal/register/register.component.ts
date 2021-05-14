@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AccountService } from 'src/app/shared/services/account.service';
+import { BalanceService } from 'src/app/shared/services/balance.service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import { AccountService } from 'src/app/shared/services/account.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService, private balanceService: BalanceService) { }
 
   ngOnInit(): void {
   }
@@ -31,7 +32,10 @@ export class RegisterComponent implements OnInit {
 
     this.accountService.signup(email, password).subscribe(
       resData => {
-        console.log(resData)
+        this.balanceService.addBalanceInDB(email, 10).subscribe(()=>{
+          console.log('balance added');
+        })
+        
         this.accountService.toggleModal(true, 'log in')
         form.reset();
       },

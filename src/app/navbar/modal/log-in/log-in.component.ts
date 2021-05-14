@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Account } from 'src/app/shared/models/account.model';
 import { AccountService } from 'src/app/shared/services/account.service';
+import { BalanceService } from 'src/app/shared/services/balance.service';
+import { MessageService } from 'src/app/shared/services/message.service';
 import * as accountActions from '../../../shared/store/account.actions'
 
 @Component({
@@ -16,7 +18,9 @@ export class LogInComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private store: Store<{account: Account}>
+    private store: Store<{account: Account}>,
+    private balanceServie: BalanceService,
+    private messageService: MessageService
   ) {}
 
   account: Observable<Account>
@@ -41,14 +45,15 @@ export class LogInComponent implements OnInit {
 
     this.accountService.logIn(email, password).subscribe(
       () => {
-        this.store.dispatch(new accountActions.changeUser({email: email, password: password, balance: 10}))
-        this.accountService.message.next({message: `welcome ${email}`, error: false})
+        this.store.dispatch(new accountActions.changeUser({email: email, password: password, balance: null}))
+        this.balanceServie.StoreAccountBalance(email);
+        this.messageService.message.next({message: `welcome ${email}`, error: false})
       },error => {
         if(error?.error?.error?.message){
-          this.accountService.message.next({message: error?.error?.error?.message.replace(/_/g, " "), error: true})
+          this.messageService.message.next({message: error?.error?.error?.message.replace(/_/g, " "), error: true})
         }
         else{
-          this.accountService.message.next({message: 'something went wrong, Check your connection', error: true})
+          this.messageService.message.next({message: 'something went wrong, Check your connection', error: true})
         }
       }
     )

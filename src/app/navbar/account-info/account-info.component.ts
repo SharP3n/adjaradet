@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Account } from 'src/app/shared/models/account.model';
 import { AccountService } from 'src/app/shared/services/account.service';
+import { BalanceService } from 'src/app/shared/services/balance.service';
+import { MessageService } from 'src/app/shared/services/message.service';
 import * as accountActions from '../../shared/store/account.actions'
 
 @Component({
@@ -13,7 +15,12 @@ export class AccountInfoComponent implements OnInit {
 
   @ViewChild('password') password: ElementRef;
 
-  constructor(private store: Store<{account: Account}>, private accountService: AccountService) { }
+  constructor(
+    private store: Store<{account: Account}>,
+    private accountService: AccountService,
+    private balanceService: BalanceService,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.store.select('account').subscribe((account)=>{
@@ -23,8 +30,10 @@ export class AccountInfoComponent implements OnInit {
   
   addMoney(moneyAmount: HTMLInputElement){
     this.store.dispatch(new accountActions.updateBalance(this.account.balance + +moneyAmount.value));
+    this.balanceService.changeBalance(this.account.email, this.account.balance)
+
     moneyAmount.value = '';
-    this.accountService.message.next({message: `your current balance is ${this.account.balance}$`, error: false})
+    this.messageService.message.next({message: `your current balance is ${this.account.balance}$`, error: false})
   }
 
   account: Account;

@@ -2,7 +2,7 @@ $green: #01AC2D;
 $dark1: rgba(29,35,41,255);
 
 .message{
-    position: absolute;
+    position: fixed;
     bottom: 50px;
     left: 30px;
     background-color: $dark1;
