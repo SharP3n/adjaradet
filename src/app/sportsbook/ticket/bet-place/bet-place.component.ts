@@ -46,7 +46,7 @@ export class BetPlaceComponent implements OnInit, OnChanges {
   odd: number;
   
   calculatePossWin(inputBet: HTMLInputElement, matches: Match[]){
-    this.betInfo = this.dataService.calculatePossWin(inputBet, matches);
+    this.betInfo = this.dataService.returnPossWin(inputBet, matches);
     this.odd = this.betInfo.odd;
   }
   
@@ -74,10 +74,10 @@ export class BetPlaceComponent implements OnInit, OnChanges {
         this.inputCanBeFilled = true;
         this.betDetailsService.creatingBet.next(this.inputCanBeFilled)
         if(this.inputBet.nativeElement.value === ''){
-          this.odd =  this.dataService.calculatePossWin(this.inputBet.nativeElement, this.matches).odd;
+          this.odd =  this.dataService.returnPossWin(this.inputBet.nativeElement, this.matches).odd;
         }
         else if(this.inputBet.nativeElement.value > 0){
-          this.betInfo = this.dataService.calculatePossWin(this.inputBet.nativeElement, this.matches);
+          this.betInfo = this.dataService.returnPossWin(this.inputBet.nativeElement, this.matches);
         }
       }
     }

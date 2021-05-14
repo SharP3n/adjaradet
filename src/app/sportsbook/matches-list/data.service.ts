@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Account } from 'src/app/shared/models/account.model';
 import { Match } from 'src/app/shared/models/match-details.model';
 
 @Injectable({
@@ -27,23 +26,19 @@ export class DataService {
   }
 
   fetchMatches(){
-    return this.http.get<{[key: string]: Account}>('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
+    return this.http.get<{[key: string]: Match}>('https://sportsbetting-e1417-default-rtdb.firebaseio.com/posts.json')
     .pipe(
       map(responseData => {
-      const postsArr: Account[] = [];
+      const postsArr = [];
       for(const key in responseData){
-        postsArr.push({...responseData[key], id: key});
+        postsArr.push(responseData[key]);
       }
       return postsArr;
     })
     )
   }
 
-  organiseMatchesData(matches){ 
-      matches.forEach((specificMatches: Match, index: number) => {
-      matches[index] = Object.values(specificMatches);
-      matches[index].splice(-1);
-    });
+  organiseMatchesData(matches: Match[][]){ 
 
     this.NBAMatches = matches[0];
     this.UFCMatches = matches[1];
@@ -54,10 +49,9 @@ export class DataService {
   UFCMatches: Match[] = []
   UEFAMatches: Match[] = []
 
-  calculatePossWin(input: HTMLInputElement, matches: Match[]){
+  calculatePossWinAndOdd(input: HTMLInputElement, matches: Match[]){
+
     let possWin: number;
-    let betCanBePlaced: boolean;
-    let bettingData: object;
     let combinedOdd: number;
 
     matches.forEach((match, i) => {
@@ -80,16 +74,24 @@ export class DataService {
       
       possWin = +input.value * combinedOdd;
       possWin = Math.round(possWin * 100) / 100;
-      
     });
-    if(possWin > 0){
+    return {posswin: possWin, odd: combinedOdd};
+  }
+
+
+  returnPossWin(input: HTMLInputElement, matches: Match[]){
+    
+    const betData = this.calculatePossWinAndOdd(input, matches);
+    
+    let betCanBePlaced: boolean;
+    if(betData.posswin > 0){
       betCanBePlaced = true;
     }
     else{
       betCanBePlaced = false;
     }
     
-    return bettingData = {odd: combinedOdd, possWin: possWin, betCanBePlaced: betCanBePlaced}
+    return {odd: betData.odd, possWin: betData.posswin, betCanBePlaced: betCanBePlaced}
   }
 
   newMatch = new Subject<Match>()

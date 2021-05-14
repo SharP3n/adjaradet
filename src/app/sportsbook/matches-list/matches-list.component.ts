@@ -39,7 +39,6 @@ export class MatchesListComponent implements OnInit, AfterViewInit, OnDestroy{
     this.subs.unsubscribe();
   }
 
-
   getMatches(sport: string){
     this.matches = this.dataService.returnSpecificMatches(sport);
   }
