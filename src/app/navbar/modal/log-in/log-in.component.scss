@@ -68,6 +68,12 @@ $green: #01AC2D;
     }
 }
 
-input.ng-invalid.ng-touched{
+.invalid{
     border: 1px solid red;
+}
+
+.disabled{
+    cursor: not-allowed;
+    background-color: red;
+    border: none;
 }

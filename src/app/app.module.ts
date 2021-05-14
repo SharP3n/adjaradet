@@ -16,7 +16,7 @@ import { MessageComponent } from './navbar/message/message.component'
 
 import { CoreModule } from './core.module';
 import { StoreModule } from '@ngrx/store';
-import { accountReducer } from './navbar/modal/log-in/store/account.reducer';
+import { accountReducer } from './shared/store/account.reducer';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AccountInfoComponent } from './navbar/account-info/account-info.component';

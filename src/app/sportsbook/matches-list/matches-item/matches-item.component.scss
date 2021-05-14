@@ -9,16 +9,18 @@ $border: rgba(43,52,60,255);
     align-items: center;
     justify-content: space-between;
 
-
     &:hover{
         background-color: rgba(37,45,55,255);
     }
 
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 680px) {
         font-size: 16px;
         padding: 10px 10px;
     }
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 550px) {
         font-size: 13px;
+    }
+    @media screen and (max-width: 375px) {
+        font-size: 12px;
     }
 }

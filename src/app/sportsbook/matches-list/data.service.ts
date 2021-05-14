@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Account } from 'src/app/shared/models/account.model';
 import { Match } from 'src/app/shared/models/match-details.model';
@@ -91,15 +92,15 @@ export class DataService {
     return bettingData = {odd: combinedOdd, possWin: possWin, betCanBePlaced: betCanBePlaced}
   }
 
-  newMatch = new EventEmitter<Match>()
-  betWasPlaced = new EventEmitter<void>();
+  newMatch = new Subject<Match>()
+  betWasPlaced = new Subject<void>();
   placeBet(){
-    this.betWasPlaced.emit();
+    this.betWasPlaced.next();
   }
   
-  idForMatchRemove = new EventEmitter<number>();
+  idForMatchRemove = new Subject<number>();
   removeMatch(id: number){
-    this.idForMatchRemove.emit(id)
+    this.idForMatchRemove.next(id)
   }
 
   

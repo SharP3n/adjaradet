@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { BetDetailsService } from 'src/app/shared/services/bet-details.service';
 import { AccountService } from '../shared/services/account.service';
 
@@ -8,7 +9,7 @@ import { AccountService } from '../shared/services/account.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
   private betDetailsService: BetDetailsService,
   private accountService: AccountService,
@@ -29,7 +30,7 @@ export class NavbarComponent implements OnInit {
   account: Account;
   
   ngOnInit(): void {
-    this.betDetailsService.betPlaced.subscribe(() =>{
+    this.activatedSub2 = this.betDetailsService.betPlaced.subscribe(() =>{
       this.betsQuantity++;
     })
 
@@ -37,7 +38,8 @@ export class NavbarComponent implements OnInit {
        this.account = account
     });
 
-    this.accountService.message.subscribe((message: {message: string, error: boolean, state: string}) => {
+    this.activatedSub = this.accountService.message.subscribe((message: {message: string, error: boolean, state: string}) => {
+
       if(!this.showMessage){
         this.messageData = {message: message.message, error: message.error, state: 'active'}
         this.showMessage = true;
@@ -63,6 +65,12 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  private activatedSub: Subscription;
+  private activatedSub2: Subscription;
+  ngOnDestroy(){
+    this.activatedSub.unsubscribe();
+
+  }
 
 
 
@@ -82,7 +90,7 @@ export class NavbarComponent implements OnInit {
   logOut(){
     this.accountService.logOut();
     // this.store.dispatch(new accountActions.removeUser())
-    this.accountService.message.emit({message: 'Logged Out', error: false});
+    this.accountService.message.next({message: 'Logged Out', error: false});
   }
 
   betsQuantity = 0;

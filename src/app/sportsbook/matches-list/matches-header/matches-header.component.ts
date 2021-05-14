@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Subject } from 'rxjs';
 import { DataService } from '../data.service';
 
 @Component({
@@ -15,12 +16,12 @@ export class MatchesHeaderComponent implements OnInit {
     this.activeRoute.params.subscribe(
       (params: Params) => {
         this.activeSport = params['sport'];
-        this.ActiveSport.emit(this.activeSport)
+        this.ActiveSport.next(this.activeSport)
       }
     )    
   }
     
-  @Output() ActiveSport = new EventEmitter<string>(); 
+  @Output() ActiveSport = new Subject<string>(); 
   activeSport: string;
 
 }

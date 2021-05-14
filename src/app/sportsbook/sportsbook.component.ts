@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { BetDetailsService } from '../shared/services/bet-details.service';
 import { CanComponentDeactivate } from './ticket/bet-place/can-deactivate-guard.service';
 
@@ -7,7 +8,7 @@ import { CanComponentDeactivate } from './ticket/bet-place/can-deactivate-guard.
   templateUrl: './sportsbook.component.html',
   styleUrls: ['./sportsbook.component.scss']
 })
-export class SportsbookComponent implements OnInit, CanComponentDeactivate{
+export class SportsbookComponent implements OnInit, CanComponentDeactivate, OnDestroy{
 
   constructor(private betDetailsService: BetDetailsService){}
 
@@ -22,13 +23,17 @@ export class SportsbookComponent implements OnInit, CanComponentDeactivate{
     }
   }  
 
+  private activatedSub: Subscription;
+
   ngOnInit(){
-    this.betDetailsService.creatingBet.subscribe((creatingBet: boolean)=>{
+    this.activatedSub = this.betDetailsService.creatingBet.subscribe((creatingBet: boolean)=>{
       this.creatingBet = creatingBet;
     })
   }
 
-  
+  ngOnDestroy(){
+    this.activatedSub.unsubscribe();
+  }
 
 }
 

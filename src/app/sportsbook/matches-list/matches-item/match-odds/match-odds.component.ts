@@ -27,7 +27,7 @@ export class MatchOddsComponent implements OnInit{
   @Input() match: {home: string, away: string, homeOdd: number, awayOdd: number};
 
   addToBet(bettingOn: string){
-    this.dataService.newMatch.emit({home: this.match.home, away: this.match.away, awayOdd: this.match.awayOdd, homeOdd: this.match.homeOdd, bettingOn: bettingOn})
+    this.dataService.newMatch.next({home: this.match.home, away: this.match.away, awayOdd: this.match.awayOdd, homeOdd: this.match.homeOdd, bettingOn: bettingOn})
   }
 
 }
@@ -36,48 +36,3 @@ export class MatchOddsComponent implements OnInit{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // applyHighlights(matches){
-  //   matches.forEach(match => {
-  //     if(match.away === this.match.away && this.match.home === this.match.home){
-  //       if(match.bettingOn === 'home'){
-  //         this.homeBtn.nativeElement.classList.add('added-bet');
-  //         console.log(this.homeBtn.nativeElement)
-  //         // console.log('added-bet applyed (again?)')
-  //         // this.highlightsArr.push({away: match.away, home: match.home, bettingOn: match.bettingOn})
-  //       }
-  //       else if(match.bettingOn === 'away'){
-  //         this.awayBtn.nativeElement.classList.add('added-bet');
-  //         console.log(this.awayBtn.nativeElement)
-  //         // console.log('added-bet applyed (again?)')
-  //         // this.highlightsArr.push({away: match.away, home: match.home, bettingOn: match.bettingOn})
-  //       }
-  //     }
-  //   });
-  // }
-
-
-
-
-      // this.buttonHighlightService.fakeEvent.subscribe(()=>{
-    //   this.removeHighlights();
-    //   if(this.matches?.length > 0 && this.matches){
-    //     this.applyHighlights(this.matches)
-    //   }
-    // })

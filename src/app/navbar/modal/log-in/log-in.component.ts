@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Account } from 'src/app/shared/models/account.model';
 import { AccountService } from 'src/app/shared/services/account.service';
-import * as accountActions from './store/account.actions'
+import * as accountActions from '../../../shared/store/account.actions'
 
 @Component({
   selector: 'app-log-in',
@@ -26,10 +26,13 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {
     this.account = this.store.select('account');
   }
+
+  showStatuses = false;
   
   onLogin(form: NgForm){
 
     if(!form.valid){
+      this.showStatuses = true;
       return;
     }
 
@@ -39,13 +42,13 @@ export class LogInComponent implements OnInit {
     this.accountService.logIn(email, password).subscribe(
       () => {
         this.store.dispatch(new accountActions.changeUser({email: email, password: password, balance: 10}))
-        this.accountService.message.emit({message: `welcome ${email}`, error: false})
+        this.accountService.message.next({message: `welcome ${email}`, error: false})
       },error => {
         if(error?.error?.error?.message){
-          this.accountService.message.emit({message: error?.error?.error?.message.replace(/_/g, " "), error: true})
+          this.accountService.message.next({message: error?.error?.error?.message.replace(/_/g, " "), error: true})
         }
         else{
-          this.accountService.message.emit({message: 'something went wrong, Check your connection', error: true})
+          this.accountService.message.next({message: 'something went wrong, Check your connection', error: true})
         }
       }
     )

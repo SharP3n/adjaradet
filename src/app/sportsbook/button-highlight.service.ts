@@ -1,4 +1,5 @@
-import { Injectable, EventEmitter } from "@angular/core";
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 import { Match } from "../shared/models/match-details.model";
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Match } from "../shared/models/match-details.model";
 
 export class ButtonHighlightService {
 
-  highlightButtons = new EventEmitter<Match[]>();
+  highlightButtons = new Subject<Match[]>();
   matches: Match[] = [];
   
   formHighlightData(matches: Match[]){
@@ -17,7 +18,7 @@ export class ButtonHighlightService {
       this.matches[i] = {away: match.away, home: match.home, bettingOn: match.bettingOn}
     });
     
-    this.highlightButtons.emit(this.matches)
+    this.highlightButtons.next(this.matches)
   }
 
 

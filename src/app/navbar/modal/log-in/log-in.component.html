@@ -7,27 +7,31 @@
     <form class="log-in__form" (ngSubmit)='onLogin(logInForm)' #logInForm='ngForm'>
         
         <label for='email' class="log-in__form__email">EMAIL:</label>
-        <input required email id='email' #email='ngModel' name='email' type="email" class="log-in__form__email-input" ngModel>
-        <div class="log-in__form__username-validity" *ngIf='!email.valid && email.touched'>Please Input Valid email</div>
+        <input [ngClass]='{"invalid": !email.valid && email.touched || showStatuses && !email.valid}'
+         required email id='email' #email='ngModel' name='email' type="email" class="log-in__form__email-input" ngModel>
+        <div class="log-in__form__username-validity" *ngIf='!email.valid && email.touched || showStatuses && !email.valid'>Please Input Valid email</div>
         <br>
         
         <label for='passwod' class="log-in__form__password">PASSWORD</label>
-        <input required id='passwod' #password='ngModel' name='password' type="password" class="log-in__form__password-input" ngModel>
-        <div class="log-in__form__username-validity" *ngIf='!password.valid && password.touched'>Please Input Password</div>
+        <input [ngClass]='{"invalid": !password.valid && password.touched || showStatuses && !password.valid}'
+        required id='passwod' #password='ngModel' name='password' type="password" class="log-in__form__password-input" ngModel>
+        <div class="log-in__form__username-validity" *ngIf='!password.valid && password.touched || showStatuses && !password.valid'
+        >Please Input Password</div>
         <br>
 
         <div class='log-in__form__btn-wrapper'>
-            
+
             <button
             type='button'
             (click)='onCancelModal()'
             class='log-in__form__btn-wrapper__cancel'>Cancel
             </button>
             <button
-            [disabled]='!logInForm.valid'
+            [ngClass]='{"disabled": !logInForm.valid}'
             type='submit'
             class='log-in__form__btn-wrapper__submit'>Log In</button>
         </div>
     </form>
-
+    
 </div>
+<!-- [disabled]='!logInForm.valid' -->

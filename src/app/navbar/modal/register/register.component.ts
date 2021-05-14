@@ -17,8 +17,14 @@ export class RegisterComponent implements OnInit {
   @ViewChild('registerForm') registerForm: NgForm; 
 
   showModal: boolean;
+  showStatuses = false;
 
   onRegister(form: NgForm){
+
+    if(!form.valid){
+      this.showStatuses = true;
+      return;
+    }
 
     const email = form.value.email;
     const password = form.value.password1;
@@ -31,10 +37,10 @@ export class RegisterComponent implements OnInit {
       },
       error => {
         if(error?.error?.error?.message){
-          this.accountService.message.emit({message: error?.error?.error?.message.replace(/_/g, " "), error: true})
+          this.accountService.message.next({message: error?.error?.error?.message.replace(/_/g, " "), error: true})
         }
         else{
-          this.accountService.message.emit({message: 'something went wrong, Check your connection', error: true})
+          this.accountService.message.next({message: 'something went wrong, Check your connection', error: true})
         }
       }
     );

@@ -2,6 +2,8 @@ $green: #01AC2D;
 
 .register{
 
+    min-width: 308px;
+    
     &__header{
         margin-bottom: 10px;
         font-size: 18px;
@@ -73,11 +75,12 @@ border: 1px solid red;
 }
 
 .valid{
-cursor: pointer;
-background-color: green;
+    cursor: pointer;
+    background-color: green;
 }
 
 .invalid{
-cursor: not-allowed;
-background-color: red;
+    cursor: not-allowed;
+    background-color: red;
+    border: none;
 }

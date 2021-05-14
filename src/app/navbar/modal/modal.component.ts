@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/shared/services/account.service';
 
 @Component({
@@ -6,14 +7,16 @@ import { AccountService } from 'src/app/shared/services/account.service';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private accountService: AccountService,
   ) {}
 
+  private activatedSub: Subscription;
+
   ngOnInit(): void {
-    this.accountService.displayModal.subscribe((modalInfo: {displayModal: boolean, action: string}) => {
+    this.activatedSub = this.accountService.displayModal.subscribe((modalInfo: {displayModal: boolean, action: string}) => {
       this.action = modalInfo.action;
       this.showModal = modalInfo.displayModal;
     })
@@ -26,6 +29,10 @@ export class ModalComponent implements OnInit {
     if(modal.classList.contains('modal')){
       this.showModal=false;
     }
+  }
+
+  ngOnDestroy(){
+    this.activatedSub.unsubscribe();
   }
 
 

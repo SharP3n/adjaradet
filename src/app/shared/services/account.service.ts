@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Account } from '../models/account.model';
 import { Store } from '@ngrx/store';
-import * as accountActions from '../../navbar/modal/log-in/store/account.actions'
+import * as accountActions from '../store/account.actions'
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 interface authResponse{
   kind: string;
@@ -21,8 +22,7 @@ interface authResponse{
 
 export class AccountService{
 
-  accountData = new EventEmitter<Account>();
-  message = new EventEmitter<{message: string, error: boolean}>();
+  message = new Subject<{message: string, error: boolean}>();
 
   signup(email: string, password: string){
     return this.http.post<authResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyChqR-cUB1DmNV5sGf77yrpdeu0_gNa-LY',
@@ -54,10 +54,10 @@ export class AccountService{
       this.router.navigate(['/'])
     }
   }
-  displayModal = new EventEmitter<{displayModal: boolean, action: string}>()
+  displayModal = new Subject<{displayModal: boolean, action: string}>()
 
   toggleModal(displayModal: boolean, action: string){
-    this.displayModal.emit({displayModal: displayModal, action: action});
+    this.displayModal.next({displayModal: displayModal, action: action});
   }
 
   saveLogInData(account: Account){

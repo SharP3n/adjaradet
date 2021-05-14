@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Account } from 'src/app/shared/models/account.model';
 import { AccountService } from 'src/app/shared/services/account.service';
-import * as accountActions from '../../navbar/modal/log-in/store/account.actions'
+import * as accountActions from '../../shared/store/account.actions'
 
 @Component({
   selector: 'app-account-info',
@@ -24,7 +24,7 @@ export class AccountInfoComponent implements OnInit {
   addMoney(moneyAmount: HTMLInputElement){
     this.store.dispatch(new accountActions.updateBalance(this.account.balance + +moneyAmount.value));
     moneyAmount.value = '';
-    this.accountService.message.emit({message: `your current balance is ${this.account.balance}$`, error: false})
+    this.accountService.message.next({message: `your current balance is ${this.account.balance}$`, error: false})
   }
 
   account: Account;

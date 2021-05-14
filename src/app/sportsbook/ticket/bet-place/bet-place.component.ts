@@ -53,7 +53,7 @@ export class BetPlaceComponent implements OnInit, OnChanges {
   clearData(betAmount: HTMLInputElement){
     betAmount.value = '';
     this.inputCanBeFilled = false;
-    this.betDetailsService.creatingBet.emit(this.inputCanBeFilled)
+    this.betDetailsService.creatingBet.next(this.inputCanBeFilled)
     delete this.betDetails;
     delete this.betInfo;
     delete this.odd;
@@ -64,7 +64,7 @@ export class BetPlaceComponent implements OnInit, OnChanges {
     if(changes.matches.currentValue && changes.matches.currentValue !== changes.matches.previousValue){
       if(this.matches.length === 0){
         this.inputCanBeFilled = false;
-        this.betDetailsService.creatingBet.emit(this.inputCanBeFilled) 
+        this.betDetailsService.creatingBet.next(this.inputCanBeFilled) 
         if(this.inputBet){
           this.inputBet.nativeElement.value = '';
           this.clearData(this.inputBet.nativeElement)
@@ -72,7 +72,7 @@ export class BetPlaceComponent implements OnInit, OnChanges {
       }
       else{
         this.inputCanBeFilled = true;
-        this.betDetailsService.creatingBet.emit(this.inputCanBeFilled)
+        this.betDetailsService.creatingBet.next(this.inputCanBeFilled)
         if(this.inputBet.nativeElement.value === ''){
           this.odd =  this.dataService.calculatePossWin(this.inputBet.nativeElement, this.matches).odd;
         }
