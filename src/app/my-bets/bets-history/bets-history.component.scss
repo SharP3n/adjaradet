@@ -46,6 +46,13 @@ $border: rgba(43,52,60,255);
             position: relative;
             border-bottom: 1px dotted white;
             cursor: pointer;
+
+            @media screen and (max-width: 375px) {
+                padding: 0px;
+                font-size: 11px;
+                background: none;
+                min-width: unset;
+            }
             
             &:hover &__matches-info{
                 visibility: visible;
@@ -100,23 +107,45 @@ $border: rgba(43,52,60,255);
                 display: flex;
                 align-items: center;
                 text-align: center;
+                justify-content: center;
                 
-                @media screen and (max-width: 740px) {
-                    font-size: 13px;
-                    padding: 8px 10px;
-                }
-                @media screen and (max-width: 620px) {
+                @media screen and (max-width: 800px) {
                     font-size: 12px;
                     padding: 8px 8px;
                 }
             }
+
+            &__poss-win{
+                @media screen and (max-width: 800px) {
+                    min-width: 150px;
+                }
+                @media screen and (max-width: 375px) {
+                    padding: 0px;
+                    margin-right: 5px;
+                    font-size: 11px;
+                    background: none;
+                    min-width: unset;
+                }
+            }
             
             &__odd{
+                @media screen and (min-width: 801px) {
+                    min-width: 125px;
+                }
+                @media screen and (max-width: 800px) {
+                    min-width: 83px;
+                }
                 @media screen and (max-width: 570px) {
                     display: none;
                 }
             }
             &__bet-amount{
+                @media screen and (min-width: 801px) {
+                    min-width: 115px;
+                }
+                @media screen and (max-width: 800px) {
+                    min-width: 75px;
+                }
                 @media screen and (max-width: 470px) {
                     display: none;
                 }

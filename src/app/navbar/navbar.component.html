@@ -1,6 +1,6 @@
 <ul class='navbar'>
-    <li class='navbar__item logo'><a routerLink='/' ><img class='navbar__item__logo' src="./assets/pictures/logo.png" alt="adjaradet"></a></li>
-    <li class='navbar__item mini-logo'><a routerLink='/' ><img class='navbar__item__mini-logo' src="./assets/icons/mini-logo.png" alt="adjaradet"></a></li>
+    <li class='navbar__item logo'><a routerLink='/' ><img class='navbar__item__logo' src="assets/pictures/logo.png" alt="adjaradet"></a></li>
+    <li class='navbar__item mini-logo'><a routerLink='/' ><img class='navbar__item__mini-logo' src="assets/icons/mini-logo.png" alt="adjaradet"></a></li>
     <li *ngIf="account" class='navbar__item sports'><a class='navbar__item__link' routerLink='/betsHistory'>MY BETS({{betsQuantity}})</a></li>
     <li class='navbar__item my-bets'><a routerLink='/sportsbook/NBA' class='navbar__item__link'>SPORTS</a></li>
     <ul class='navbar__item__account'>
@@ -11,7 +11,7 @@
         <li *ngIf="account"><button routerLink='/account-info' class='navbar__item__account__info'>Account</button></li>
         
         <div class="navbar__item__account__dropdown">
-          <span class="navbar__item__account__dropdown__name">ACCOUNT<img src="/assets/icons/dropdown.png" alt="dropdown"></span>
+          <span class="navbar__item__account__dropdown__name">ACCOUNT<img src="assets/icons/dropdown.png" alt="dropdown"></span>
           <div class="navbar__item__account__dropdown__dropdown-content">
             <button *ngIf="!account" (click)='onOpenModal("log in")' class='navbar__item__account__dropdown__dropdown-content__item'>Log In</button>
             <button *ngIf="!account" (click)='onOpenModal("register")' class='navbar__item__account__dropdown__dropdown-content__item'>Register</button>
