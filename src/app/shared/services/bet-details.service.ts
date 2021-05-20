@@ -18,7 +18,6 @@ export class BetDetailsService{
 
   newBet: FullBet;
   betCanNotBePlaced = new Subject<void>();
-  creatingBet = new Subject<boolean>();
   account: Account;
 
   constructor(

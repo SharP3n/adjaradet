@@ -8,7 +8,6 @@ import { AccountService } from '../shared/services/account.service';
 import { BetsHistoryService } from '../shared/services/bets-history.service';
 import { MessageService } from '../shared/services/message.service';
 
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { Account } from '../shared/models/account.model';
 import { BetDetailsService } from '../shared/services/bet-details.service';
 import { CanComponentDeactivate } from './ticket/bet-place/can-deactivate-guard.service';
 
@@ -11,12 +13,13 @@ import { CanComponentDeactivate } from './ticket/bet-place/can-deactivate-guard.
 
 export class SportsbookComponent implements OnInit, CanComponentDeactivate, OnDestroy{
 
-  constructor(private betDetailsService: BetDetailsService){}
-
-  creatingBet: boolean;
+  constructor(
+    private betDetailsService: BetDetailsService,
+    private store: Store<{account: Account}>,
+  ){}
 
   canDeactivate(){
-    if(this.creatingBet){
+    if(this.account.placingBet){
       return confirm('Do You Want To Stop Placing Bet?')
     }
     else{
@@ -25,14 +28,14 @@ export class SportsbookComponent implements OnInit, CanComponentDeactivate, OnDe
   }  
 
   private activatedSub: Subscription;
+  account: Account;
 
   ngOnInit(){
 
-    
-
-    this.activatedSub = this.betDetailsService.creatingBet.subscribe((creatingBet: boolean)=>{
-      this.creatingBet = creatingBet;
+    this.activatedSub = this.store.select('account').subscribe(account=>{
+      this.account = account;
     })
+
   }
 
   ngOnDestroy(){

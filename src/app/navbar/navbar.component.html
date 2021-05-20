@@ -4,25 +4,25 @@
     <li *ngIf="account" class='navbar__item sports'><a class='navbar__item__link' routerLink='/betsHistory'>MY BETS({{betsQuantity}})</a></li>
     <li class='navbar__item my-bets'><a routerLink='/sportsbook/NBA' class='navbar__item__link'>SPORTS</a></li>
     <ul class='navbar__item__account'>
-      <ng-container *ngIf="!(account | json)">
+      <ng-container *ngIf="!account">
         <li><button (click)='onOpenModal("log in")' class='navbar__item__account__log-in'>Log in</button></li>
         <li><button (click)='onOpenModal("register")' class='navbar__item__account__register'>Register</button></li>
       </ng-container>
-      <ng-container *ngIf="(account | json)">
+      <ng-container *ngIf="account">
         <li><div class='navbar__item__account__balance'>Balance: {{this.account?.balance}}$</div></li>
         <li><button (click)='onLogOut()' class='navbar__item__account__log-out'>Log out</button></li>
         <li><button routerLink='/account-info' class='navbar__item__account__info'>Account</button></li>
       </ng-container>
-        
+      
         <div class="navbar__item__account__dropdown">
           <span class="navbar__item__account__dropdown__name">ACCOUNT<img src="assets/icons/dropdown.png" alt="dropdown"></span>
           <div class="navbar__item__account__dropdown__dropdown-content">
 
-            <ng-container *ngIf="!(account | json)">
+            <ng-container *ngIf="!account">
               <button (click)='onOpenModal(modalPurpose.login)' class='navbar__item__account__dropdown__dropdown-content__item'>Log In</button>
               <button (click)='onOpenModal(modalPurpose.register)' class='navbar__item__account__dropdown__dropdown-content__item'>Register</button>
             </ng-container>
-            <ng-container *ngIf="(account | json)">
+            <ng-container *ngIf="account">
               <button (click)='onLogOut()' class='navbar__item__account__dropdown__dropdown-content__item  navbar__item__account__dropdown__dropdown-content__item--log-out' >Log Out</button>
               <button routerLink='/account-info' class='navbar__item__account__dropdown__dropdown-content__item'>Account</button>
             </ng-container>

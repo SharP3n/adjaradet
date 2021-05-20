@@ -46,7 +46,7 @@ export class LogInComponent implements OnInit {
 
     this.accountService.logIn(email, password).subscribe(
       () => {
-        this.store.dispatch(new accountActions.changeUser({email: email, password: password, balance: null}))
+        this.store.dispatch(new accountActions.changeUser({email: email, password: password, balance: null, placingBet: false}))
         this.balanceServie.StoreAccountBalance(email);
         this.betsHistoryService.StoreAccountBets(email);
         this.messageService.message.next({message: `welcome ${email}`, error: false})

@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Match } from 'src/app/shared/models/match-details.model';
 import { AccountService } from 'src/app/shared/services/account.service';
 import { BetDetailsService } from 'src/app/shared/services/bet-details.service';
 import { Bet } from '../../bet-details.model';
 import { DataService } from '../../matches-list/data.service';
+import * as accountActions from '../../../shared/store/account.actions'
 
 @Component({
   selector: 'app-bet-place',
@@ -13,9 +15,11 @@ import { DataService } from '../../matches-list/data.service';
 export class BetPlaceComponent implements OnInit, OnChanges {
 
   constructor(
-  private dataService: DataService,
-  private betDetailsService: BetDetailsService,
-  public accountService: AccountService) { }
+    private dataService: DataService,
+    private betDetailsService: BetDetailsService,
+    public accountService: AccountService,
+    private store: Store<{account: Account}>,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -53,7 +57,7 @@ export class BetPlaceComponent implements OnInit, OnChanges {
   clearData(betAmount: HTMLInputElement){
     betAmount.value = '';
     this.inputCanBeFilled = false;
-    this.betDetailsService.creatingBet.next(this.inputCanBeFilled)
+    this.store.dispatch(new accountActions.updateBetPlacingState(this.inputCanBeFilled))
     delete this.betDetails;
     delete this.betInfo;
     delete this.odd;
@@ -64,7 +68,7 @@ export class BetPlaceComponent implements OnInit, OnChanges {
     if(changes.matches.currentValue && changes.matches.currentValue !== changes.matches.previousValue){
       if(this.matches.length === 0){
         this.inputCanBeFilled = false;
-        this.betDetailsService.creatingBet.next(this.inputCanBeFilled) 
+        this.store.dispatch(new accountActions.updateBetPlacingState(this.inputCanBeFilled))
         if(this.inputBet){
           this.inputBet.nativeElement.value = '';
           this.clearData(this.inputBet.nativeElement)
@@ -72,7 +76,7 @@ export class BetPlaceComponent implements OnInit, OnChanges {
       }
       else{
         this.inputCanBeFilled = true;
-        this.betDetailsService.creatingBet.next(this.inputCanBeFilled)
+        this.store.dispatch(new accountActions.updateBetPlacingState(this.inputCanBeFilled))
         if(this.inputBet.nativeElement.value === ''){
           this.odd =  this.dataService.returnPossWin(this.inputBet.nativeElement, this.matches).odd;
         }

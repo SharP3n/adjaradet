@@ -9,11 +9,16 @@ export function accountReducer(state: Account = currentState, action: accountAct
         case accountActions.CHANGE_USER:
             return action.payload;            
         case accountActions.REMOVE_USER:
-            return undefined;
+            return null;
         case accountActions.UPDATE_BALANCE:
             return {
-                ...state,
+                ...state, 
                 balance: action.payload
+            }
+        case accountActions.UPDATE_PLACINGBET:
+            return {
+                ...state,
+                placingBet: action.payload
             }
 
         default: 

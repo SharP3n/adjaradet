@@ -3,4 +3,5 @@ export interface Account {
     password: string;
     id?: string
     balance: number;
+    placingBet: boolean;
 }

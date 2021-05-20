@@ -90,7 +90,7 @@ export class AccountService{
     if(!userData){
       return
     }
-    this.store.dispatch(new accountActions.changeUser({email: userData.email, password: userData.password, balance: null}))
+    this.store.dispatch(new accountActions.changeUser({email: userData.email, password: userData.password, balance: null, placingBet: false}))
     this.balanceService.StoreAccountBalance(userData.email)
     this.betsHistoryService.StoreAccountBets(userData.email)
     this.loggedIn = true;
