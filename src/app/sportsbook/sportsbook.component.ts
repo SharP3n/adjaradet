@@ -8,6 +8,7 @@ import { CanComponentDeactivate } from './ticket/bet-place/can-deactivate-guard.
   templateUrl: './sportsbook.component.html',
   styleUrls: ['./sportsbook.component.scss']
 })
+
 export class SportsbookComponent implements OnInit, CanComponentDeactivate, OnDestroy{
 
   constructor(private betDetailsService: BetDetailsService){}
@@ -26,6 +27,9 @@ export class SportsbookComponent implements OnInit, CanComponentDeactivate, OnDe
   private activatedSub: Subscription;
 
   ngOnInit(){
+
+    
+
     this.activatedSub = this.betDetailsService.creatingBet.subscribe((creatingBet: boolean)=>{
       this.creatingBet = creatingBet;
     })

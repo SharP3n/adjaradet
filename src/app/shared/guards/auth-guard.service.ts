@@ -1,7 +1,7 @@
 import { CanActivate, Router } from "@angular/router";
 import { Observable } from "rxjs";
-import { AccountService } from "./account.service";
-import { Injectable, OnInit } from '@angular/core'
+import { AccountService } from "../services/account.service";
+import { Injectable } from '@angular/core'
 
 @Injectable()
 

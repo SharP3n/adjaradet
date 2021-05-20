@@ -1,5 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-message',
@@ -30,9 +32,10 @@ export class MessageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(){
     this.state = this.messageData?.state;
  
-    setTimeout(() => {
+    interval(4000).pipe(take(1))
+    .subscribe(()=>{
       this.state = 'inactive'
-    }, 4000);
+    })
     this.changeDetector.detectChanges()
   }
 

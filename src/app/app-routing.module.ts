@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { MyBetsComponent } from './my-bets/my-bets.component';
 import { AccountInfoComponent } from './navbar/account-info/account-info.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AuthGuard } from './shared/services/auth-guard.service';
+import { AuthGuard } from './shared/guards/auth-guard.service';
 import { SportsBookRouteModule } from './shared/sportsbook-router/sportsbook-route.module';
 
 const routes: Routes = [

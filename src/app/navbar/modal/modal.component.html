@@ -1,7 +1,7 @@
-<div class="modal" (click)='closeModal($event.target)' *ngIf='showModal'>
+<div class="modal" (click)='closeModal($event.target)' *ngIf='displayModal'>
 
     <div class="modal__wrapper">
-        <div class='modal__log-in' *ngIf='action === "log in"; else register'>
+        <div class='modal__log-in' *ngIf='purpose === modalPurpose.login; else register'>
             <app-log-in></app-log-in>
         </div>
     

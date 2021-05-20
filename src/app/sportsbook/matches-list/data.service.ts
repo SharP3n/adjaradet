@@ -104,5 +104,35 @@ export class DataService {
     this.idForMatchRemove.next(id)
   }
 
+  checkMatchIdentity(newMatch: Match, matches: Match[]){
+
+    if(matches.length > 0){
+      let matchCanBeAdded = true;
+      for (const match of matches) {
+
+        if(match.home === newMatch.home && match.away === newMatch.away){
+          matchCanBeAdded = false;
+          matches.splice(matches.indexOf(match), 1);
+          if(match.bettingOn !== newMatch.bettingOn){
+            matches.push(newMatch);
+            matches = matches.slice();
+            return matches;
+          }
+          matches = matches.slice();
+          return matches;
+        }
+      }
+      if(matchCanBeAdded){
+        matches.push(newMatch)
+        matches = matches.slice();
+        return matches;
+      }
+    }
+    else{
+      matches.push(newMatch);
+      matches = matches.slice();
+      return matches;
+    }
+  }
   
 }

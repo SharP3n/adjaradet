@@ -15,8 +15,6 @@ export class TicketComponent implements OnInit, OnDestroy{
 
   possWin: number;
   matches: Match[] = [];
-  inputCanBeFilled = false;
-  betCanBePlaced = false;
 
   constructor(
   private dataService: DataService,
@@ -24,33 +22,7 @@ export class TicketComponent implements OnInit, OnDestroy{
   private betDetailsService: BetDetailsService) { }
 
   checkMatchIdentity(newMatch: Match){
-
-    if(this.matches.length > 0){
-      let matchCanBeAdded = true;
-      for (const match of this.matches) {
-
-        if(match.home === newMatch.home && match.away === newMatch.away){
-          matchCanBeAdded = false;
-          this.matches.splice(this.matches.indexOf(match), 1);
-          if(match.bettingOn !== newMatch.bettingOn){
-            this.matches.push(newMatch);
-            this.matches = this.matches.slice();
-            break;
-          }
-          this.matches = this.matches.slice();
-        }
-      }
-
-      if(matchCanBeAdded){
-        this.matches.push(newMatch)
-        this.matches = this.matches.slice();
-      }
-    }
-    else{
-      this.matches.push(newMatch);
-      this.matches = this.matches.slice();
-      this.inputCanBeFilled = true;
-    }
+    this.matches = this.dataService.checkMatchIdentity(newMatch, this.matches)
   }
 
   ngOnInit(){

@@ -55,10 +55,10 @@ export class AccountService{
       this.router.navigate(['/'])
     }
   }
-  displayModal = new Subject<{displayModal: boolean, action: string}>()
+  displayModal = new Subject<{displayModal: boolean, purpose: string}>()
 
-  toggleModal(displayModal: boolean, action: string){
-    this.displayModal.next({displayModal: displayModal, action: action});
+  toggleModal(displayModal: boolean, purpose: string){
+    this.displayModal.next({displayModal: displayModal, purpose: purpose});
   }
 
   saveLogInData(account: Account){
